@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pawfecto/authentication/adopt_main.dart';
 import 'package:pawfecto/authentication/adopt_register.dart';
 import 'package:pawfecto/components/rounded_button.dart';
 import 'package:pawfecto/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AdoptLogin extends StatefulWidget {
   static const String id = 'adopt_login';
@@ -11,6 +13,10 @@ class AdoptLogin extends StatefulWidget {
 }
 
 class _AdoptLoginState extends State<AdoptLogin> {
+  final _auth = FirebaseAuth.instance;
+  String email;
+  String password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +59,9 @@ class _AdoptLoginState extends State<AdoptLogin> {
                       hintText: 'Enter Email',
                       labelText: 'EMAIL',
                     ),
+                    onChanged: (value) {
+                      email = value;
+                    },
                   ),
                   SizedBox(
                     height: 15.0,
@@ -63,6 +72,9 @@ class _AdoptLoginState extends State<AdoptLogin> {
                       hintText: 'Enter Password',
                       labelText: 'PASSWORD',
                     ),
+                    onChanged: (value) {
+                      password = value;
+                    },
                   ),
                   SizedBox(
                     height: 20.0,
@@ -71,8 +83,17 @@ class _AdoptLoginState extends State<AdoptLogin> {
                     title: 'LOGIN',
                     colour: Color.fromARGB(255, 0, 136, 145),
                     tcolor: Colors.white,
-                    onPressed: () {
-                      // must register to firebase
+                    onPressed: () async {
+                      try {
+                        final user = await _auth.signInWithEmailAndPassword(
+                            email: email, password: password);
+
+                        if (user != null) {
+                          Navigator.pushNamed(context, AdoptMain.id);
+                        }
+                      } catch (e) {
+                        print(e);
+                      }
                     },
                   ),
                   Container(
