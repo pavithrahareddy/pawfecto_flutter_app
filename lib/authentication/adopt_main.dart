@@ -48,7 +48,13 @@ class _AdoptMainState extends State<AdoptMain> {
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 50.0, horizontal: 40.0),
               child: Container(
-                child: Text(loggedInUser.email),
+                child: ElevatedButton(
+                  child: Text('Logout'),
+                  onPressed: () {
+                    _auth.signOut();
+                    Navigator.pop(context);
+                  },
+                ),
               ),
             ),
           ),
