@@ -6,6 +6,7 @@ import 'package:pawfecto/authentication/shelter_register.dart';
 import 'package:pawfecto/welcome.dart';
 import 'package:pawfecto/authentication/adopt_main.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:pawfecto/authentication/shelter_main.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         AdoptRegister.id: (context) => AdoptRegister(),
         SRegister.id: (context) => SRegister(),
         AdoptMain.id: (context) => AdoptMain(),
+        ShelterMain.id: (context) => ShelterMain(),
       },
     );
   }

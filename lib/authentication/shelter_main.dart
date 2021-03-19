@@ -3,13 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class AdoptMain extends StatefulWidget {
-  static const String id = 'adopt_main';
+class ShelterMain extends StatefulWidget {
+  static const String id = 'shelter_main';
   @override
-  _AdoptMainState createState() => _AdoptMainState();
+  _ShelterMainState createState() => _ShelterMainState();
 }
 
-class _AdoptMainState extends State<AdoptMain> {
+class _ShelterMainState extends State<ShelterMain> {
   final _auth = FirebaseAuth.instance;
 
   // FirebaseUser class was changed to User

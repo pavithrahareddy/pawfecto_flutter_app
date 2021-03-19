@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pawfecto/authentication/shelter_login.dart';
+import 'package:pawfecto/authentication/shelter_main.dart';
 import 'package:pawfecto/components/rounded_button.dart';
 import 'package:pawfecto/constants.dart';
+import 'package:pawfecto/authentication/shelter_main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SRegister extends StatefulWidget {
   static const String id = 's_register';
@@ -10,6 +13,11 @@ class SRegister extends StatefulWidget {
 }
 
 class _SRegisterState extends State<SRegister> {
+  final _auth = FirebaseAuth.instance;
+
+  String email;
+  String password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,39 +55,45 @@ class _SRegisterState extends State<SRegister> {
                   SizedBox(
                     height: 38.0,
                   ),
-                  TextFormField(
-                    decoration: textinputdecoration.copyWith(
-                      hintText: 'Enter Shelter Name',
-                      labelText: 'SHELTER NAME',
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15.0,
-                  ),
+                  // TextFormField(
+                  //   decoration: textinputdecoration.copyWith(
+                  //     hintText: 'Enter Shelter Name',
+                  //     labelText: 'SHELTER NAME',
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 15.0,
+                  // ),
                   TextFormField(
                     decoration: textinputdecoration.copyWith(
                       hintText: 'Enter Email',
                       labelText: 'EMAIL',
                     ),
+                    onChanged: (value) {
+                      email = value;
+                    },
                   ),
                   SizedBox(
                     height: 15.0,
                   ),
-                  TextFormField(
-                    decoration: textinputdecoration.copyWith(
-                      hintText: 'Enter Phone Number',
-                      labelText: 'PHONE',
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15.0,
-                  ),
+                  // TextFormField(
+                  //   decoration: textinputdecoration.copyWith(
+                  //     hintText: 'Enter Phone Number',
+                  //     labelText: 'PHONE',
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 15.0,
+                  // ),
                   TextFormField(
                     obscureText: true,
                     decoration: textinputdecoration.copyWith(
                       hintText: 'Enter Password',
                       labelText: 'PASSWORD',
                     ),
+                    onChanged: (value) {
+                      password = value;
+                    },
                   ),
                   SizedBox(
                     height: 20.0,
@@ -88,8 +102,18 @@ class _SRegisterState extends State<SRegister> {
                     title: 'REGISTER',
                     colour: Color.fromARGB(255, 0, 136, 145),
                     tcolor: Colors.white,
-                    onPressed: () {
-                      // must register to firebase
+                    onPressed: () async {
+                      try {
+                        // must register to firebase
+                        final user = await _auth.createUserWithEmailAndPassword(
+                            email: email, password: password);
+
+                        if (user != null) {
+                          Navigator.pushNamed(context, ShelterMain.id);
+                        }
+                      } catch (e) {
+                        print(e);
+                      }
                     },
                   ),
                   Container(
