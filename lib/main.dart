@@ -4,8 +4,14 @@ import 'package:pawfecto/authentication/adopt_register.dart';
 import 'package:pawfecto/authentication/shelter_login.dart';
 import 'package:pawfecto/authentication/shelter_register.dart';
 import 'package:pawfecto/welcome.dart';
+import 'package:pawfecto/authentication/adopt_main.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -18,6 +24,7 @@ class MyApp extends StatelessWidget {
         ShelterLogin.id: (context) => ShelterLogin(),
         AdoptRegister.id: (context) => AdoptRegister(),
         SRegister.id: (context) => SRegister(),
+        AdoptMain.id: (context) => AdoptMain(),
       },
     );
   }
