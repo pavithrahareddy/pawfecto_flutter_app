@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pawfecto/authentication/shelter_register.dart';
 import 'package:pawfecto/components/rounded_button.dart';
 import 'package:pawfecto/constants.dart';
+import 'package:pawfecto/authentication/shelter_main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ShelterLogin extends StatefulWidget {
   static const String id = 'shelter_login';
@@ -10,6 +12,10 @@ class ShelterLogin extends StatefulWidget {
 }
 
 class _ShelterLoginState extends State<ShelterLogin> {
+  final _auth = FirebaseAuth.instance;
+  String email;
+  String password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,8 +76,17 @@ class _ShelterLoginState extends State<ShelterLogin> {
                     title: 'LOGIN',
                     colour: Color.fromARGB(255, 0, 136, 145),
                     tcolor: Colors.white,
-                    onPressed: () {
-                      // must register to firebase
+                    onPressed: () async {
+                      try {
+                        final user = await _auth.signInWithEmailAndPassword(
+                            email: email, password: password);
+
+                        if (user != null) {
+                          Navigator.pushNamed(context, ShelterMain.id);
+                        }
+                      } catch (e) {
+                        print(e);
+                      }
                     },
                   ),
                   Container(
