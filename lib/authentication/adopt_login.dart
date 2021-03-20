@@ -6,6 +6,7 @@ import 'package:pawfecto/components/rounded_button.dart';
 import 'package:pawfecto/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AdoptLogin extends StatefulWidget {
   static const String id = 'adopt_login';
@@ -14,10 +15,39 @@ class AdoptLogin extends StatefulWidget {
 }
 
 class _AdoptLoginState extends State<AdoptLogin> {
+  // Firebase instances
   final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
+
   bool isLoading = false;
   String email;
   String password;
+
+  // Error handling
+  String errorMessage = '';
+  bool isErrorVisible = false;
+
+  // to store users from cloud firestore
+  QuerySnapshot users;
+
+  @override
+  void initState() {
+    super.initState();
+    getUsers();
+  }
+
+  void getUsers() async {
+    users = await _firestore.collection('users').get();
+  }
+
+  bool findUser() {
+    for (var user in users.docs) {
+      if (user.data().containsValue(email)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +111,20 @@ class _AdoptLoginState extends State<AdoptLogin> {
                       },
                     ),
                     SizedBox(
-                      height: 20.0,
+                      height: 10.0,
+                    ),
+                    Visibility(
+                      visible: isErrorVisible,
+                      child: Text(
+                        errorMessage,
+                        style: TextStyle(
+                          color: Colors.red,
+                        ),
+                      ),
+                      replacement: SizedBox.shrink(),
+                    ),
+                    SizedBox(
+                      height: 10.0,
                     ),
                     RoundedButton(
                       title: 'LOGIN',
@@ -91,22 +134,36 @@ class _AdoptLoginState extends State<AdoptLogin> {
                         // set spinner to true
                         setState(() {
                           isLoading = true;
+                          isErrorVisible = false;
                         });
 
-                        try {
-                          final user = await _auth.signInWithEmailAndPassword(
-                              email: email, password: password);
+                        if (findUser()) {
+                          try {
+                            final user = await _auth.signInWithEmailAndPassword(
+                                email: email, password: password);
 
-                          if (user != null) {
-                            Navigator.pushNamed(context, AdoptMain.id);
+                            if (user != null) {
+                              Navigator.pushNamed(context, AdoptMain.id);
+                            }
+
+                            // set spinner to false
+                            setState(() {
+                              isLoading = false;
+                            });
+                          } catch (e) {
+                            print(e);
+                            setState(() {
+                              errorMessage = e.message;
+                              isErrorVisible = true;
+                              isLoading = false;
+                            });
                           }
-
-                          // set spinner to false
+                        } else {
                           setState(() {
+                            isErrorVisible = true;
+                            errorMessage = 'User Not Found';
                             isLoading = false;
                           });
-                        } catch (e) {
-                          print(e);
                         }
                       },
                     ),
@@ -127,18 +184,30 @@ class _AdoptLoginState extends State<AdoptLogin> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(vertical: 20),
                       alignment: Alignment.center,
-                      child: GestureDetector(
-                          child: Text("Don't have an account? Register",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 17,
-                                  decoration: TextDecoration.underline,
-                                  color: Color.fromARGB(255, 0, 136, 145))),
-                          onTap: () {
-                            Navigator.pushNamed(context, AdoptRegister.id);
-                          }),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Don't have an account? ",
+                            style: TextStyle(
+                              fontSize: 17,
+                              // decoration: TextDecoration.underline,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          GestureDetector(
+                              child: Text("Register",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      // decoration: TextDecoration.underline,
+                                      color: Color.fromARGB(255, 0, 136, 145))),
+                              onTap: () {
+                                Navigator.pushNamed(context, AdoptRegister.id);
+                              }),
+                        ],
+                      ),
                     ),
                   ],
                 ),

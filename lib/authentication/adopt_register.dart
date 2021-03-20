@@ -5,6 +5,7 @@ import 'package:pawfecto/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pawfecto/authentication/adopt_main.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AdoptRegister extends StatefulWidget {
   static const String id = 'adopt_register';
@@ -15,9 +16,16 @@ class AdoptRegister extends StatefulWidget {
 class _AdoptRegisterState extends State<AdoptRegister> {
   // private instance auth, which will be used to register
   final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
   bool isLoading = false;
+  String name;
+  String phone;
   String email;
   String password;
+
+  // handling errors
+  String errorMessage = '';
+  bool isErrorVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -58,15 +66,18 @@ class _AdoptRegisterState extends State<AdoptRegister> {
                     SizedBox(
                       height: 38.0,
                     ),
-                    // TextFormField(
-                    //   decoration: textinputdecoration.copyWith(
-                    //     hintText: 'Enter Name',
-                    //     labelText: 'NAME',
-                    //   ),
-                    // ),
-                    // SizedBox(
-                    //   height: 15.0,
-                    // ),
+                    TextFormField(
+                      decoration: textinputdecoration.copyWith(
+                        hintText: 'Enter Name',
+                        labelText: 'NAME',
+                      ),
+                      onChanged: (value) {
+                        name = value;
+                      },
+                    ),
+                    SizedBox(
+                      height: 15.0,
+                    ),
                     TextFormField(
                       keyboardType: TextInputType.emailAddress,
                       decoration: textinputdecoration.copyWith(
@@ -80,15 +91,18 @@ class _AdoptRegisterState extends State<AdoptRegister> {
                     SizedBox(
                       height: 15.0,
                     ),
-                    // TextFormField(
-                    //   decoration: textinputdecoration.copyWith(
-                    //     hintText: 'Enter Phone Number',
-                    //     labelText: 'PHONE',
-                    //   ),
-                    // ),
-                    // SizedBox(
-                    //   height: 15.0,
-                    // ),
+                    TextFormField(
+                      decoration: textinputdecoration.copyWith(
+                        hintText: 'Enter Phone Number',
+                        labelText: 'PHONE',
+                      ),
+                      onChanged: (value) {
+                        phone = value;
+                      },
+                    ),
+                    SizedBox(
+                      height: 15.0,
+                    ),
                     TextFormField(
                       obscureText: true,
                       decoration: textinputdecoration.copyWith(
@@ -100,6 +114,19 @@ class _AdoptRegisterState extends State<AdoptRegister> {
                       },
                     ),
                     SizedBox(
+                      height: 10.0,
+                    ),
+                    Visibility(
+                      visible: isErrorVisible,
+                      child: Text(
+                        errorMessage,
+                        style: TextStyle(
+                          color: Colors.red,
+                        ),
+                      ),
+                      replacement: SizedBox.shrink(),
+                    ),
+                    SizedBox(
                       height: 20.0,
                     ),
                     RoundedButton(
@@ -109,8 +136,10 @@ class _AdoptRegisterState extends State<AdoptRegister> {
                       onPressed: () async {
                         // set the spinner to true
                         setState(() {
+                          isErrorVisible = false;
                           isLoading = true;
                         });
+
                         // to catch errors such as already registered user
                         try {
                           // returns a Future
@@ -122,27 +151,51 @@ class _AdoptRegisterState extends State<AdoptRegister> {
                             Navigator.pushNamed(context, AdoptMain.id);
                           }
 
+                          // save data to firestore
+                          _firestore.collection('users').add({
+                            'name': name,
+                            'email': email,
+                            'phone': phone,
+                          });
+
                           // set spinner to false
                           setState(() {
                             isLoading = false;
                           });
                         } catch (e) {
-                          print(e);
+                          setState(() {
+                            errorMessage = e.message;
+                            isErrorVisible = true;
+                            isLoading = false;
+                          });
                         }
                       },
                     ),
                     Container(
                       alignment: Alignment.center,
-                      child: GestureDetector(
-                          child: Text("Already a user? Login",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 17,
-                                  decoration: TextDecoration.underline,
-                                  color: Color.fromARGB(255, 0, 136, 145))),
-                          onTap: () {
-                            Navigator.pushNamed(context, AdoptLogin.id);
-                          }),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Already a user? ',
+                            style: TextStyle(
+                              fontSize: 17,
+                              // decoration: TextDecoration.underline,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          GestureDetector(
+                              child: Text("Login",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      // decoration: TextDecoration.underline,
+                                      color: Color.fromARGB(255, 0, 136, 145))),
+                              onTap: () {
+                                Navigator.pushNamed(context, AdoptLogin.id);
+                              }),
+                        ],
+                      ),
                     ),
                   ],
                 ),
