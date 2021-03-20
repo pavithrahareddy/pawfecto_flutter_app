@@ -14,8 +14,10 @@ class ShelterLogin extends StatefulWidget {
 }
 
 class _ShelterLoginState extends State<ShelterLogin> {
+  // Firebase instances
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
+
   bool isLoading = false;
   String email;
   String password;
@@ -31,9 +33,6 @@ class _ShelterLoginState extends State<ShelterLogin> {
 
   void getUsers() async {
     users = await _firestore.collection('shelters').get();
-    for (var user in users.docs) {
-      print(user.data());
-    }
   }
 
   bool findUser() {
@@ -179,18 +178,30 @@ class _ShelterLoginState extends State<ShelterLogin> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(vertical: 20),
                       alignment: Alignment.center,
-                      child: GestureDetector(
-                          child: Text("Don't have an account? Register",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 17,
-                                  decoration: TextDecoration.underline,
-                                  color: Color.fromARGB(255, 0, 136, 145))),
-                          onTap: () {
-                            Navigator.pushNamed(context, SRegister.id);
-                          }),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Don't have an account? ",
+                            style: TextStyle(
+                              fontSize: 17,
+                              // decoration: TextDecoration.underline,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          GestureDetector(
+                              child: Text("Register",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      // decoration: TextDecoration.underline,
+                                      color: Color.fromARGB(255, 0, 136, 145))),
+                              onTap: () {
+                                Navigator.pushNamed(context, SRegister.id);
+                              }),
+                        ],
+                      ),
                     ),
                   ],
                 ),
