@@ -22,6 +22,10 @@ class _SRegisterState extends State<SRegister> {
   String phone;
   String password;
 
+  // handling errors
+  String errorMessage = '';
+  bool isErrorVisible = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,6 +121,7 @@ class _SRegisterState extends State<SRegister> {
                       onPressed: () async {
                         // set spinner to true
                         setState(() {
+                          isErrorVisible = false;
                           isLoading = true;
                         });
 
@@ -145,7 +150,10 @@ class _SRegisterState extends State<SRegister> {
                             isLoading = false;
                           });
                         } catch (e) {
-                          print(e);
+                          setState(() {
+                            errorMessage = e.message;
+                            isErrorVisible = true;
+                          });
                         }
                       },
                     ),
