@@ -5,6 +5,7 @@ import 'package:pawfecto/constants.dart';
 import 'package:pawfecto/authentication/shelter_main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ShelterLogin extends StatefulWidget {
   static const String id = 'shelter_login';
@@ -14,9 +15,35 @@ class ShelterLogin extends StatefulWidget {
 
 class _ShelterLoginState extends State<ShelterLogin> {
   final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
   bool isLoading = false;
   String email;
   String password;
+  String errorMessage = '';
+  bool isErrorVisible = false;
+  QuerySnapshot users;
+
+  @override
+  void initState() {
+    super.initState();
+    getUsers();
+  }
+
+  void getUsers() async {
+    users = await _firestore.collection('shelters').get();
+    for (var user in users.docs) {
+      print(user.data());
+    }
+  }
+
+  bool findUser() {
+    for (var user in users.docs) {
+      if (user.data().containsValue(email)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +89,9 @@ class _ShelterLoginState extends State<ShelterLogin> {
                         hintText: 'Enter Email',
                         labelText: 'EMAIL',
                       ),
+                      onChanged: (value) {
+                        email = value;
+                      },
                     ),
                     SizedBox(
                       height: 15.0,
@@ -72,9 +102,25 @@ class _ShelterLoginState extends State<ShelterLogin> {
                         hintText: 'Enter Password',
                         labelText: 'PASSWORD',
                       ),
+                      onChanged: (value) {
+                        password = value;
+                      },
                     ),
                     SizedBox(
-                      height: 20.0,
+                      height: 10.0,
+                    ),
+                    Visibility(
+                      visible: isErrorVisible,
+                      child: Text(
+                        errorMessage,
+                        style: TextStyle(
+                          color: Colors.red,
+                        ),
+                      ),
+                      replacement: SizedBox.shrink(),
+                    ),
+                    SizedBox(
+                      height: 10.0,
                     ),
                     RoundedButton(
                       title: 'LOGIN',
@@ -84,22 +130,35 @@ class _ShelterLoginState extends State<ShelterLogin> {
                         // set spinner to true
                         setState(() {
                           isLoading = true;
+                          isErrorVisible = false;
                         });
+                        if (findUser()) {
+                          try {
+                            final user = await _auth.signInWithEmailAndPassword(
+                                email: email, password: password);
 
-                        try {
-                          final user = await _auth.signInWithEmailAndPassword(
-                              email: email, password: password);
+                            if (user != null) {
+                              Navigator.pushNamed(context, ShelterMain.id);
+                            }
 
-                          if (user != null) {
-                            Navigator.pushNamed(context, ShelterMain.id);
+                            // set spinner to false
+                            setState(() {
+                              isLoading = false;
+                            });
+                          } catch (e) {
+                            print(e);
+                            setState(() {
+                              errorMessage = e.message;
+                              isErrorVisible = true;
+                              isLoading = false;
+                            });
                           }
-
-                          // set spinner to false
+                        } else {
                           setState(() {
+                            isErrorVisible = true;
+                            errorMessage = 'User Not Found';
                             isLoading = false;
                           });
-                        } catch (e) {
-                          print(e);
                         }
                       },
                     ),
