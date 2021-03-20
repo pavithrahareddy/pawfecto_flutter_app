@@ -1,20 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pawfecto/authentication/adopt_main.dart';
-import 'package:pawfecto/authentication/adopt_register.dart';
+import 'package:pawfecto/screens/auth/shelter_register.dart';
 import 'package:pawfecto/components/rounded_button.dart';
-import 'package:pawfecto/constants.dart';
+import 'file:///C:/Users/User/Desktop/pawfecto/lib/constants/constants.dart';
+import 'file:///C:/Users/User/Desktop/pawfecto/lib/screens/shelter/shelter_main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class AdoptLogin extends StatefulWidget {
-  static const String id = 'adopt_login';
+class ShelterLogin extends StatefulWidget {
+  static const String id = 'shelter_login';
   @override
-  _AdoptLoginState createState() => _AdoptLoginState();
+  _ShelterLoginState createState() => _ShelterLoginState();
 }
 
-class _AdoptLoginState extends State<AdoptLogin> {
+class _ShelterLoginState extends State<ShelterLogin> {
   // Firebase instances
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
@@ -22,12 +21,8 @@ class _AdoptLoginState extends State<AdoptLogin> {
   bool isLoading = false;
   String email;
   String password;
-
-  // Error handling
   String errorMessage = '';
   bool isErrorVisible = false;
-
-  // to store users from cloud firestore
   QuerySnapshot users;
 
   @override
@@ -37,7 +32,7 @@ class _AdoptLoginState extends State<AdoptLogin> {
   }
 
   void getUsers() async {
-    users = await _firestore.collection('users').get();
+    users = await _firestore.collection('shelters').get();
   }
 
   bool findUser() {
@@ -76,7 +71,7 @@ class _AdoptLoginState extends State<AdoptLogin> {
                     ),
                     Container(
                       child: Text(
-                        'USER LOGIN',
+                        'SHELTER LOGIN',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 20.0,
@@ -90,8 +85,8 @@ class _AdoptLoginState extends State<AdoptLogin> {
                     ),
                     TextFormField(
                       decoration: textinputdecoration.copyWith(
-                        hintText: 'Enter Email',
-                        labelText: 'EMAIL',
+                        // hintText: 'Enter Email',
+                        labelText: 'Email',
                       ),
                       onChanged: (value) {
                         email = value;
@@ -103,8 +98,8 @@ class _AdoptLoginState extends State<AdoptLogin> {
                     TextFormField(
                       obscureText: true,
                       decoration: textinputdecoration.copyWith(
-                        hintText: 'Enter Password',
-                        labelText: 'PASSWORD',
+                        // hintText: 'Enter Password',
+                        labelText: 'Password',
                       ),
                       onChanged: (value) {
                         password = value;
@@ -136,14 +131,13 @@ class _AdoptLoginState extends State<AdoptLogin> {
                           isLoading = true;
                           isErrorVisible = false;
                         });
-
                         if (findUser()) {
                           try {
                             final user = await _auth.signInWithEmailAndPassword(
                                 email: email, password: password);
 
                             if (user != null) {
-                              Navigator.pushNamed(context, AdoptMain.id);
+                              Navigator.pushNamed(context, ShelterMain.id);
                             }
 
                             // set spinner to false
@@ -172,7 +166,7 @@ class _AdoptLoginState extends State<AdoptLogin> {
                       alignment: Alignment.center,
                       child: GestureDetector(
                         child: Text(
-                          'FORGOT PASSWORD?',
+                          'FORGOT PASSWORD',
                           style: TextStyle(
                             color: Color.fromARGB(255, 0, 136, 145),
                             fontWeight: FontWeight.bold,
@@ -204,7 +198,7 @@ class _AdoptLoginState extends State<AdoptLogin> {
                                       // decoration: TextDecoration.underline,
                                       color: Color.fromARGB(255, 0, 136, 145))),
                               onTap: () {
-                                Navigator.pushNamed(context, AdoptRegister.id);
+                                Navigator.pushNamed(context, SRegister.id);
                               }),
                         ],
                       ),

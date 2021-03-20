@@ -1,6 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pawfecto/authentication/adopt_register.dart';
-import 'package:pawfecto/authentication/shelter_register.dart';
+import 'package:pawfecto/screens/auth/adopt_register.dart';
+import 'package:pawfecto/screens/auth/shelter_register.dart';
 import 'package:pawfecto/components/rounded_button.dart';
 
 class Welcome extends StatefulWidget {
@@ -17,23 +18,29 @@ class _WelcomeState extends State<Welcome> {
       body: SafeArea(
         top: true,
         bottom: true,
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 160, horizontal: 24.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: 30.0, right: 30.0, bottom: 40.0),
+                child: Container(
+                  alignment: Alignment.bottomCenter,
+                  child: Image.asset('images/pawsfecto.png'),
+                ),
+              ),
+              flex: 4,
+            ),
+            Expanded(
+              flex: 5,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 35.0, right: 35.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Container(
-                      child: Image.asset('images/pawsfecto.png'),
-                    ),
-                    SizedBox(
-                      height: 48.0,
-                    ),
+                  children: [
                     RoundedButton(
-                      title: 'Adopt',
+                      title: 'ADOPT',
                       colour: Color.fromARGB(255, 202, 247, 227),
                       tcolor: Color.fromARGB(255, 0, 136, 145),
                       onPressed: () {
@@ -41,7 +48,7 @@ class _WelcomeState extends State<Welcome> {
                       },
                     ),
                     RoundedButton(
-                      title: 'Shelter',
+                      title: 'SHELTER',
                       colour: Color.fromARGB(255, 0, 136, 145),
                       tcolor: Colors.white,
                       onPressed: () {
@@ -49,7 +56,7 @@ class _WelcomeState extends State<Welcome> {
                       },
                     ),
                     RoundedButton(
-                      title: 'Report',
+                      title: 'REPORT',
                       colour: Color.fromARGB(255, 218, 120, 120),
                       tcolor: Colors.white,
                       onPressed: () {
@@ -59,7 +66,10 @@ class _WelcomeState extends State<Welcome> {
                   ],
                 ),
               ),
-              Container(
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
                 alignment: Alignment.center,
                 height: 70,
                 color: Color.fromARGB(255, 202, 247, 227),
@@ -74,8 +84,8 @@ class _WelcomeState extends State<Welcome> {
                       // link to terms and conditions
                     }),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

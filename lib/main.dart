@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pawfecto/authentication/adopt_login.dart';
-import 'package:pawfecto/authentication/adopt_register.dart';
-import 'package:pawfecto/authentication/shelter_login.dart';
-import 'package:pawfecto/authentication/shelter_register.dart';
-import 'package:pawfecto/welcome.dart';
-import 'package:pawfecto/authentication/adopt_main.dart';
+import 'package:pawfecto/screens/auth/adopt_login.dart';
+import 'package:pawfecto/screens/auth/adopt_register.dart';
+import 'package:pawfecto/screens/auth/shelter_login.dart';
+import 'package:pawfecto/screens/auth/shelter_register.dart';
+import 'file:///C:/Users/User/Desktop/pawfecto/lib/screens/user/adopt_main.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:pawfecto/authentication/shelter_main.dart';
+import 'package:pawfecto/screens/welcome.dart';
+import 'file:///C:/Users/User/Desktop/pawfecto/lib/screens/shelter/shelter_main.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

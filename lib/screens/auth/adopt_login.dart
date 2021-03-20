@@ -1,19 +1,20 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pawfecto/authentication/shelter_register.dart';
+import 'file:///C:/Users/User/Desktop/pawfecto/lib/screens/user/adopt_main.dart';
+import 'package:pawfecto/screens/auth/adopt_register.dart';
 import 'package:pawfecto/components/rounded_button.dart';
-import 'package:pawfecto/constants.dart';
-import 'package:pawfecto/authentication/shelter_main.dart';
+import 'file:///C:/Users/User/Desktop/pawfecto/lib/constants/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ShelterLogin extends StatefulWidget {
-  static const String id = 'shelter_login';
+class AdoptLogin extends StatefulWidget {
+  static const String id = 'adopt_login';
   @override
-  _ShelterLoginState createState() => _ShelterLoginState();
+  _AdoptLoginState createState() => _AdoptLoginState();
 }
 
-class _ShelterLoginState extends State<ShelterLogin> {
+class _AdoptLoginState extends State<AdoptLogin> {
   // Firebase instances
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
@@ -21,8 +22,12 @@ class _ShelterLoginState extends State<ShelterLogin> {
   bool isLoading = false;
   String email;
   String password;
+
+  // Error handling
   String errorMessage = '';
   bool isErrorVisible = false;
+
+  // to store users from cloud firestore
   QuerySnapshot users;
 
   @override
@@ -32,7 +37,7 @@ class _ShelterLoginState extends State<ShelterLogin> {
   }
 
   void getUsers() async {
-    users = await _firestore.collection('shelters').get();
+    users = await _firestore.collection('users').get();
   }
 
   bool findUser() {
@@ -71,7 +76,7 @@ class _ShelterLoginState extends State<ShelterLogin> {
                     ),
                     Container(
                       child: Text(
-                        'SHELTER LOGIN',
+                        'USER LOGIN',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 20.0,
@@ -85,8 +90,8 @@ class _ShelterLoginState extends State<ShelterLogin> {
                     ),
                     TextFormField(
                       decoration: textinputdecoration.copyWith(
-                        hintText: 'Enter Email',
-                        labelText: 'EMAIL',
+                        // hintText: 'Enter Email',
+                        labelText: 'Email',
                       ),
                       onChanged: (value) {
                         email = value;
@@ -98,8 +103,8 @@ class _ShelterLoginState extends State<ShelterLogin> {
                     TextFormField(
                       obscureText: true,
                       decoration: textinputdecoration.copyWith(
-                        hintText: 'Enter Password',
-                        labelText: 'PASSWORD',
+                        // hintText: 'Enter Password',
+                        labelText: 'Password',
                       ),
                       onChanged: (value) {
                         password = value;
@@ -131,13 +136,14 @@ class _ShelterLoginState extends State<ShelterLogin> {
                           isLoading = true;
                           isErrorVisible = false;
                         });
+
                         if (findUser()) {
                           try {
                             final user = await _auth.signInWithEmailAndPassword(
                                 email: email, password: password);
 
                             if (user != null) {
-                              Navigator.pushNamed(context, ShelterMain.id);
+                              Navigator.pushNamed(context, AdoptMain.id);
                             }
 
                             // set spinner to false
@@ -166,7 +172,7 @@ class _ShelterLoginState extends State<ShelterLogin> {
                       alignment: Alignment.center,
                       child: GestureDetector(
                         child: Text(
-                          'FORGOT PASSWORD?',
+                          'FORGOT PASSWORD',
                           style: TextStyle(
                             color: Color.fromARGB(255, 0, 136, 145),
                             fontWeight: FontWeight.bold,
@@ -198,7 +204,7 @@ class _ShelterLoginState extends State<ShelterLogin> {
                                       // decoration: TextDecoration.underline,
                                       color: Color.fromARGB(255, 0, 136, 145))),
                               onTap: () {
-                                Navigator.pushNamed(context, SRegister.id);
+                                Navigator.pushNamed(context, AdoptRegister.id);
                               }),
                         ],
                       ),

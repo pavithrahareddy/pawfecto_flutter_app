@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:pawfecto/authentication/shelter_login.dart';
-import 'package:pawfecto/authentication/shelter_main.dart';
+import 'package:pawfecto/screens/auth/adopt_login.dart';
 import 'package:pawfecto/components/rounded_button.dart';
-import 'package:pawfecto/constants.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'file:///C:/Users/User/Desktop/pawfecto/lib/constants/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'file:///C:/Users/User/Desktop/pawfecto/lib/screens/user/adopt_main.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class SRegister extends StatefulWidget {
-  static const String id = 's_register';
+class AdoptRegister extends StatefulWidget {
+  static const String id = 'adopt_register';
   @override
-  _SRegisterState createState() => _SRegisterState();
+  _AdoptRegisterState createState() => _AdoptRegisterState();
 }
 
-class _SRegisterState extends State<SRegister> {
-  final _firestore = FirebaseFirestore.instance;
+class _AdoptRegisterState extends State<AdoptRegister> {
+  // private instance auth, which will be used to register
   final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
   bool isLoading = false;
-  String email;
-  String shelterName;
+  String name;
   String phone;
+  String email;
   String password;
 
   // handling errors
@@ -53,7 +54,7 @@ class _SRegisterState extends State<SRegister> {
                     ),
                     Container(
                       child: Text(
-                        'REGISTER SHELTER',
+                        'REGISTER USER',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 20.0,
@@ -67,20 +68,21 @@ class _SRegisterState extends State<SRegister> {
                     ),
                     TextFormField(
                       decoration: textinputdecoration.copyWith(
-                        hintText: 'Enter Shelter Name',
-                        labelText: 'SHELTER NAME',
+                        // hintText: 'Enter Name',
+                        labelText: 'Name',
                       ),
                       onChanged: (value) {
-                        shelterName = value;
+                        name = value;
                       },
                     ),
                     SizedBox(
                       height: 15.0,
                     ),
                     TextFormField(
+                      keyboardType: TextInputType.emailAddress,
                       decoration: textinputdecoration.copyWith(
-                        hintText: 'Enter Email',
-                        labelText: 'EMAIL',
+                        // hintText: 'Enter Email',
+                        labelText: 'Email',
                       ),
                       onChanged: (value) {
                         email = value;
@@ -91,8 +93,8 @@ class _SRegisterState extends State<SRegister> {
                     ),
                     TextFormField(
                       decoration: textinputdecoration.copyWith(
-                        hintText: 'Enter Phone Number',
-                        labelText: 'PHONE',
+                        // hintText: 'Enter Phone Number',
+                        labelText: 'Phone',
                       ),
                       onChanged: (value) {
                         phone = value;
@@ -104,12 +106,25 @@ class _SRegisterState extends State<SRegister> {
                     TextFormField(
                       obscureText: true,
                       decoration: textinputdecoration.copyWith(
-                        hintText: 'Enter Password',
-                        labelText: 'PASSWORD',
+                        // hintText: 'Enter Password',
+                        labelText: 'Password',
                       ),
                       onChanged: (value) {
                         password = value;
                       },
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Visibility(
+                      visible: isErrorVisible,
+                      child: Text(
+                        errorMessage,
+                        style: TextStyle(
+                          color: Colors.red,
+                        ),
+                      ),
+                      replacement: SizedBox.shrink(),
                     ),
                     SizedBox(
                       height: 20.0,
@@ -119,30 +134,28 @@ class _SRegisterState extends State<SRegister> {
                       colour: Color.fromARGB(255, 0, 136, 145),
                       tcolor: Colors.white,
                       onPressed: () async {
-                        // set spinner to true
+                        // set the spinner to true
                         setState(() {
                           isErrorVisible = false;
                           isLoading = true;
                         });
 
+                        // to catch errors such as already registered user
                         try {
-                          // must register to firebase
-                          final user =
+                          // returns a Future
+                          final newUser =
                               await _auth.createUserWithEmailAndPassword(
                                   email: email, password: password);
 
-                          if (user != null) {
-                            Navigator.pushNamed(context, ShelterMain.id);
+                          if (newUser != null) {
+                            Navigator.pushNamed(context, AdoptMain.id);
                           }
 
-                          print(user);
-
-                          // save data to cloud firestore
-                          _firestore.collection('shelters').add({
-                            'name': shelterName,
+                          // save data to firestore
+                          _firestore.collection('users').add({
+                            'name': name,
                             'email': email,
                             'phone': phone,
-                            'pets': [],
                           });
 
                           // set spinner to false
@@ -153,6 +166,7 @@ class _SRegisterState extends State<SRegister> {
                           setState(() {
                             errorMessage = e.message;
                             isErrorVisible = true;
+                            isLoading = false;
                           });
                         }
                       },
@@ -178,7 +192,7 @@ class _SRegisterState extends State<SRegister> {
                                       // decoration: TextDecoration.underline,
                                       color: Color.fromARGB(255, 0, 136, 145))),
                               onTap: () {
-                                Navigator.pushNamed(context, ShelterLogin.id);
+                                Navigator.pushNamed(context, AdoptLogin.id);
                               }),
                         ],
                       ),
