@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pawfecto/screens/auth/adopt_register.dart';
 import 'package:pawfecto/screens/auth/shelter_register.dart';
 import 'package:pawfecto/components/rounded_button.dart';
-import 'package:pawfecto/screens/user/user_menu.dart';
+import 'package:pawfecto/screens/user/sidebar.dart';
 
 class Welcome extends StatefulWidget {
   static const String id = 'welcome';
@@ -61,7 +61,7 @@ class _WelcomeState extends State<Welcome> {
                       colour: Color.fromARGB(255, 218, 120, 120),
                       tcolor: Colors.white,
                       onPressed: () {
-                        Navigator.pushNamed(context, UserMenu.id);
+                        Navigator.pushNamed(context, SideBar.id);
                       },
                     ),
                   ],

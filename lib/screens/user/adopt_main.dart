@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pawfecto/screens/user/sidebar.dart';
 
 class AdoptMain extends StatefulWidget {
   static const String id = 'adopt_main';
@@ -48,10 +49,9 @@ class _AdoptMainState extends State<AdoptMain> {
               padding: EdgeInsets.symmetric(vertical: 50.0, horizontal: 40.0),
               child: Container(
                 child: ElevatedButton(
-                  child: Text('Logout'),
+                  child: Text('Sidebar'),
                   onPressed: () {
-                    _auth.signOut();
-                    Navigator.pop(context);
+                    Navigator.pushNamed(context, SideBar.id);
                   },
                 ),
               ),
