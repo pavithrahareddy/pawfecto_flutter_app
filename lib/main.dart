@@ -3,10 +3,11 @@ import 'package:pawfecto/screens/auth/adopt_login.dart';
 import 'package:pawfecto/screens/auth/adopt_register.dart';
 import 'package:pawfecto/screens/auth/shelter_login.dart';
 import 'package:pawfecto/screens/auth/shelter_register.dart';
-import 'file:///C:/Users/User/Desktop/pawfecto/lib/screens/user/adopt_main.dart';
+import 'package:pawfecto/screens/user/adopt_main.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:pawfecto/screens/user/user_menu.dart';
 import 'package:pawfecto/screens/welcome.dart';
-import 'file:///C:/Users/User/Desktop/pawfecto/lib/screens/shelter/shelter_main.dart';
+import 'package:pawfecto/screens/shelter/shelter_main.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         SRegister.id: (context) => SRegister(),
         AdoptMain.id: (context) => AdoptMain(),
         ShelterMain.id: (context) => ShelterMain(),
+        UserMenu.id: (context) => UserMenu(),
       },
     );
   }
