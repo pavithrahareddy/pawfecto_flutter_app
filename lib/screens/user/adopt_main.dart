@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pawfecto/screens/user/sidebar.dart';
+import 'package:pawfecto/screens/user/pet_details.dart';
 
 class AdoptMain extends StatefulWidget {
   static const String id = 'adopt_main';
@@ -122,10 +123,15 @@ class _AdoptMainState extends State<AdoptMain> {
                           color: Colors.white,
                           child: Column(
                             children: [
-                              Image(
-                                image: AssetImage('images/dog1.jpg'),
-                                // width: 150.0,
-                                // height: 250.0,
+                              GestureDetector(
+                                child: Image(
+                                  image: AssetImage('images/dog1.jpg'),
+                                  // width: 150.0,
+                                  // height: 250.0,
+                                ),
+                                onTap: () {
+                                  Navigator.pushNamed(context, PetDetails.id);
+                                },
                               ),
                               SizedBox(
                                 height: 10.0,
