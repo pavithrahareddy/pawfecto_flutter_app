@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pawfecto/screens/auth/adopt_login.dart';
-// import 'package:pawfecto/screens/user/adopt_main.dart';
 
 class SideBar extends StatefulWidget {
   static const String id = 'adopt_sidebar';
