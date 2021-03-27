@@ -58,7 +58,8 @@ class _PetDetailsState extends State<PetDetails> {
                         ),
                       ],
                     ),
-                  )),
+                  ),
+              ),
             ),
             Positioned(
               top: MediaQuery.of(context).size.height * .37,
