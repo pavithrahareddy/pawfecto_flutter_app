@@ -24,7 +24,6 @@ class _PetDetailsState extends State<PetDetails> {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * .40,
                   decoration: BoxDecoration(
-                    color: Colors.deepPurple,
                     image: DecorationImage(
                       image: AssetImage('images/dog1.jpg'),
                       fit: BoxFit.cover,
@@ -193,7 +192,7 @@ class _PetDetailsState extends State<PetDetails> {
               ),
             ),
             Positioned(
-              top: MediaQuery.of(context).size.height * .84,
+              top: MediaQuery.of(context).size.height * .86,
               left: 15,
               right: 15,
               child: Row(
