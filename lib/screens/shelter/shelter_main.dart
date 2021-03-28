@@ -11,10 +11,11 @@ class ShelterMain extends StatefulWidget {
 }
 
 class _ShelterMainState extends State<ShelterMain> {
-  final _auth = FirebaseAuth.instance;
 
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
+
+    // First Container is for all Pets
     Container(
         child: Column(
       children: [
@@ -160,7 +161,9 @@ class _ShelterMainState extends State<ShelterMain> {
           ),
         ),
       ],
-    )),
+    ),),
+
+    //Second Container is for all events
     Container(
       child: Column(
         children: [
@@ -613,73 +616,66 @@ class _ShelterMainState extends State<ShelterMain> {
     ),
   ];
 
+  //Selecting navigator option
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 
-  // FirebaseUser class was changed to User
-  User loggedInUser;
-
-  @override
-  void initState() {
-    super.initState();
-
-    getCurrentUser();
-  }
-
-  void getCurrentUser() {
-    try {
-      final user = _auth.currentUser;
-      if (user != null) {
-        loggedInUser = user;
-        print(loggedInUser.email);
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      //appbar for menu and profile button
+      appBar: AppBar(
+        elevation: 5,
+        backgroundColor:Color.fromARGB(255, 0, 136, 145) ,
+        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              GestureDetector(
+                child: Icon(
+                  Icons.menu,
+                  color: Colors.white,
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, ShelterSideBar.id);
+                },
+              ),
+              SizedBox(
+                width: 345,
+              ),
+              CircleAvatar(
+                radius: 20.0,
+                backgroundImage: AssetImage('images/profile.png'),
+              ),
+            ],
+          ),
+        ],
+      ),
+
+      //body area scrollable all events and pets
       body: SafeArea(
           child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    child: Icon(
-                      Icons.menu,
-                      color: Color(0xff008891),
-                    ),
-                    onTap: () {
-                      Navigator.pushNamed(context, ShelterSideBar.id);
-                    },
-                  ),
-                  CircleAvatar(
-                    radius: 25.0,
-                    backgroundImage: AssetImage('images/profile.png'),
-                  ),
-                ],
-              ),
+            child: Column(
+              children: [
+                Container(
+                  child: _widgetOptions.elementAt(_selectedIndex),
+                )
+              ],
             ),
-            Container(
-              child: _widgetOptions.elementAt(_selectedIndex),
-            )
-          ],
-        ),
-      )),
+          )),
+
+      //bottom navigation between all pets and all events
       bottomNavigationBar: BottomNavigationBar(
-        elevation: 8,
-        iconSize: 35,
-        selectedFontSize: 20,
-        unselectedFontSize: 18,
+        elevation: 5,
+        iconSize: 30,
+        selectedFontSize: 18,
+        unselectedFontSize: 16,
         backgroundColor: Color.fromARGB(255, 0, 136, 145),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
