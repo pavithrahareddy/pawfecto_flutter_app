@@ -135,10 +135,13 @@ class _SRegisterState extends State<SRegister> {
                             Navigator.pushNamed(context, ShelterMain.id);
                           }
 
-                          print(user);
+                          print(user.user.uid);
 
                           // save data to cloud firestore
-                          _firestore.collection('shelters').add({
+                          _firestore
+                              .collection('shelters')
+                              .doc(user.user.uid)
+                              .set({
                             'name': shelterName,
                             'email': email,
                             'phone': phone,
