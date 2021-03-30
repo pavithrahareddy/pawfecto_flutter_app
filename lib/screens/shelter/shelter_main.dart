@@ -11,157 +11,156 @@ class ShelterMain extends StatefulWidget {
 }
 
 class _ShelterMainState extends State<ShelterMain> {
-
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
-
     // First Container is for all Pets
     Container(
-        child: Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Container(
-            color: Colors.white,
-            child: Column(
-              children: [
-                GestureDetector(
-                  child: Image(
-                    image: AssetImage('images/dog1.jpg'),
-                    // width: 150.0,
-                    // height: 250.0,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Container(
+              color: Colors.white,
+              child: Column(
+                children: [
+                  GestureDetector(
+                    child: Image(
+                      image: AssetImage('images/dog1.jpg'),
+                      // width: 150.0,
+                      // height: 250.0,
+                    ),
+                    onTap: () {},
                   ),
-                  onTap: () {},
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Column(
-                        children: [
-                          Text(
-                            'Ellie',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20.0,
-                            ),
-                          ),
-                          Text(
-                            'Labrador',
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 14.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                  SizedBox(
+                    height: 10.0,
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              'Ellie',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                            Text(
+                              'Labrador',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 14.0,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Container(
-            color: Colors.white,
-            child: Column(
-              children: [
-                GestureDetector(
-                  child: Image(
-                    image: AssetImage('images/dog1.jpg'),
-                    // width: 150.0,
-                    // height: 250.0,
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Container(
+              color: Colors.white,
+              child: Column(
+                children: [
+                  GestureDetector(
+                    child: Image(
+                      image: AssetImage('images/dog1.jpg'),
+                      // width: 150.0,
+                      // height: 250.0,
+                    ),
+                    onTap: () {},
                   ),
-                  onTap: () {},
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Column(
-                        children: [
-                          Text(
-                            'Ellie',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20.0,
-                            ),
-                          ),
-                          Text(
-                            'Labrador',
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 14.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                  SizedBox(
+                    height: 10.0,
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              'Ellie',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                            Text(
+                              'Labrador',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 14.0,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Container(
-            color: Colors.white,
-            child: Column(
-              children: [
-                GestureDetector(
-                  child: Image(
-                    image: AssetImage('images/dog1.jpg'),
-                    // width: 150.0,
-                    // height: 250.0,
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Container(
+              color: Colors.white,
+              child: Column(
+                children: [
+                  GestureDetector(
+                    child: Image(
+                      image: AssetImage('images/dog1.jpg'),
+                      // width: 150.0,
+                      // height: 250.0,
+                    ),
+                    onTap: () {},
                   ),
-                  onTap: () {},
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Column(
-                        children: [
-                          Text(
-                            'Ellie',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20.0,
-                            ),
-                          ),
-                          Text(
-                            'Labrador',
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 14.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                  SizedBox(
+                    height: 10.0,
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              'Ellie',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                            Text(
+                              'Labrador',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 14.0,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      ],
-    ),),
+        ],
+      ),
+    ),
 
     //Second Container is for all events
     Container(
@@ -288,13 +287,13 @@ class _ShelterMainState extends State<ShelterMain> {
                     ListTile(
                       title: Center(
                           child: Text(
-                            'Willie Pet Paradise',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          )),
+                        'Willie Pet Paradise',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      )),
                       tileColor: Color.fromARGB(255, 0, 136, 145),
                       subtitle: Center(
                         child: Text(
@@ -399,13 +398,13 @@ class _ShelterMainState extends State<ShelterMain> {
                     ListTile(
                       title: Center(
                           child: Text(
-                            'Willie Pet Paradise',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          )),
+                        'Willie Pet Paradise',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      )),
                       tileColor: Color.fromARGB(255, 0, 136, 145),
                       subtitle: Center(
                         child: Text(
@@ -510,13 +509,13 @@ class _ShelterMainState extends State<ShelterMain> {
                     ListTile(
                       title: Center(
                           child: Text(
-                            'Willie Pet Paradise',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          )),
+                        'Willie Pet Paradise',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      )),
                       tileColor: Color.fromARGB(255, 0, 136, 145),
                       subtitle: Center(
                         child: Text(
@@ -626,49 +625,49 @@ class _ShelterMainState extends State<ShelterMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      //appbar for menu and profile button
-      appBar: AppBar(
-        elevation: 5,
-        backgroundColor:Color.fromARGB(255, 0, 136, 145) ,
-        automaticallyImplyLeading: false,
-        actions: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              GestureDetector(
-                child: Icon(
-                  Icons.menu,
-                  color: Colors.white,
-                ),
-                onTap: () {
-                  Navigator.pushNamed(context, ShelterSideBar.id);
-                },
-              ),
-              SizedBox(
-                width: 345,
-              ),
-              CircleAvatar(
-                radius: 20.0,
-                backgroundImage: AssetImage('images/profile.png'),
-              ),
-            ],
-          ),
-        ],
-      ),
-
       //body area scrollable all events and pets
       body: SafeArea(
           child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  child: _widgetOptions.elementAt(_selectedIndex),
-                )
-              ],
+        child: Column(
+          children: [
+            // appBar
+            Container(
+              color: Color.fromARGB(255, 0, 136, 145),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 10.0, horizontal: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    GestureDetector(
+                      child: Icon(
+                        Icons.menu,
+                        color: Colors.white,
+                      ),
+                      onTap: () {
+                        Navigator.pushNamed(context, ShelterSideBar.id);
+                      },
+                    ),
+                    // SizedBox(
+                    //   width: 345,
+                    // ),
+                    CircleAvatar(
+                      radius: 20.0,
+                      backgroundImage: AssetImage('images/profile.png'),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          )),
+
+            // mainScreen
+            Container(
+              child: _widgetOptions.elementAt(_selectedIndex),
+            )
+          ],
+        ),
+      )),
 
       //bottom navigation between all pets and all events
       bottomNavigationBar: BottomNavigationBar(
