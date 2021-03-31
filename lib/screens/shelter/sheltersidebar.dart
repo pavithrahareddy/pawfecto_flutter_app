@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pawfecto/screens/auth/shelter_login.dart';
+import 'package:pawfecto/screens/shelter/addEvent.dart';
 import 'package:pawfecto/screens/shelter/addPet.dart';
 
 class ShelterSideBar extends StatefulWidget {
@@ -107,9 +108,7 @@ class _ShelterSideBarState extends State<ShelterSideBar> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    setState(() {
-                      selectedMenuItem = 'addevents';
-                    });
+                    Navigator.popAndPushNamed(context, AddEvent.id);
                   },
                   child: Row(
                     children: [
