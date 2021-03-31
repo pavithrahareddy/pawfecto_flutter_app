@@ -7,6 +7,7 @@ import 'package:pawfecto/screens/shelter/addPet.dart';
 import 'package:pawfecto/screens/shelter/sheltersidebar.dart';
 import 'package:pawfecto/screens/user/adopt_main.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:pawfecto/screens/user/event_details.dart';
 import 'package:pawfecto/screens/user/pet_details.dart';
 import 'package:pawfecto/screens/user/sidebar.dart';
 import 'package:pawfecto/screens/welcome.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         PetDetails.id: (context) => PetDetails(),
         ShelterSideBar.id: (context) => ShelterSideBar(),
         AddPet.id: (context) => AddPet(),
+        EventDetails.id: (context)=> EventDetails(),
       },
     );
   }
