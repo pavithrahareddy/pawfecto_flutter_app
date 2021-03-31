@@ -58,7 +58,7 @@ class _AddEventState extends State<AddEvent> {
     });
   }
 
-  Future uploadFile() {
+  void uploadFile() {
     setState(() {
       isLoading = true;
     });
@@ -111,6 +111,22 @@ class _AddEventState extends State<AddEvent> {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 16.0, top: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                        child: Icon(
+                          Icons.close,
+                        ),
+                        onTap: () {
+                          Navigator.popAndPushNamed(context, ShelterMain.id);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 30.0),
                   child: Text(

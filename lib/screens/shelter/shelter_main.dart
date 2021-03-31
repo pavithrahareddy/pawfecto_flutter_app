@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pawfecto/screens/shelter/addPet.dart';
 import 'package:pawfecto/screens/shelter/sheltersidebar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -30,16 +30,19 @@ class _ShelterMainState extends State<ShelterMain> {
 
   int _selectedIndex = 0;
 
-  //Selecting navigator option
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, AddPet.id);
+        },
+        backgroundColor: Color.fromARGB(255, 0, 136, 145),
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
       //body area scrollable all events and pets
       body: SafeArea(
         child: SingleChildScrollView(
@@ -87,12 +90,15 @@ class _ShelterMainState extends State<ShelterMain> {
                         List pets = [];
                         List<Widget> petCards = [];
                         final shelters = snapshot.data.docs;
+
+                        // fetch the pets under the current user
                         for (var shelter in shelters) {
                           if (shelter.id == _uid) {
                             pets = shelter.data()["pets"];
                             break;
                           }
                         }
+
                         for (var pet in pets) {
                           final petCard = Padding(
                             padding: const EdgeInsets.all(15.0),
@@ -293,35 +299,6 @@ class _ShelterMainState extends State<ShelterMain> {
             ],
           ),
         ),
-      ),
-
-      //bottom navigation
-      bottomNavigationBar: BottomNavigationBar(
-        elevation: 5,
-        iconSize: 30,
-        selectedFontSize: 18,
-        unselectedFontSize: 16,
-        backgroundColor: Color.fromARGB(255, 0, 136, 145),
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              FontAwesomeIcons.dog,
-              size: 20.0,
-            ),
-            label: 'Pets',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              FontAwesomeIcons.calendar,
-              size: 20.0,
-            ),
-            label: 'Events',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Color.fromARGB(255, 202, 247, 227),
-        onTap: _onItemTapped,
       ),
     );
   }

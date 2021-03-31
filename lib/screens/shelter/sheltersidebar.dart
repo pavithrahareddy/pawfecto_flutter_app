@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pawfecto/screens/auth/shelter_login.dart';
 import 'package:pawfecto/screens/shelter/addEvent.dart';
-import 'package:pawfecto/screens/shelter/addPet.dart';
+import 'package:pawfecto/screens/shelter/shelter_main.dart';
 
 class ShelterSideBar extends StatefulWidget {
   static const String id = 'shelter_sidebar';
@@ -11,7 +11,6 @@ class ShelterSideBar extends StatefulWidget {
 }
 
 class _ShelterSideBarState extends State<ShelterSideBar> {
-  String selectedMenuItem;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,18 +45,12 @@ class _ShelterSideBarState extends State<ShelterSideBar> {
                   ],
                 ),
                 GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedMenuItem = 'profile';
-                    });
-                  },
+                  onTap: () {},
                   child: Row(
                     children: [
                       Icon(
                         FontAwesomeIcons.userAlt,
-                        color: selectedMenuItem == 'profile'
-                            ? Colors.white
-                            : Colors.white.withOpacity(0.7),
+                        color: Colors.white.withOpacity(0.7),
                       ),
                       SizedBox(
                         width: 30.0,
@@ -65,9 +58,7 @@ class _ShelterSideBarState extends State<ShelterSideBar> {
                       Text(
                         'Profile',
                         style: TextStyle(
-                          color: selectedMenuItem == 'profile'
-                              ? Colors.white
-                              : Colors.white.withOpacity(0.7),
+                          color: Colors.white.withOpacity(0.7),
                           fontWeight: FontWeight.w600,
                           fontSize: 20.0,
                         ),
@@ -77,28 +68,45 @@ class _ShelterSideBarState extends State<ShelterSideBar> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // setState(() {
-                    //   selectedMenuItem = 'addpet';
-                    // });
-                    Navigator.popAndPushNamed(context, AddPet.id);
+                    Navigator.popAndPushNamed(context, ShelterMain.id);
                   },
                   child: Row(
                     children: [
                       Icon(
                         FontAwesomeIcons.paw,
-                        color: selectedMenuItem == 'addpet'
-                            ? Colors.white
-                            : Colors.white.withOpacity(0.7),
+                        color: Colors.white.withOpacity(0.7),
                       ),
                       SizedBox(
                         width: 30.0,
                       ),
                       Text(
-                        'Add Pet',
+                        'Pets',
                         style: TextStyle(
-                          color: selectedMenuItem == 'addpet'
-                              ? Colors.white
-                              : Colors.white.withOpacity(0.7),
+                          color: Colors.white.withOpacity(0.7),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.popAndPushNamed(context, ShelterMain.id);
+                  },
+                  child: Row(
+                    children: [
+                      Icon(
+                        FontAwesomeIcons.calendar,
+                        color: Colors.white.withOpacity(0.7),
+                      ),
+                      SizedBox(
+                        width: 30.0,
+                      ),
+                      Text(
+                        'Events',
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.7),
                           fontWeight: FontWeight.w600,
                           fontSize: 20.0,
                         ),
@@ -113,20 +121,16 @@ class _ShelterSideBarState extends State<ShelterSideBar> {
                   child: Row(
                     children: [
                       Icon(
-                        FontAwesomeIcons.democrat,
-                        color: selectedMenuItem == 'addevents'
-                            ? Colors.white
-                            : Colors.white.withOpacity(0.7),
+                        FontAwesomeIcons.donate,
+                        color: Colors.white.withOpacity(0.7),
                       ),
                       SizedBox(
                         width: 30.0,
                       ),
                       Text(
-                        'Add Events',
+                        'Donation',
                         style: TextStyle(
-                          color: selectedMenuItem == 'addevents'
-                              ? Colors.white
-                              : Colors.white.withOpacity(0.7),
+                          color: Colors.white.withOpacity(0.7),
                           fontWeight: FontWeight.w600,
                           fontSize: 20.0,
                         ),
@@ -135,18 +139,12 @@ class _ShelterSideBarState extends State<ShelterSideBar> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedMenuItem = 'settings';
-                    });
-                  },
+                  onTap: () {},
                   child: Row(
                     children: [
                       Icon(
                         FontAwesomeIcons.cog,
-                        color: selectedMenuItem == 'profile'
-                            ? Colors.white
-                            : Colors.white.withOpacity(0.7),
+                        color: Colors.white.withOpacity(0.7),
                       ),
                       SizedBox(
                         width: 30.0,
@@ -154,9 +152,7 @@ class _ShelterSideBarState extends State<ShelterSideBar> {
                       Text(
                         'Settings',
                         style: TextStyle(
-                          color: selectedMenuItem == 'settings'
-                              ? Colors.white
-                              : Colors.white.withOpacity(0.7),
+                          color: Colors.white.withOpacity(0.7),
                           fontWeight: FontWeight.w600,
                           fontSize: 20.0,
                         ),

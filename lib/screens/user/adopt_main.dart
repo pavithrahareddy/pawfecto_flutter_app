@@ -39,65 +39,65 @@ class _AdoptMainState extends State<AdoptMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.white,
-          actions: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    child: Icon(
-                      Icons.menu,
-                      color: Color(0xff008891),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  child: Icon(
+                    Icons.menu,
+                    color: Color(0xff008891),
+                  ),
+                  onTap: () {
+                    Navigator.pushNamed(context, SideBar.id);
+                  },
+                ),
+                SizedBox(
+                  width: 125,
+                ),
+                Column(
+                  children: [
+                    Text(
+                      'Location',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 12.0,
+                      ),
                     ),
-                    onTap: () {
-                      Navigator.pushNamed(context, SideBar.id);
-                    },
-                  ),
-                  SizedBox(
-                    width: 125,
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        'Location',
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 12.0,
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.location_on,
+                          color: Color(0xff008891),
                         ),
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.location_on,
-                            color: Color(0xff008891),
+                        Text(
+                          'Bangalore',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15.0,
                           ),
-                          Text(
-                            'Bangalore',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: 125,
-                  ),
-                  CircleAvatar(
-                    radius: 25.0,
-                    backgroundImage: AssetImage('images/profile.png'),
-                  ),
-                ],
-              ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: 125,
+                ),
+                CircleAvatar(
+                  radius: 25.0,
+                  backgroundImage: AssetImage('images/profile.png'),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
+      ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -116,6 +116,7 @@ class _AdoptMainState extends State<AdoptMain> {
                           IconButton(
                             icon: Icon(FontAwesomeIcons.dog),
                             iconSize: 30.0,
+                            onPressed: () {},
                           ),
                           SizedBox(
                             width: 20.0,
@@ -123,6 +124,7 @@ class _AdoptMainState extends State<AdoptMain> {
                           IconButton(
                             icon: Icon(FontAwesomeIcons.cat),
                             iconSize: 30.0,
+                            onPressed: () {},
                           ),
                         ],
                       ),

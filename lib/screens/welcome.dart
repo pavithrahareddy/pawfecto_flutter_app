@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:pawfecto/screens/auth/adopt_register.dart';
 import 'package:pawfecto/screens/auth/shelter_register.dart';
 import 'package:pawfecto/components/rounded_button.dart';
-import 'package:pawfecto/screens/shelter/shelter_main.dart';
-import 'package:pawfecto/screens/user/event_details.dart';
 
 class Welcome extends StatefulWidget {
   static const String id = 'welcome';
@@ -61,9 +59,7 @@ class _WelcomeState extends State<Welcome> {
                       title: 'REPORT',
                       colour: Color.fromARGB(255, 218, 120, 120),
                       tcolor: Colors.white,
-                      // onPressed: () {
-                      //   Navigator.pushNamed(context, EventDetails.id);
-                      // },
+                      onPressed: () {},
                     ),
                   ],
                 ),
