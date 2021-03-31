@@ -56,24 +56,24 @@ class _AddPetState extends State<AddPet> {
       setState(() {
         _image = image;
         _imageFile = File(image.path);
+        _isImageUploaded = true;
       });
     });
   }
 
-  Future uploadFile() async {
+  Future uploadFile() {
     setState(() {
       isLoading = true;
     });
     Reference storageReference =
         _storage.ref().child('Pets/${Path.basename(_image.path)}');
     UploadTask uploadTask = storageReference.putFile(_imageFile);
-    await uploadTask.then((res) {
+    uploadTask.then((res) {
       res.ref.getDownloadURL().then((fileURL) {
         setState(() {
           _uploadedFileURL = fileURL;
           print(_uploadedFileURL);
           isLoading = false;
-          _isImageUploaded = true;
         });
       });
     });
@@ -410,11 +410,11 @@ class _AddPetState extends State<AddPet> {
                                   Color(0xff008891),
                                 ),
                               ),
-                              onPressed: () {
-                                chooseFile();
-                                uploadFile();
-                              },
-                              child: Text('UPLOAD IMAGE'),
+                              onPressed:
+                                  _isImageUploaded ? uploadFile : chooseFile,
+                              child: Text(_isImageUploaded
+                                  ? 'UPLOAD IMAGE'
+                                  : 'CHOOSE IMAGE'),
                             ),
                           ],
                         ),
