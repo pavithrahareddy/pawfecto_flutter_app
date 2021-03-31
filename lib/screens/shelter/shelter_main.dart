@@ -15,9 +15,6 @@ class _ShelterMainState extends State<ShelterMain> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
 
-  List _pets = [];
-  List<Widget> _petCards = [];
-
   String _uid;
   void getUID() {
     setState(() {
@@ -25,229 +22,15 @@ class _ShelterMainState extends State<ShelterMain> {
     });
   }
 
-  void createPetCards() {
-    for (int i = 0; i < _pets.length; i++) {
-      setState(() {
-        _petCards[i] = Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Container(
-            color: Colors.white,
-            child: Column(
-              children: [
-                GestureDetector(
-                  child: Image(
-                    image: NetworkImage(_pets[i].imageUrl),
-                    width: 150.0,
-                    height: 250.0,
-                  ),
-                  onTap: () {},
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Column(
-                        children: [
-                          Text(
-                            _pets[i].name,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20.0,
-                            ),
-                          ),
-                          Text(
-                            _pets[i].breed,
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 14.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      });
-    }
-  }
-
-  void getPets() async {
-    DocumentSnapshot shelter =
-        await _firestore.collection('shelters').doc(_uid).get();
-
-    setState(() {
-      _pets = shelter.data()["pets"];
-    });
-  }
-
   @override
   void initState() {
     super.initState();
     getUID();
-    getPets();
-    createPetCards();
   }
 
   int _selectedIndex = 0;
 
   static List<Widget> _widgetOptions = <Widget>[
-    // First Container is for all Pets
-    Container(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Container(
-              color: Colors.white,
-              child: Column(
-                children: [
-                  GestureDetector(
-                    child: Image(
-                      image: AssetImage('images/dog1.jpg'),
-                      // width: 150.0,
-                      // height: 250.0,
-                    ),
-                    onTap: () {},
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Column(
-                          children: [
-                            Text(
-                              'Ellie',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20.0,
-                              ),
-                            ),
-                            Text(
-                              'Labrador',
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 14.0,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Container(
-              color: Colors.white,
-              child: Column(
-                children: [
-                  GestureDetector(
-                    child: Image(
-                      image: AssetImage('images/dog1.jpg'),
-                      // width: 150.0,
-                      // height: 250.0,
-                    ),
-                    onTap: () {},
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Column(
-                          children: [
-                            Text(
-                              'Ellie',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20.0,
-                              ),
-                            ),
-                            Text(
-                              'Labrador',
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 14.0,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Container(
-              color: Colors.white,
-              child: Column(
-                children: [
-                  GestureDetector(
-                    child: Image(
-                      image: AssetImage('images/dog1.jpg'),
-                      // width: 150.0,
-                      // height: 250.0,
-                    ),
-                    onTap: () {},
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Column(
-                          children: [
-                            Text(
-                              'Ellie',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20.0,
-                              ),
-                            ),
-                            Text(
-                              'Labrador',
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 14.0,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    ),
-
     //Second Container is for all events
     Container(
       child: Column(
@@ -819,7 +602,7 @@ class _ShelterMainState extends State<ShelterMain> {
                     children: petCards,
                   );
                 },
-              )
+              ),
             ],
           ),
         ),
