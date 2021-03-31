@@ -39,61 +39,70 @@ class _AdoptMainState extends State<AdoptMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          actions: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    child: Icon(
+                      Icons.menu,
+                      color: Color(0xff008891),
+                    ),
+                    onTap: () {
+                      Navigator.pushNamed(context, SideBar.id);
+                    },
+                  ),
+                  SizedBox(
+                    width: 125,
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        'Location',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12.0,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.location_on,
+                            color: Color(0xff008891),
+                          ),
+                          Text(
+                            'Bangalore',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15.0,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 125,
+                  ),
+                  CircleAvatar(
+                    radius: 25.0,
+                    backgroundImage: AssetImage('images/profile.png'),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      child: Icon(
-                        Icons.menu,
-                        color: Color(0xff008891),
-                      ),
-                      onTap: () {
-                        Navigator.pushNamed(context, SideBar.id);
-                      },
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                          'Location',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12.0,
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.location_on,
-                              color: Color(0xff008891),
-                            ),
-                            Text(
-                              'Bangalore',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15.0,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    CircleAvatar(
-                      radius: 25.0,
-                      backgroundImage: AssetImage('images/profile.png'),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
               Container(
                 // height: 500.0,
                 color: Color(0xffF6F6F6),

@@ -16,55 +16,58 @@ class _EventDetailsState extends State<EventDetails> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         actions: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GestureDetector(
-                child: Icon(
-                  Icons.menu,
-                  color: Color(0xff008891),
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  child: Icon(
+                    Icons.menu,
+                    color: Color(0xff008891),
+                  ),
+                  onTap: () {
+                    Navigator.pushNamed(context, SideBar.id);
+                  },
                 ),
-                onTap: () {
-                  Navigator.pushNamed(context, SideBar.id);
-                },
-              ),
-              SizedBox(
-                width: 125,
-              ),
-              Column(
-                children: [
-                  Text(
-                    'Location',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12.0,
+                SizedBox(
+                  width: 125,
+                ),
+                Column(
+                  children: [
+                    Text(
+                      'Location',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 12.0,
+                      ),
                     ),
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.location_on,
-                        color: Color(0xff008891),
-                      ),
-                      Text(
-                        'Bangalore',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15.0,
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.location_on,
+                          color: Color(0xff008891),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(
-                width: 125,
-              ),
-              CircleAvatar(
-                radius: 25.0,
-                backgroundImage: AssetImage('images/profile.png'),
-              ),
-            ],
+                        Text(
+                          'Bangalore',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: 125,
+                ),
+                CircleAvatar(
+                  radius: 25.0,
+                  backgroundImage: AssetImage('images/profile.png'),
+                ),
+              ],
+            ),
           ),
         ],
       ),
