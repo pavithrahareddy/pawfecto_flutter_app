@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pawfecto/screens/shelter/addPet.dart';
 import 'package:pawfecto/screens/shelter/sheltersidebar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -100,45 +101,69 @@ class _ShelterMainPetState extends State<ShelterMainPet> {
 
                   for (var pet in pets) {
                     final petCard = Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Container(
-                        color: Colors.white,
+                      padding: EdgeInsets.only(
+                        top: 20.0,
+                      ),
+                      child: Card(
+                        shadowColor: Colors.grey,
+                        elevation: 5,
                         child: Column(
                           children: [
-                            GestureDetector(
-                              child: Image(
-                                image: NetworkImage(pet["imageURL"]),
-                                width: 150.0,
-                                height: 250.0,
-                              ),
-                              onTap: () {},
-                            ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
                             Padding(
-                              padding: const EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.width * 0.70,
+                                width: MediaQuery.of(context).size.width * 0.80,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(pet["imageURL"]),
+                                    fit: BoxFit.fill,
+                                  ),
+                                  shape: BoxShape.rectangle,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.85,
                               child: Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Column(
-                                    children: [
-                                      Text(
-                                        pet["name"],
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 20.0,
+                                  Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          pet["name"],
+                                          style: TextStyle(
+                                            fontSize: 25.0,
+                                            color: Colors.blueGrey,
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        pet["breed"],
-                                        style: TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: 14.0,
+                                        Text(
+                                          '${pet["breed"]}, ${pet["age"]}',
+                                          style: TextStyle(
+                                            fontSize: 16.0,
+                                            color: Colors.grey,
+                                          ),
                                         ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: GestureDetector(
+                                      onTap: () {},
+                                      child: Icon(
+                                        pet["gender"] == 'Male'
+                                            ? FontAwesomeIcons.mars
+                                            : FontAwesomeIcons.venus,
+                                        color: Color.fromARGB(255, 0, 136, 145),
                                       ),
-                                    ],
+                                    ),
                                   ),
                                 ],
                               ),

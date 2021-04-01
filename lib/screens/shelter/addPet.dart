@@ -34,6 +34,8 @@ class _AddPetState extends State<AddPet> {
     getUID();
   }
 
+  List pets = [];
+
   String _gender = 'Male';
   String _type = 'Dog';
   String _name;
@@ -85,9 +87,12 @@ class _AddPetState extends State<AddPet> {
     });
 
     try {
+      final shelter = await _firestore.collection('shelters').doc(_uid).get();
+      pets = shelter.data()["pets"];
       await _firestore.collection('shelters').doc(_uid).update({
         'pets': FieldValue.arrayUnion([
           {
+            'id': pets.length + 1,
             'name': _name,
             'age': _age,
             'gender': _gender,
