@@ -3,8 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pawfecto/screens/user/sidebar.dart';
-import 'package:pawfecto/screens/user/pet_details.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pawfecto/screens/user/adopt/pet_details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AdoptMain extends StatefulWidget {
@@ -38,6 +37,16 @@ class _AdoptMainState extends State<AdoptMain> {
       print(e);
     }
   }
+
+  int _selectedtype = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedtype = index;
+    });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -90,15 +99,27 @@ class _AdoptMainState extends State<AdoptMain> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           IconButton(
-                            icon: Icon(FontAwesomeIcons.dog),
+                            icon: Icon(
+                              FontAwesomeIcons.dog,
+                              color: Color.fromARGB(255, 0, 136, 145),
+                            ),
                             iconSize: 30.0,
+                            onPressed: () {
+                              _onItemTapped(0);
+                            },
                           ),
                           SizedBox(
                             width: 20.0,
                           ),
                           IconButton(
-                            icon: Icon(FontAwesomeIcons.cat),
+                            icon: Icon(
+                              FontAwesomeIcons.cat,
+                              color: Color.fromARGB(255, 0, 136, 145),
+                            ),
                             iconSize: 30.0,
+                            onPressed: () {
+                              _onItemTapped(1);
+                            },
                           ),
                         ],
                       ),
@@ -111,90 +132,170 @@ class _AdoptMainState extends State<AdoptMain> {
                             );
                           }
 
-
                           List pets = [];
-                          List allpets =[];
-                          List<Widget> petCards = [];
+                          List allpets = [];
+                          List<Widget> dogCards = [];
+                          List<Widget> catCards = [];
                           final shelters = snapshot.data.docs;
                           for (var shelter in shelters) {
                             pets = shelter.data()["pets"];
-                            for(var eachpet in pets){
+                            for (var eachpet in pets) {
                               allpets.add(eachpet);
                             }
                           }
                           for (var pet in allpets) {
-                            final petCard = Padding(
-                              padding: const EdgeInsets.all(25.0),
-                              child: Container(
-                                color: Colors.white,
-                                child: Column(
-                                  children: [
-                                    GestureDetector(
-                                      child: Image(
-                                        image: (pet["imageURL"] == null)
-                                            ? AssetImage('images/dog1.jpg')
-                                            : NetworkImage(pet["imageURL"]),
-                                        width: 150.0,
-                                        height: 250.0,
+                            if (pet["type"] == "Dog") {
+                              final dogCard = Padding(
+                                padding: const EdgeInsets.all(25.0),
+                                child: Container(
+                                  color: Colors.white,
+                                  child: Column(
+                                    children: [
+                                      GestureDetector(
+                                        child: Image(
+                                          image: (pet["imageURL"] == null)
+                                              ? AssetImage('images/dog1.jpg')
+                                              : NetworkImage(pet["imageURL"]),
+                                          width: 150.0,
+                                          height: 250.0,
+                                        ),
+                                        onTap: () {
+                                          Navigator.pushNamed(
+                                              context, PetDetails.id);
+                                        },
                                       ),
-                                      onTap: () {
-                                        Navigator.pushNamed(
-                                            context, PetDetails.id);
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: 10.0,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Column(
-                                            children: [
-                                              Text(
-                                                pet["name"]==null ? "No name" : pet["name"],
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 20.0,
-                                                ),
-                                              ),
-                                              Text(
-                                                pet["breed"]==null ? "No breed" : pet["breed"],
-                                                style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 14.0,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Container(
-                                            child: Row(
+                                      SizedBox(
+                                        height: 10.0,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Column(
                                               children: [
-                                                Icon(
-                                                  FontAwesomeIcons.heart,
-                                                  color: Colors.redAccent,
+                                                Text(
+                                                  pet["name"] == null
+                                                      ? "No name"
+                                                      : pet["name"],
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 20.0,
+                                                  ),
                                                 ),
-                                                SizedBox(
-                                                  width: 30.0,
+                                                Text(
+                                                  pet["breed"] == null
+                                                      ? "No breed"
+                                                      : pet["breed"],
+                                                  style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 14.0,
+                                                  ),
                                                 ),
-                                                Icon(FontAwesomeIcons.phone,
-                                                    color: Colors.green),
                                               ],
                                             ),
-                                          ),
-                                        ],
+                                            Container(
+                                              child: Row(
+                                                children: [
+                                                  Icon(
+                                                    FontAwesomeIcons.heart,
+                                                    color: Colors.redAccent,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 30.0,
+                                                  ),
+                                                  Icon(FontAwesomeIcons.phone,
+                                                      color: Colors.green),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            );
-                            petCards.add(petCard);
+                              );
+                              dogCards.add(dogCard);
+                            } else {
+                              final catCard = Padding(
+                                padding: const EdgeInsets.all(25.0),
+                                child: Container(
+                                  color: Colors.white,
+                                  child: Column(
+                                    children: [
+                                      GestureDetector(
+                                        child: Image(
+                                          image: (pet["imageURL"] == null)
+                                              ? AssetImage('images/dog1.jpg')
+                                              : NetworkImage(pet["imageURL"]),
+                                          width: 150.0,
+                                          height: 250.0,
+                                        ),
+                                        onTap: () {
+                                          Navigator.pushNamed(
+                                              context, PetDetails.id);
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 10.0,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Column(
+                                              children: [
+                                                Text(
+                                                  pet["name"] == null
+                                                      ? "No name"
+                                                      : pet["name"],
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 20.0,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  pet["breed"] == null
+                                                      ? "No breed"
+                                                      : pet["breed"],
+                                                  style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 14.0,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Container(
+                                              child: Row(
+                                                children: [
+                                                  Icon(
+                                                    FontAwesomeIcons.heart,
+                                                    color: Colors.redAccent,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 30.0,
+                                                  ),
+                                                  Icon(FontAwesomeIcons.phone,
+                                                      color: Colors.green),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                              catCards.add(catCard);
+                            }
                           }
                           return Column(
-                            children: petCards,
+                            children: _selectedtype == 0 ? dogCards : catCards,
                           );
                         },
                       ),

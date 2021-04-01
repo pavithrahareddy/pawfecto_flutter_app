@@ -6,10 +6,12 @@ import 'package:pawfecto/screens/auth/shelter_register.dart';
 import 'package:pawfecto/screens/shelter/addEvent.dart';
 import 'package:pawfecto/screens/shelter/addPet.dart';
 import 'package:pawfecto/screens/shelter/sheltersidebar.dart';
+import 'package:pawfecto/screens/user/adopt/adopt_form.dart';
 import 'package:pawfecto/screens/user/adopt_main.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:pawfecto/screens/user/event_details.dart';
-import 'package:pawfecto/screens/user/pet_details.dart';
+import 'package:pawfecto/screens/user/events/event_register.dart';
+import 'file:///C:/Users/PavithraReddy/AndroidStudioProjects/pawfecto/lib/screens/user/events/event_details.dart';
+import 'file:///C:/Users/PavithraReddy/AndroidStudioProjects/pawfecto/lib/screens/user/adopt/pet_details.dart';
 import 'package:pawfecto/screens/user/sidebar.dart';
 import 'package:pawfecto/screens/welcome.dart';
 import 'package:pawfecto/screens/shelter/shelter_main.dart';
@@ -39,6 +41,8 @@ class MyApp extends StatelessWidget {
         AddPet.id: (context) => AddPet(),
         AddEvent.id: (context) => AddEvent(),
         EventDetails.id: (context) => EventDetails(),
+        EventRegister.id: (context) => EventRegister(),
+        AdoptForm.id:(context) =>AdoptForm(),
       },
     );
   }
