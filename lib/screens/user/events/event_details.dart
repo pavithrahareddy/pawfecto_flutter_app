@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pawfecto/screens/user/events/event_register.dart';
+import 'package:pawfecto/screens/user/sidebar.dart';
 
-import 'sidebar.dart';
 
 class EventDetails extends StatefulWidget {
   static const String id = 'event_detail';
@@ -15,59 +16,32 @@ class _EventDetailsState extends State<EventDetails> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+        leading: GestureDetector(
+          child: Icon(
+            Icons.menu,
+            color: Color(0xff008891),
+          ),
+          onTap: () {
+            Navigator.pushNamed(context, SideBar.id);
+          },
+        ),
+        title: Text(
+          'Events',
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
         actions: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  child: Icon(
-                    Icons.menu,
-                    color: Color(0xff008891),
-                  ),
-                  onTap: () {
-                    Navigator.pushNamed(context, SideBar.id);
-                  },
-                ),
-                SizedBox(
-                  width: 125,
-                ),
-                Column(
-                  children: [
-                    Text(
-                      'Location',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12.0,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.location_on,
-                          color: Color(0xff008891),
-                        ),
-                        Text(
-                          'Bangalore',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 15.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  width: 125,
-                ),
-                CircleAvatar(
-                  radius: 25.0,
-                  backgroundImage: AssetImage('images/profile.png'),
-                ),
-              ],
-            ),
+          Icon(
+            Icons.location_on,
+            color: Color(0xff008891),
+          ),
+          SizedBox(
+            width: 15,
+          ),
+          CircleAvatar(
+            radius: 15.0,
+            backgroundImage: AssetImage('images/profile.png'),
           ),
         ],
       ),
@@ -161,7 +135,9 @@ class _EventDetailsState extends State<EventDetails> {
                                         backgroundColor: Colors.teal,
                                         onSurface: Colors.grey,
                                       ),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.pushNamed(context, EventRegister.id);
+                                      },
                                     ),
                                     const SizedBox(width: 15),
                                     TextButton(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pawfecto/screens/user/adopt/adopt_form.dart';
 
 class PetDetails extends StatefulWidget {
   static const String id = 'pet_detail';
@@ -227,16 +228,21 @@ class _PetDetailsState extends State<PetDetails> {
                       borderRadius: BorderRadius.circular(20.0),
                       elevation: 4.0,
                       color: Color.fromARGB(255, 0, 136, 145),
-                      child: Padding(
-                        padding: EdgeInsets.all(20.0),
-                        child: Text(
-                          'Adopt',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.0,
+                      child: GestureDetector(
+                        onTap: (){
+                          Navigator.pushNamed(context, AdoptForm.id);
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(20.0),
+                          child: Text(
+                            'Adopt',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18.0,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
                         ),
                       ),
                     ),
