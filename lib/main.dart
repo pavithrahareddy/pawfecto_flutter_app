@@ -5,6 +5,7 @@ import 'package:pawfecto/screens/auth/shelter_login.dart';
 import 'package:pawfecto/screens/auth/shelter_register.dart';
 import 'package:pawfecto/screens/shelter/addEvent.dart';
 import 'package:pawfecto/screens/shelter/addPet.dart';
+import 'package:pawfecto/screens/shelter/shelter_main_events.dart';
 import 'package:pawfecto/screens/shelter/sheltersidebar.dart';
 import 'package:pawfecto/screens/user/adopt_main.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,7 +13,7 @@ import 'package:pawfecto/screens/user/event_details.dart';
 import 'package:pawfecto/screens/user/pet_details.dart';
 import 'package:pawfecto/screens/user/sidebar.dart';
 import 'package:pawfecto/screens/welcome.dart';
-import 'package:pawfecto/screens/shelter/shelter_main.dart';
+import 'package:pawfecto/screens/shelter/shelter_main_pet.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
         AdoptRegister.id: (context) => AdoptRegister(),
         SRegister.id: (context) => SRegister(),
         AdoptMain.id: (context) => AdoptMain(),
-        ShelterMain.id: (context) => ShelterMain(),
+        ShelterMainPet.id: (context) => ShelterMainPet(),
+        ShelterMainEvents.id: (context) => ShelterMainEvents(),
         SideBar.id: (context) => SideBar(),
         PetDetails.id: (context) => PetDetails(),
         ShelterSideBar.id: (context) => ShelterSideBar(),

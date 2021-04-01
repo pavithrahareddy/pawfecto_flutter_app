@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pawfecto/screens/auth/shelter_login.dart';
 import 'package:pawfecto/screens/shelter/addEvent.dart';
-import 'package:pawfecto/screens/shelter/shelter_main.dart';
+import 'package:pawfecto/screens/shelter/shelter_main_events.dart';
+import 'package:pawfecto/screens/shelter/shelter_main_pet.dart';
 
 class ShelterSideBar extends StatefulWidget {
   static const String id = 'shelter_sidebar';
@@ -68,7 +69,7 @@ class _ShelterSideBarState extends State<ShelterSideBar> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.popAndPushNamed(context, ShelterMain.id);
+                    Navigator.popAndPushNamed(context, ShelterMainPet.id);
                   },
                   child: Row(
                     children: [
@@ -92,7 +93,7 @@ class _ShelterSideBarState extends State<ShelterSideBar> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.popAndPushNamed(context, ShelterMain.id);
+                    Navigator.popAndPushNamed(context, ShelterMainEvents.id);
                   },
                   child: Row(
                     children: [
@@ -116,7 +117,7 @@ class _ShelterSideBarState extends State<ShelterSideBar> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.popAndPushNamed(context, AddEvent.id);
+                    Navigator.popAndPushNamed(context, ShelterMainEvents.id);
                   },
                   child: Row(
                     children: [

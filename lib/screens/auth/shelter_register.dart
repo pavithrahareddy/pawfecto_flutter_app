@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pawfecto/screens/auth/shelter_login.dart';
-import 'package:pawfecto/screens/shelter/shelter_main.dart';
+import 'package:pawfecto/screens/shelter/shelter_main_pet.dart';
 import 'package:pawfecto/components/rounded_button.dart';
 import 'package:pawfecto/constants/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -132,7 +132,7 @@ class _SRegisterState extends State<SRegister> {
                                   email: email, password: password);
 
                           if (user != null) {
-                            Navigator.pushNamed(context, ShelterMain.id);
+                            Navigator.pushNamed(context, ShelterMainPet.id);
                           }
 
                           print(user.user.uid);

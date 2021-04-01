@@ -7,7 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:pawfecto/screens/shelter/shelter_main.dart';
+import 'package:pawfecto/screens/shelter/shelter_main_pet.dart';
 
 class AddPet extends StatefulWidget {
   static const String id = 'addPet';
@@ -103,7 +103,7 @@ class _AddPetState extends State<AddPet> {
       setState(() {
         isLoading = false;
       });
-      Navigator.popAndPushNamed(context, ShelterMain.id);
+      Navigator.popAndPushNamed(context, ShelterMainPet.id);
     } catch (e) {
       isLoading = false;
     }
@@ -128,7 +128,7 @@ class _AddPetState extends State<AddPet> {
                           Icons.close,
                         ),
                         onTap: () {
-                          Navigator.popAndPushNamed(context, ShelterMain.id);
+                          Navigator.popAndPushNamed(context, ShelterMainPet.id);
                         },
                       ),
                     ],

@@ -7,7 +7,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:pawfecto/screens/shelter/shelter_main.dart';
+import 'package:pawfecto/screens/shelter/shelter_main_events.dart';
+import 'package:pawfecto/screens/shelter/shelter_main_pet.dart';
 
 class AddEvent extends StatefulWidget {
   static const String id = 'addEvent';
@@ -96,7 +97,7 @@ class _AddEventState extends State<AddEvent> {
       setState(() {
         isLoading = false;
       });
-      Navigator.popAndPushNamed(context, ShelterMain.id);
+      Navigator.popAndPushNamed(context, ShelterMainEvents.id);
     } catch (e) {
       isLoading = false;
     }
@@ -121,7 +122,8 @@ class _AddEventState extends State<AddEvent> {
                           Icons.close,
                         ),
                         onTap: () {
-                          Navigator.popAndPushNamed(context, ShelterMain.id);
+                          Navigator.popAndPushNamed(
+                              context, ShelterMainEvents.id);
                         },
                       ),
                     ],
