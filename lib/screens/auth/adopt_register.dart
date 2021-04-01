@@ -147,16 +147,23 @@ class _AdoptRegisterState extends State<AdoptRegister> {
                               await _auth.createUserWithEmailAndPassword(
                                   email: email, password: password);
 
+                          await newUser.user.sendEmailVerification();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Email Verification Link Sent',
+                              ),
+                            ),
+                          );
                           if (newUser != null) {
-                            Navigator.pushNamed(context, AdoptMain.id);
+                            // save data to firestore
+                            _firestore.collection('users').add({
+                              'name': name,
+                              'email': email,
+                              'phone': phone,
+                            });
+                            Navigator.pushNamed(context, AdoptLogin.id);
                           }
-
-                          // save data to firestore
-                          _firestore.collection('users').add({
-                            'name': name,
-                            'email': email,
-                            'phone': phone,
-                          });
 
                           // set spinner to false
                           setState(() {
