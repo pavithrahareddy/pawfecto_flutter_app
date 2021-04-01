@@ -131,22 +131,27 @@ class _SRegisterState extends State<SRegister> {
                               await _auth.createUserWithEmailAndPassword(
                                   email: email, password: password);
 
+                          await user.user.sendEmailVerification();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Email Verification Link Sent',
+                              ),
+                            ),
+                          );
                           if (user != null) {
-                            Navigator.pushNamed(context, ShelterMainPet.id);
+                            // save data to cloud firestore
+                            _firestore
+                                .collection('shelters')
+                                .doc(user.user.uid)
+                                .set({
+                              'name': shelterName,
+                              'email': email,
+                              'phone': phone,
+                              'pets': [],
+                            });
+                            Navigator.pushNamed(context, ShelterLogin.id);
                           }
-
-                          print(user.user.uid);
-
-                          // save data to cloud firestore
-                          _firestore
-                              .collection('shelters')
-                              .doc(user.user.uid)
-                              .set({
-                            'name': shelterName,
-                            'email': email,
-                            'phone': phone,
-                            'pets': [],
-                          });
 
                           // set spinner to false
                           setState(() {
