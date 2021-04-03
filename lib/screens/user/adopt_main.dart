@@ -220,9 +220,9 @@ class _AdoptMainState extends State<AdoptMain> {
                                             child: Image(
                                               image: (pet["imageURL"] == null)
                                                   ? AssetImage(
-                                                      'images/dog1.jpg')
+                                                  'images/dog1.jpg')
                                                   : NetworkImage(
-                                                      pet["imageURL"]),
+                                                  pet["imageURL"]),
                                               width: 150.0,
                                               height: 250.0,
                                             ),
@@ -238,7 +238,7 @@ class _AdoptMainState extends State<AdoptMain> {
                                             padding: const EdgeInsets.all(16.0),
                                             child: Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
+                                              MainAxisAlignment.spaceEvenly,
                                               children: [
                                                 Column(
                                                   children: [
