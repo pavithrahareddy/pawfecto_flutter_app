@@ -13,6 +13,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:pawfecto/screens/user/events/event_register.dart';
 import 'package:pawfecto/screens/user/adopt/pet_details.dart';
 import 'package:pawfecto/screens/user/events/event_details.dart';
+import 'package:pawfecto/screens/user/profile.dart';
 import 'package:pawfecto/screens/user/sidebar.dart';
 import 'package:pawfecto/screens/welcome.dart';
 import 'package:pawfecto/screens/shelter/shelter_main_pet.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         EventDetails.id: (context) => EventDetails(),
         EventRegister.id: (context) => EventRegister(),
         AdoptForm.id: (context) => AdoptForm(),
+        ProfilePage.id:(context) => ProfilePage(),
       },
     );
   }

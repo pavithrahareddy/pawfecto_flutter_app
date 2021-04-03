@@ -5,6 +5,7 @@ import 'package:pawfecto/screens/auth/shelter_register.dart';
 import 'package:pawfecto/components/rounded_button.dart';
 import 'package:pawfecto/screens/user/adopt/adopt_form.dart';
 import 'package:pawfecto/screens/user/events/event_details.dart';
+import 'package:pawfecto/screens/user/profile.dart';
 
 import 'user/adopt_main.dart';
 
