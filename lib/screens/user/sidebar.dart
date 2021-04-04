@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pawfecto/screens/auth/adopt_login.dart';
 import 'package:pawfecto/screens/user/adopt_main.dart';
+import 'package:pawfecto/screens/user/donation/donate_page.dart';
 import 'package:pawfecto/screens/user/events/event_details.dart';
 import 'package:pawfecto/screens/user/profile.dart';
 
@@ -145,6 +146,7 @@ class _SideBarState extends State<SideBar> {
                   onTap: () {
                     setState(() {
                       selectedMenuItem = 'donation';
+                      Navigator.pushNamed(context, DonatePage.id);
                     });
                   },
                   child: Row(

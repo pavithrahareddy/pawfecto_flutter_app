@@ -38,6 +38,7 @@ dependencies:
   image_picker: ^0.7.3
   firebase_storage: ^8.0.1
   date_field: ^1.0.4
+  upi_india: ^3.0.0
 
 dev_dependencies:
   flutter_test:

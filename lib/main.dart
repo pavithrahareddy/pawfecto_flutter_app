@@ -10,6 +10,8 @@ import 'package:pawfecto/screens/shelter/sheltersidebar.dart';
 import 'package:pawfecto/screens/user/adopt/adopt_form.dart';
 import 'package:pawfecto/screens/user/adopt_main.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:pawfecto/screens/user/donation/donate_form.dart';
+import 'package:pawfecto/screens/user/donation/donate_page.dart';
 import 'package:pawfecto/screens/user/events/event_register.dart';
 import 'package:pawfecto/screens/user/adopt/pet_details.dart';
 import 'package:pawfecto/screens/user/events/event_details.dart';
@@ -47,6 +49,8 @@ class MyApp extends StatelessWidget {
         EventRegister.id: (context) => EventRegister(),
         AdoptForm.id: (context) => AdoptForm(),
         ProfilePage.id:(context) => ProfilePage(),
+        DonatePage.id:(context)=> DonatePage(),
+        DonateForm.id:(context) => DonateForm(),
       },
     );
   }
