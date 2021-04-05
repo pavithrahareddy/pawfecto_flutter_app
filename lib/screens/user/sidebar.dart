@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pawfecto/screens/auth/adopt_login.dart';
+import 'package:pawfecto/screens/user/adopt_main.dart';
+import 'package:pawfecto/screens/user/donation/donate_page.dart';
 import 'package:pawfecto/screens/user/events/event_details.dart';
+import 'package:pawfecto/screens/user/profile.dart';
 
 class SideBar extends StatefulWidget {
   static const String id = 'adopt_sidebar';
@@ -49,6 +52,7 @@ class _SideBarState extends State<SideBar> {
                 GestureDetector(
                   onTap: () {
                     setState(() {
+                      Navigator.pushNamed(context, ProfilePage.id);
                       selectedMenuItem = 'profile';
                     });
                   },
@@ -79,6 +83,7 @@ class _SideBarState extends State<SideBar> {
                 GestureDetector(
                   onTap: () {
                     setState(() {
+                      Navigator.pushNamed(context, AdoptMain.id);
                       selectedMenuItem = 'adoption';
                     });
                   },
@@ -141,6 +146,7 @@ class _SideBarState extends State<SideBar> {
                   onTap: () {
                     setState(() {
                       selectedMenuItem = 'donation';
+                      Navigator.pushNamed(context, DonatePage.id);
                     });
                   },
                   child: Row(

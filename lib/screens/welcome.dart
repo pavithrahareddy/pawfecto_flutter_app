@@ -4,6 +4,9 @@ import 'package:pawfecto/screens/auth/adopt_register.dart';
 import 'package:pawfecto/screens/auth/shelter_register.dart';
 import 'package:pawfecto/components/rounded_button.dart';
 import 'package:pawfecto/screens/user/adopt/adopt_form.dart';
+import 'package:pawfecto/screens/user/donation/donate_page.dart';
+import 'package:pawfecto/screens/user/events/event_details.dart';
+import 'package:pawfecto/screens/user/profile.dart';
 
 import 'user/adopt_main.dart';
 
@@ -63,6 +66,7 @@ class _WelcomeState extends State<Welcome> {
                       colour: Color.fromARGB(255, 218, 120, 120),
                       tcolor: Colors.white,
                       onPressed: () {
+                        Navigator.pushNamed(context, AdoptMain.id);
                       },
                     ),
                   ],
