@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pawfecto/screens/auth/adopt_register.dart';
 import 'package:pawfecto/screens/auth/shelter_register.dart';
 import 'package:pawfecto/components/rounded_button.dart';
+import 'package:pawfecto/screens/user/LostandFound/LAF_page.dart';
 import 'package:pawfecto/screens/user/adopt/adopt_form.dart';
 import 'package:pawfecto/screens/user/donation/donate_page.dart';
 import 'package:pawfecto/screens/user/events/event_details.dart';
@@ -66,7 +67,7 @@ class _WelcomeState extends State<Welcome> {
                       colour: Color.fromARGB(255, 218, 120, 120),
                       tcolor: Colors.white,
                       onPressed: () {
-                        Navigator.pushNamed(context, AdoptMain.id);
+                        Navigator.pushNamed(context, LAFPage.id);
                       },
                     ),
                   ],
