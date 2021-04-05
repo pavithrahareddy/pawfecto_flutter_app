@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pawfecto/screens/auth/adopt_login.dart';
+import 'package:pawfecto/screens/user/LostandFound/LAF_page.dart';
 import 'package:pawfecto/screens/user/adopt_main.dart';
 import 'package:pawfecto/screens/user/donation/donate_page.dart';
 import 'package:pawfecto/screens/user/events/event_details.dart';
@@ -34,7 +35,7 @@ class _SideBarState extends State<SideBar> {
                   children: [
                     CircleAvatar(
                       radius: 30.0,
-                      backgroundImage: AssetImage('images/profile.png'),
+                      backgroundImage: AssetImage('images/cat1.jpg'),
                     ),
                     SizedBox(
                       width: 30.0,
@@ -145,15 +146,15 @@ class _SideBarState extends State<SideBar> {
                 GestureDetector(
                   onTap: () {
                     setState(() {
-                      selectedMenuItem = 'donation';
-                      Navigator.pushNamed(context, DonatePage.id);
+                      selectedMenuItem = 'lostandfound';
+                      Navigator.pushNamed(context, LAFPage.id);
                     });
                   },
                   child: Row(
                     children: [
                       Icon(
-                        FontAwesomeIcons.home,
-                        color: selectedMenuItem == 'donation'
+                        FontAwesomeIcons.phoneAlt,
+                        color: selectedMenuItem == 'lostandfound '
                             ? Colors.white
                             : Colors.white.withOpacity(0.7),
                       ),
@@ -161,9 +162,9 @@ class _SideBarState extends State<SideBar> {
                         width: 30.0,
                       ),
                       Text(
-                        'Donation',
+                        'Lost And Found',
                         style: TextStyle(
-                          color: selectedMenuItem == 'donation'
+                          color: selectedMenuItem == 'lostandfound '
                               ? Colors.white
                               : Colors.white.withOpacity(0.7),
                           fontWeight: FontWeight.w600,
@@ -194,6 +195,37 @@ class _SideBarState extends State<SideBar> {
                         'Favourites',
                         style: TextStyle(
                           color: selectedMenuItem == 'favourites'
+                              ? Colors.white
+                              : Colors.white.withOpacity(0.7),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedMenuItem = 'donation';
+                      Navigator.pushNamed(context, DonatePage.id);
+                    });
+                  },
+                  child: Row(
+                    children: [
+                      Icon(
+                        FontAwesomeIcons.home,
+                        color: selectedMenuItem == 'donation'
+                            ? Colors.white
+                            : Colors.white.withOpacity(0.7),
+                      ),
+                      SizedBox(
+                        width: 30.0,
+                      ),
+                      Text(
+                        'Donation',
+                        style: TextStyle(
+                          color: selectedMenuItem == 'donation'
                               ? Colors.white
                               : Colors.white.withOpacity(0.7),
                           fontWeight: FontWeight.w600,
