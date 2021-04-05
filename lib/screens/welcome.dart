@@ -67,7 +67,6 @@ class _WelcomeState extends State<Welcome> {
                       colour: Color.fromARGB(255, 218, 120, 120),
                       tcolor: Colors.white,
                       onPressed: () {
-                        Navigator.pushNamed(context, LAFPage.id);
                       },
                     ),
                   ],

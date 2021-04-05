@@ -35,7 +35,7 @@ class _SideBarState extends State<SideBar> {
                   children: [
                     CircleAvatar(
                       radius: 30.0,
-                      backgroundImage: AssetImage('images/profile.png'),
+                      backgroundImage: AssetImage('images/cat1.jpg'),
                     ),
                     SizedBox(
                       width: 30.0,
