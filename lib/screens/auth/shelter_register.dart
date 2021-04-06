@@ -149,6 +149,7 @@ class _SRegisterState extends State<SRegister> {
                               'email': email,
                               'phone': phone,
                               'pets': [],
+                              'events': [],
                             });
                             Navigator.pushNamed(context, ShelterLogin.id);
                           }
