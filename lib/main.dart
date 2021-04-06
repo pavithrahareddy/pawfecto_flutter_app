@@ -22,6 +22,7 @@ import 'package:pawfecto/screens/user/profile.dart';
 import 'package:pawfecto/screens/user/sidebar.dart';
 import 'package:pawfecto/screens/welcome.dart';
 import 'package:pawfecto/screens/shelter/shelter_main_pet.dart';
+import 'package:pawfecto/screens/shelter/donation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,12 +52,13 @@ class MyApp extends StatelessWidget {
         EventDetails.id: (context) => EventDetails(),
         EventRegister.id: (context) => EventRegister(),
         AdoptForm.id: (context) => AdoptForm(),
-        ProfilePage.id:(context) => ProfilePage(),
-        DonatePage.id:(context)=> DonatePage(),
-        DonateForm.id:(context) => DonateForm(),
-        LAFPage.id:(context) => LAFPage(),
-        StrayPetForm.id:(context) =>StrayPetForm(),
-        LostPetForm.id:(context) =>LostPetForm(),
+        ProfilePage.id: (context) => ProfilePage(),
+        DonatePage.id: (context) => DonatePage(),
+        DonateForm.id: (context) => DonateForm(),
+        LAFPage.id: (context) => LAFPage(),
+        StrayPetForm.id: (context) => StrayPetForm(),
+        LostPetForm.id: (context) => LostPetForm(),
+        DonationDetails.id: (context) => DonationDetails(),
       },
     );
   }

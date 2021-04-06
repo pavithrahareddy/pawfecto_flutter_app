@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pawfecto/screens/auth/shelter_login.dart';
-import 'package:pawfecto/screens/shelter/addEvent.dart';
+import 'package:pawfecto/screens/shelter/donation.dart';
 import 'package:pawfecto/screens/shelter/shelter_main_events.dart';
 import 'package:pawfecto/screens/shelter/shelter_main_pet.dart';
 
@@ -117,7 +117,7 @@ class _ShelterSideBarState extends State<ShelterSideBar> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.popAndPushNamed(context, ShelterMainEvents.id);
+                    Navigator.popAndPushNamed(context, DonationDetails.id);
                   },
                   child: Row(
                     children: [
