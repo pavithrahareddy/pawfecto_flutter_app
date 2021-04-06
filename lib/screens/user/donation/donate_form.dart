@@ -16,7 +16,7 @@ class _DonateFormState extends State<DonateForm> {
   String _number = "";
   String _email = "";
   String _feedback = "";
-  double _amount=0.00;
+  double _amount = 0.00;
 
   Future<UpiResponse> _transaction;
   UpiIndia _upiIndia = UpiIndia();
@@ -145,9 +145,9 @@ class _DonateFormState extends State<DonateForm> {
           Text("$title: ", style: header),
           Flexible(
               child: Text(
-                body,
-                style: value,
-              )),
+            body,
+            style: value,
+          )),
         ],
       ),
     );
@@ -372,7 +372,7 @@ class _DonateFormState extends State<DonateForm> {
                   ),
                 ),
                 child: Text(
-                  'Choose your payment gateway below:',
+                  'Choose your payment gateway below',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16.0,
@@ -383,7 +383,7 @@ class _DonateFormState extends State<DonateForm> {
               Container(
                 width: 100,
                 height: 100,
-                padding: EdgeInsets.only(top: 10,bottom: 10),
+                padding: EdgeInsets.only(top: 10, bottom: 10),
                 child: Expanded(
                   child: displayUpiApps(),
                 ),
@@ -391,7 +391,8 @@ class _DonateFormState extends State<DonateForm> {
               Container(
                 child: FutureBuilder(
                   future: _transaction,
-                  builder: (BuildContext context, AsyncSnapshot<UpiResponse> snapshot) {
+                  builder: (BuildContext context,
+                      AsyncSnapshot<UpiResponse> snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
                       if (snapshot.hasError) {
                         return Center(
@@ -419,16 +420,19 @@ class _DonateFormState extends State<DonateForm> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text("Donation Successfull",style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 0, 136, 145),
-                            ),
+                            Text(
+                              "Donation Successfull",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 0, 136, 145),
+                              ),
                             ),
                             displayTransactionData('Transaction Id', txnId),
                             displayTransactionData('Response Code', resCode),
                             displayTransactionData('Reference Id', txnRef),
-                            displayTransactionData('Status', status.toUpperCase()),
+                            displayTransactionData(
+                                'Status', status.toUpperCase()),
                             displayTransactionData('Approval No', approvalRef),
                           ],
                         ),
