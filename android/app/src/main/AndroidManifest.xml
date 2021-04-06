@@ -2,7 +2,7 @@
     package="riyasavant.com.pawfecto">
    <application
         android:label="pawfecto"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
