@@ -30,6 +30,7 @@ class _ShelterMainPetState extends State<ShelterMainPet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       floatingActionButton: _auth.currentUser.emailVerified
           ? FloatingActionButton(
               onPressed: () {
@@ -85,6 +86,27 @@ class _ShelterMainPetState extends State<ShelterMainPet> {
                             child: CircularProgressIndicator(),
                           );
                         }
+
+                        Widget noPetspage = Column(
+                          children: [
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.15,
+                            ),
+                            Center(
+                              child: Image(
+                                image: AssetImage(
+                                  'images/noPetsFound.jpg',
+                                ),
+                                height: 300.0,
+                                width: 300.0,
+                              ),
+                            ),
+                            Text(
+                              'No Pets Added!',
+                              style: TextStyle(fontSize: 20.0),
+                            ),
+                          ],
+                        );
 
                         List pets = [];
                         List<Widget> petCards = [];
@@ -178,9 +200,11 @@ class _ShelterMainPetState extends State<ShelterMainPet> {
                           petCards.add(petCard);
                         }
 
-                        return Column(
-                          children: petCards,
-                        );
+                        print(petCards.length);
+
+                        return petCards.length == 0
+                            ? noPetspage
+                            : Column(children: petCards);
                       },
                     )
                   ],

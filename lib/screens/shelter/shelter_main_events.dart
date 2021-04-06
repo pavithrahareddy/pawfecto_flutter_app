@@ -33,6 +33,7 @@ class _ShelterMainEventsState extends State<ShelterMainEvents> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, AddEvent.id);
@@ -85,6 +86,27 @@ class _ShelterMainEventsState extends State<ShelterMainEvents> {
                       child: CircularProgressIndicator(),
                     );
                   }
+
+                  Widget noEventspage = Column(
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.15,
+                      ),
+                      Center(
+                        child: Image(
+                          image: AssetImage(
+                            'images/noEvents.jpg',
+                          ),
+                          height: 250.0,
+                          width: 300.0,
+                        ),
+                      ),
+                      Text(
+                        'No Events Added!',
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                    ],
+                  );
 
                   List events = [];
                   List<Widget> eventCards = [];
@@ -215,9 +237,11 @@ class _ShelterMainEventsState extends State<ShelterMainEvents> {
                     }
                   }
 
-                  return Column(
-                    children: eventCards,
-                  );
+                  return eventCards.length == 0
+                      ? noEventspage
+                      : Column(
+                          children: eventCards,
+                        );
                 },
               )
             ],
