@@ -5,7 +5,11 @@ import 'package:upi_india/upi_india.dart';
 import 'package:pawfecto/constants/constants.dart';
 
 class DonateForm extends StatefulWidget {
+  DonateForm({@required this.donor});
   static const String id = 'donate_form';
+
+  final Map donor;
+
   @override
   _DonateFormState createState() => _DonateFormState();
 }
@@ -13,7 +17,7 @@ class DonateForm extends StatefulWidget {
 class _DonateFormState extends State<DonateForm> {
   final _formKey = GlobalKey<FormState>();
   String _name = "";
-  String _number = "";
+  String _phone = "";
   String _email = "";
   String _feedback = "";
   double _amount = 0.00;
@@ -55,10 +59,12 @@ class _DonateFormState extends State<DonateForm> {
     return _upiIndia.startTransaction(
       app: app,
       receiverUpiId: "zomato@hdfcbank",
-      receiverName: 'Zomato',
+      receiverName: "Zomato",
+      // receiverUpiId: this.widget.donor["upi"],
+      // receiverName: this.widget.donor["name"],
       transactionRefId: 'PetDonationID',
       transactionNote: 'Pet Donation',
-      amount: 1.00,
+      amount: _amount,
     );
   }
 
@@ -197,16 +203,16 @@ class _DonateFormState extends State<DonateForm> {
                           // filled: true,
                           labelText: 'Name',
                           labelStyle: TextStyle(
-                            color: Color(0xff008891),
+                            color: Colors.grey,
                           ),
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xff008891),
+                              color: Colors.grey,
                             ),
                           ),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xff008891),
+                              color: Colors.grey,
                             ),
                           ),
                         ),
@@ -231,16 +237,16 @@ class _DonateFormState extends State<DonateForm> {
                           // filled: true,
                           labelText: 'Email',
                           labelStyle: TextStyle(
-                            color: Color(0xff008891),
+                            color: Colors.grey,
                           ),
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xff008891),
+                              color: Colors.grey,
                             ),
                           ),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xff008891),
+                              color: Colors.grey,
                             ),
                           ),
                         ),
@@ -265,16 +271,16 @@ class _DonateFormState extends State<DonateForm> {
                           // filled: true,
                           labelText: 'Mobile Number',
                           labelStyle: TextStyle(
-                            color: Color(0xff008891),
+                            color: Colors.grey,
                           ),
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xff008891),
+                              color: Colors.grey,
                             ),
                           ),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xff008891),
+                              color: Colors.grey,
                             ),
                           ),
                         ),
@@ -287,7 +293,7 @@ class _DonateFormState extends State<DonateForm> {
                         },
                         onChanged: (value) {
                           setState(() {
-                            _number = value;
+                            _phone = value;
                           });
                         },
                       ),
@@ -301,16 +307,16 @@ class _DonateFormState extends State<DonateForm> {
                           // filled: true,
                           labelText: 'Anything you would like to say to us?',
                           labelStyle: TextStyle(
-                            color: Color(0xff008891),
+                            color: Colors.grey,
                           ),
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xff008891),
+                              color: Colors.grey,
                             ),
                           ),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xff008891),
+                              color: Colors.grey,
                             ),
                           ),
                         ),
@@ -335,16 +341,16 @@ class _DonateFormState extends State<DonateForm> {
                           // filled: true,
                           labelText: 'Amount',
                           labelStyle: TextStyle(
-                            color: Color(0xff008891),
+                            color: Colors.grey,
                           ),
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xff008891),
+                              color: Colors.grey,
                             ),
                           ),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xff008891),
+                              color: Colors.grey,
                             ),
                           ),
                         ),
@@ -364,6 +370,45 @@ class _DonateFormState extends State<DonateForm> {
                     ],
                   ),
                 ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 25.0),
+                    child: Text(
+                      'Donating to: ${this.widget.donor["name"]}',
+                      style: TextStyle(
+                        fontSize: 17.0,
+                        color: Colors.grey,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 25.0),
+                    child: Text(
+                      'UPI ID: ${this.widget.donor["upi"]}',
+                      style: TextStyle(
+                        fontSize: 17.0,
+                        color: Colors.grey,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20.0,
               ),
               ElevatedButton(
                 style: ButtonStyle(
@@ -428,12 +473,12 @@ class _DonateFormState extends State<DonateForm> {
                                 color: Color.fromARGB(255, 0, 136, 145),
                               ),
                             ),
-                            displayTransactionData('Transaction Id', txnId),
-                            displayTransactionData('Response Code', resCode),
-                            displayTransactionData('Reference Id', txnRef),
-                            displayTransactionData(
-                                'Status', status.toUpperCase()),
-                            displayTransactionData('Approval No', approvalRef),
+                            // displayTransactionData('Transaction Id', txnId),
+                            // displayTransactionData('Response Code', resCode),
+                            // displayTransactionData('Reference Id', txnRef),
+                            // displayTransactionData(
+                            //     'Status', status.toUpperCase()),
+                            // displayTransactionData('Approval No', approvalRef),
                           ],
                         ),
                       );

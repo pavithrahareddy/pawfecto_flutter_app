@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pawfecto/screens/user/donation/donate_form.dart';
+import 'package:pawfecto/screens/user/donation/donators.dart';
 import 'package:pawfecto/screens/user/sidebar.dart';
 
 class DonatePage extends StatefulWidget {
@@ -24,31 +24,28 @@ class _DonatePageState extends State<DonatePage> {
             Navigator.pushNamed(context, SideBar.id);
           },
         ),
-        title: Text(
-          'Donate',
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
+        // title: Text(
+        //   'Donate',
+        //   style: TextStyle(
+        //     color: Colors.black,
+        //   ),
+        // ),
       ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Container(
             decoration: BoxDecoration(
-              borderRadius:
-              BorderRadius.circular(15),
-              color:
-              Colors.white,
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.white,
                 boxShadow: [
-            BoxShadow(
-            color: Colors.blueGrey[50],
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: Offset(0, 3), // changes position of shadow
-          ),
-          ]
-            ),
+                  BoxShadow(
+                    color: Colors.blueGrey[50],
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ]),
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
@@ -63,7 +60,7 @@ class _DonatePageState extends State<DonatePage> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          "Make a Gift to Pets of the Homeless",
+                          "Care for the Homeless Pets",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Color(0xff008891),
@@ -73,40 +70,49 @@ class _DonatePageState extends State<DonatePage> {
                         SizedBox(
                           height: 20,
                         ),
-                        Text(
-                          "Thousands of abandoned, unwanted and injured pets turn to us for help every year.\n",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                          child: Text(
+                            "Thousands of abandoned, unwanted and injured pets turn to us for help every year.\n",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
                               color: Color(0xff000000),
                               fontSize: 15,
                               height: 1.5,
-                              fontWeight: FontWeight.bold),
+                              // fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
-                        Text(
-                          "We, at Pawfecto, believe in finding each one a home that can give them all the love they deserve. You can play a very important role in changing these animals’ lives forever. Your support can help us in our mission to provide the best care for neglected animals. Every donation, no matter how small, can go a long way in putting an end to animal abuse. You can make a donation in an amount that suits you through Google Pay.\n",
-                          textAlign: TextAlign.justify,
-                          style: TextStyle(
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 10.0, right: 10.0),
+                          child: Text(
+                            "We, at Pawfecto, believe in finding each one a home that can give them all the love they deserve. You can play a very important role in changing these animals’ lives forever. Your support can help us in our mission to provide the best care for neglected animals. Every donation, no matter how small, can go a long way in putting an end to animal abuse.\n",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
                               height: 1.5,
                               color: Color(0xff000000),
                               fontSize: 15,
-                              fontWeight: FontWeight.bold),
+                              // fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
                 Positioned(
-                  top: MediaQuery.of(context).size.height * .40,
+                  top: MediaQuery.of(context).size.height * .48,
                   left: 5,
                   right: 5,
                   child: Container(
                     child: Image(
-                      image: AssetImage('images/pets.webp'),
+                      image: AssetImage('images/animals.jpg'),
                     ),
                   ),
                 ),
                 Positioned(
-                  top: MediaQuery.of(context).size.height * .70,
+                  top: MediaQuery.of(context).size.height * .73,
                   left: 15,
                   right: 15,
                   child: Row(
@@ -117,12 +123,12 @@ class _DonatePageState extends State<DonatePage> {
                           elevation: 4.0,
                           color: Color.fromARGB(255, 0, 136, 145),
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               // Navigator.pushNamed(context, );
                             },
                             child: GestureDetector(
-                              onTap: (){
-                                Navigator.popAndPushNamed(context, DonateForm.id);
+                              onTap: () {
+                                Navigator.popAndPushNamed(context, Donators.id);
                               },
                               child: Padding(
                                 padding: EdgeInsets.all(20.0),
