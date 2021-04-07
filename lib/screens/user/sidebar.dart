@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pawfecto/screens/auth/adopt_login.dart';
 import 'package:pawfecto/screens/user/LostandFound/LAF_page.dart';
+import 'package:pawfecto/screens/user/adopt/favourites.dart';
 import 'package:pawfecto/screens/user/adopt_main.dart';
 import 'package:pawfecto/screens/user/donation/donate_page.dart';
 import 'package:pawfecto/screens/user/events/event_details.dart';
 import 'package:pawfecto/screens/user/profile.dart';
+import 'package:pawfecto/screens/user/settings.dart';
 
 class SideBar extends StatefulWidget {
   static const String id = 'adopt_sidebar';
@@ -177,6 +179,7 @@ class _SideBarState extends State<SideBar> {
                 GestureDetector(
                   onTap: () {
                     setState(() {
+                      Navigator.pushNamed(context, Favorites.id);
                       selectedMenuItem = 'favourites';
                     });
                   },
@@ -238,6 +241,7 @@ class _SideBarState extends State<SideBar> {
                 GestureDetector(
                   onTap: () {
                     setState(() {
+                      Navigator.pushNamed(context, Settings.id);
                       selectedMenuItem = 'settings';
                     });
                   },

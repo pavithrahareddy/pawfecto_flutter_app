@@ -11,6 +11,7 @@ import 'package:pawfecto/screens/user/LostandFound/LAF_page.dart';
 import 'package:pawfecto/screens/user/LostandFound/lostpet_form.dart';
 import 'package:pawfecto/screens/user/LostandFound/straypet_form.dart';
 import 'package:pawfecto/screens/user/adopt/adopt_form.dart';
+import 'package:pawfecto/screens/user/adopt/favourites.dart';
 import 'package:pawfecto/screens/user/adopt_main.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pawfecto/screens/user/donation/donate_form.dart';
@@ -20,6 +21,7 @@ import 'package:pawfecto/screens/user/events/event_register.dart';
 import 'package:pawfecto/screens/user/adopt/pet_details.dart';
 import 'package:pawfecto/screens/user/events/event_details.dart';
 import 'package:pawfecto/screens/user/profile.dart';
+import 'package:pawfecto/screens/user/settings.dart';
 import 'package:pawfecto/screens/user/sidebar.dart';
 import 'package:pawfecto/screens/welcome.dart';
 import 'package:pawfecto/screens/shelter/shelter_main_pet.dart';
@@ -61,6 +63,8 @@ class MyApp extends StatelessWidget {
         LostPetForm.id: (context) => LostPetForm(),
         DonationDetails.id: (context) => DonationDetails(),
         Donators.id: (context) => Donators(),
+       Settings.id: (context) =>Settings(),
+        Favorites.id:(context) =>Favorites(),
       },
     );
   }

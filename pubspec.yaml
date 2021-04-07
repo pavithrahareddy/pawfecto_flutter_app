@@ -39,6 +39,7 @@ dependencies:
   firebase_storage: ^8.0.1
   date_field: ^1.0.4
   upi_india: ^3.0.0
+  cached_network_image: ^2.0.0-rc
 
 dev_dependencies:
   flutter_test:
