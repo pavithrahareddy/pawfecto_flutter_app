@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pawfecto/screens/auth/shelter_login.dart';
 import 'package:pawfecto/components/rounded_button.dart';
 import 'package:pawfecto/constants/constants.dart';
+import 'package:pawfecto/screens/welcome.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -44,8 +45,14 @@ class _SRegisterState extends State<SRegister> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    Container(
-                      child: Image.asset('images/pawsfecto.png'),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, Welcome.id, (route) => false);
+                      },
+                      child: Container(
+                        child: Image.asset('images/pawsfecto.png'),
+                      ),
                     ),
                     SizedBox(
                       height: 40.0,

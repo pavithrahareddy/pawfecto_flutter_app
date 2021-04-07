@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:pawfecto/screens/user/sidebar.dart';
+import 'package:pawfecto/screens/shelter/sheltersidebar.dart';
 
 class ShelterProfile extends StatefulWidget {
   static const String id = 'shelter_profile';
@@ -72,7 +72,7 @@ class MapScreenState extends State<ShelterProfile>
               color: Color(0xff008891),
             ),
             onTap: () {
-              Navigator.pushNamed(context, SideBar.id);
+              Navigator.pushNamed(context, ShelterSideBar.id);
             },
           ),
           title: Text(

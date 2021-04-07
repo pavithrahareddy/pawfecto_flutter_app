@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pawfecto/screens/user/sidebar.dart';
 
 class Settings extends StatefulWidget {
@@ -12,7 +11,7 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -29,10 +28,12 @@ class _SettingsState extends State<Settings> {
             Navigator.pushNamed(context, SideBar.id);
           },
         ),
-        title: Text('Settings', style: TextStyle(color: Colors.black),),
+        title: Text(
+          'Settings',
+          style: TextStyle(color: Colors.black),
+        ),
       ),
-      body: Stack
-        (
+      body: Stack(
         children: [
           SingleChildScrollView(
             padding: const EdgeInsets.all(16.0),
@@ -48,7 +49,9 @@ class _SettingsState extends State<Settings> {
                     children: <Widget>[
                       ListTile(
                         leading: Icon(
-                          Icons.language, color: Color(0xff008891),),
+                          Icons.language,
+                          color: Color(0xff008891),
+                        ),
                         title: Text("Change Language"),
                         trailing: Icon(Icons.keyboard_arrow_right),
                         onTap: () {
@@ -59,18 +62,21 @@ class _SettingsState extends State<Settings> {
                   ),
                 ),
                 const SizedBox(height: 20.0),
-                Text("Other Settings", style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.teal,
-                ),),
+                Text(
+                  "Other Settings",
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.teal,
+                  ),
+                ),
                 SwitchListTile(
                   dense: true,
                   activeColor: Color(0xff008891),
                   contentPadding: const EdgeInsets.all(0),
                   value: true,
                   title: Text("Receive Notifications"),
-                  onChanged: (Val) {},
+                  onChanged: (val) {},
                 ),
                 SwitchListTile(
                   dense: true,
@@ -78,16 +84,12 @@ class _SettingsState extends State<Settings> {
                   contentPadding: const EdgeInsets.all(0),
                   value: true,
                   title: Text("Theme: Dark/Light"),
-                  onChanged: (value) {
-
-                  },
+                  onChanged: (value) {},
                 ),
-
-
               ],
             ),
           ),
-        ],//children
+        ], //children
       ),
     );
   }
