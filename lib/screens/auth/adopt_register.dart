@@ -156,10 +156,17 @@ class _AdoptRegisterState extends State<AdoptRegister> {
                           );
                           if (newUser != null) {
                             // save data to firestore
-                            _firestore.collection('users').add({
+                            _firestore
+                                .collection('users')
+                                .doc(newUser.user.uid)
+                                .set({
                               'name': name,
                               'email': email,
                               'phone': phone,
+                              'favourites': [],
+                              'lostAndFound': [],
+                              'city': '',
+                              'state': '',
                             });
                             Navigator.pushNamed(context, AdoptLogin.id);
                           }
