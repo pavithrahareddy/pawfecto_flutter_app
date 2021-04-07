@@ -165,6 +165,7 @@ class _AdoptRegisterState extends State<AdoptRegister> {
                               'phone': phone,
                               'favourites': [],
                               'lostAndFound': [],
+                              'events': [],
                               'city': '',
                               'state': '',
                             });
