@@ -75,12 +75,6 @@ class MapScreenState extends State<ShelterProfile>
               Navigator.pushNamed(context, ShelterSideBar.id);
             },
           ),
-          title: Text(
-            'Shelter Profile',
-            style: TextStyle(
-              color: Colors.black,
-            ),
-          ),
         ),
         body: new Container(
           color: Colors.white,
@@ -155,12 +149,6 @@ class MapScreenState extends State<ShelterProfile>
                             for (var shelter in shelters) {
                               if (shelter.id == _uid) {
                                 currentUser = shelter.data();
-                                // setState(() {
-                                //   _name = currentUser["name"];
-                                //   _phone = currentUser["phone"];
-                                //   _city = currentUser["city"];
-                                //   _state = currentUser["state"];
-                                // });
                                 break;
                               }
                             }
@@ -178,9 +166,8 @@ class MapScreenState extends State<ShelterProfile>
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Row(
                                               mainAxisAlignment:
@@ -196,6 +183,9 @@ class MapScreenState extends State<ShelterProfile>
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 ),
+                                                SizedBox(
+                                                  width: 10.0,
+                                                ),
                                                 Icon(
                                                   currentUser["isVerified"]
                                                       ? Icons.verified
@@ -208,10 +198,13 @@ class MapScreenState extends State<ShelterProfile>
                                                 ),
                                               ],
                                             ),
+                                            SizedBox(
+                                              height: 5.0,
+                                            ),
                                             Text(
                                               currentUser["isVerified"]
-                                                  ? "(Shelter has been verified.)"
-                                                  : "(We will contact you shortly for verification)",
+                                                  ? "Verified"
+                                                  : "We will contact you shortly for verification",
                                               textAlign: TextAlign.start,
                                               style: TextStyle(
                                                   color:
