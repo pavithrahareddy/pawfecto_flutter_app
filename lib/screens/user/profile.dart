@@ -25,7 +25,7 @@ class MapScreenState extends State<ProfilePage>
   final _firestore = FirebaseFirestore.instance;
 
   String _name;
-  String _email;
+  // String _email;
   String _phone;
   String _city;
   String _state;
@@ -38,15 +38,25 @@ class MapScreenState extends State<ProfilePage>
     });
   }
 
-  // void saveProfile() async {
-  //   try {
-  //     await _firestore.collection('users').doc(_uid).update({
-  //       "bio":
-  //     })
-  //   } catch(e) {
-  //     print(e);
-  //   }
-  // }
+  void saveProfile() async {
+    try {
+      final user = await _firestore.collection('users').doc(_uid).get();
+      await _firestore.collection('users').doc(_uid).update(
+        {
+          "name": _name ?? user.data()["name"],
+          "phone": _phone ?? user.data()["phone"],
+          "city": _city ?? user.data()["city"],
+          "state": _state ?? user.data()["state"],
+        },
+      );
+
+      setState(() {
+        _status = true;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +82,7 @@ class MapScreenState extends State<ProfilePage>
         ),
         body: new Container(
           color: Colors.white,
-          child: new ListView(
+          child: ListView(
             children: <Widget>[
               Column(
                 children: [
@@ -128,286 +138,359 @@ class MapScreenState extends State<ProfilePage>
                     color: Color(0xffFFFFFF),
                     child: Padding(
                       padding: EdgeInsets.only(bottom: 25.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Padding(
-                              padding: EdgeInsets.only(left: 25.0, right: 25.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        'Personal Information',
-                                        style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 0, 136, 145),
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      _status
-                                          ? _getEditIcon()
-                                          : new Container(),
-                                    ],
-                                  )
-                                ],
-                              )),
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: 25.0, right: 25.0, top: 25.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        'Name',
-                                        style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 0, 136, 145),
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              )),
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: 25.0, right: 25.0, top: 2.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: <Widget>[
-                                  Flexible(
-                                    child: TextField(
-                                      decoration: const InputDecoration(
-                                        enabledBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Color(0xff008891),
+                      child: StreamBuilder<QuerySnapshot>(
+                          stream: _firestore.collection('users').snapshots(),
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+
+                            final users = snapshot.data.docs;
+                            Map currentUser;
+
+                            for (var user in users) {
+                              if (user.id == _uid) {
+                                currentUser = user.data();
+                                // setState(() {
+                                //   _name = currentUser["name"];
+                                //   _phone = currentUser["phone"];
+                                //   _city = currentUser["city"];
+                                //   _state = currentUser["state"];
+                                // });
+                                break;
+                              }
+                            }
+
+                            final bioColumn = Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 25.0, right: 25.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              'Personal Information',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 0, 136, 145),
+                                                  fontSize: 18.0,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            _status
+                                                ? _getEditIcon()
+                                                : new Container(),
+                                          ],
+                                        )
+                                      ],
+                                    )),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 25.0, right: 25.0, top: 25.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              'Name',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 0, 136, 145),
+                                                  fontSize: 16.0,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    )),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 25.0, right: 25.0, top: 2.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: <Widget>[
+                                        Flexible(
+                                          child: TextField(
+                                            style: TextStyle(
+                                                color: _status
+                                                    ? Colors.grey
+                                                    : Colors.black),
+                                            decoration: const InputDecoration(
+                                              enabledBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0xff008891),
+                                                ),
+                                              ),
+                                              focusedBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0xff008891),
+                                                ),
+                                              ),
+                                              hintText: "Enter Your Name",
+                                            ),
+                                            enabled: !_status,
+                                            autofocus: !_status,
+                                            onChanged: (value) {
+                                              _name = value;
+                                            },
+                                            controller: TextEditingController(
+                                                text: currentUser["name"]),
                                           ),
                                         ),
-                                        focusedBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Color(0xff008891),
+                                      ],
+                                    )),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 25.0, right: 25.0, top: 25.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              'Email ID',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 0, 136, 145),
+                                                  fontSize: 16.0,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    )),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 25.0, right: 25.0, top: 2.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Flexible(
+                                          child: TextField(
+                                            style:
+                                                TextStyle(color: Colors.grey),
+                                            decoration: const InputDecoration(
+                                                enabledBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0xff008891),
+                                                  ),
+                                                ),
+                                                focusedBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0xff008891),
+                                                  ),
+                                                ),
+                                                hintText: "Enter Email ID"),
+                                            enabled: false,
+                                            controller: TextEditingController(
+                                                text: currentUser["email"]),
                                           ),
                                         ),
-                                        hintText: "Enter Your Name",
-                                      ),
-                                      enabled: !_status,
-                                      autofocus: !_status,
-                                      onChanged: (value) {
-                                        _name = value;
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              )),
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: 25.0, right: 25.0, top: 25.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        'Email ID',
-                                        style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 0, 136, 145),
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              )),
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: 25.0, right: 25.0, top: 2.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Flexible(
-                                    child: TextField(
-                                      decoration: const InputDecoration(
-                                          enabledBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0xff008891),
+                                      ],
+                                    )),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 25.0, right: 25.0, top: 25.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: <Widget>[
+                                            Text(
+                                              'Mobile',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 0, 136, 145),
+                                                  fontSize: 16.0,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    )),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 25.0, right: 25.0, top: 2.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Flexible(
+                                          child: TextField(
+                                            style: TextStyle(
+                                                color: _status
+                                                    ? Colors.grey
+                                                    : Colors.black),
+                                            decoration: const InputDecoration(
+                                                enabledBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0xff008891),
+                                                  ),
+                                                ),
+                                                focusedBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0xff008891),
+                                                  ),
+                                                ),
+                                                hintText:
+                                                    "Enter Mobile Number"),
+                                            enabled: !_status,
+                                            onChanged: (value) {
+                                              _phone = value;
+                                            },
+                                            controller: TextEditingController(
+                                                text: currentUser["phone"]),
+                                          ),
+                                        ),
+                                      ],
+                                    )),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 25.0, right: 25.0, top: 25.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            child: Text(
+                                              'City',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 0, 136, 145),
+                                                  fontSize: 16.0,
+                                                  fontWeight: FontWeight.bold),
                                             ),
                                           ),
-                                          focusedBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0xff008891),
+                                          flex: 2,
+                                        ),
+                                        Expanded(
+                                          child: Container(
+                                            child: Text(
+                                              'State',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 0, 136, 145),
+                                                  fontSize: 16.0,
+                                                  fontWeight: FontWeight.bold),
                                             ),
                                           ),
-                                          hintText: "Enter Email ID"),
-                                      enabled: !_status,
-                                      onChanged: (value) {
-                                        _email = value;
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              )),
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: 25.0, right: 25.0, top: 25.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: <Widget>[
-                                      Text(
-                                        'Mobile',
-                                        style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 0, 136, 145),
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              )),
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: 25.0, right: 25.0, top: 2.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Flexible(
-                                    child: TextField(
-                                      decoration: const InputDecoration(
-                                          enabledBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0xff008891),
+                                          flex: 2,
+                                        ),
+                                      ],
+                                    )),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 25.0, right: 25.0, top: 2.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Flexible(
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsets.only(right: 10.0),
+                                            child: TextField(
+                                              style: TextStyle(
+                                                  color: _status
+                                                      ? Colors.grey
+                                                      : Colors.black),
+                                              decoration: const InputDecoration(
+                                                  enabledBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0xff008891),
+                                                    ),
+                                                  ),
+                                                  focusedBorder:
+                                                      UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0xff008891),
+                                                    ),
+                                                  ),
+                                                  hintText: "Enter City"),
+                                              enabled: !_status,
+                                              onChanged: (value) {
+                                                _city = value;
+                                              },
+                                              controller: TextEditingController(
+                                                  text: currentUser["city"]),
                                             ),
                                           ),
-                                          focusedBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0xff008891),
-                                            ),
+                                          flex: 2,
+                                        ),
+                                        Flexible(
+                                          child: TextField(
+                                            style: TextStyle(
+                                                color: _status
+                                                    ? Colors.grey
+                                                    : Colors.black),
+                                            decoration: const InputDecoration(
+                                                enabledBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0xff008891),
+                                                  ),
+                                                ),
+                                                focusedBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0xff008891),
+                                                  ),
+                                                ),
+                                                hintText: "Enter State"),
+                                            enabled: !_status,
+                                            onChanged: (value) {
+                                              _state = value;
+                                            },
+                                            controller: TextEditingController(
+                                                text: currentUser["state"]),
                                           ),
-                                          hintText: "Enter Mobile Number"),
-                                      enabled: !_status,
-                                      onChanged: (value) {
-                                        _phone = value;
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              )),
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: 25.0, right: 25.0, top: 25.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      child: Text(
-                                        'City',
-                                        style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 0, 136, 145),
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    flex: 2,
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      child: Text(
-                                        'State',
-                                        style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 0, 136, 145),
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    flex: 2,
-                                  ),
-                                ],
-                              )),
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: 25.0, right: 25.0, top: 2.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Flexible(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(right: 10.0),
-                                      child: TextField(
-                                        decoration: const InputDecoration(
-                                            enabledBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0xff008891),
-                                              ),
-                                            ),
-                                            focusedBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0xff008891),
-                                              ),
-                                            ),
-                                            hintText: "Enter City"),
-                                        enabled: !_status,
-                                        onChanged: (value) {
-                                          _city = value;
-                                        },
-                                      ),
-                                    ),
-                                    flex: 2,
-                                  ),
-                                  Flexible(
-                                    child: TextField(
-                                      decoration: const InputDecoration(
-                                          enabledBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0xff008891),
-                                            ),
-                                          ),
-                                          focusedBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0xff008891),
-                                            ),
-                                          ),
-                                          hintText: "Enter State"),
-                                      enabled: !_status,
-                                      onChanged: (value) {
-                                        _state = value;
-                                      },
-                                    ),
-                                    flex: 2,
-                                  ),
-                                ],
-                              )),
-                          !_status ? _getActionButtons() : Container(),
-                        ],
-                      ),
+                                          flex: 2,
+                                        ),
+                                      ],
+                                    )),
+                                !_status ? _getActionButtons() : Container(),
+                              ],
+                            );
+
+                            return bioColumn;
+                          }),
                     ),
                   )
                 ],
@@ -439,12 +522,7 @@ class MapScreenState extends State<ProfilePage>
                 child: new Text("Save"),
                 textColor: Colors.white,
                 color: Color.fromARGB(255, 0, 136, 145),
-                onPressed: () {
-                  setState(() {
-                    _status = true;
-                    // FocusScope.of(context).requestFocus(FocusNode());
-                  });
-                },
+                onPressed: saveProfile,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0)),
               )),
