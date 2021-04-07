@@ -4,6 +4,7 @@ import 'package:pawfecto/screens/auth/shelter_login.dart';
 import 'package:pawfecto/screens/shelter/donation.dart';
 import 'package:pawfecto/screens/shelter/shelter_main_events.dart';
 import 'package:pawfecto/screens/shelter/shelter_main_pet.dart';
+import 'package:pawfecto/screens/shelter/shelter_profile.dart';
 
 class ShelterSideBar extends StatefulWidget {
   static const String id = 'shelter_sidebar';
@@ -46,7 +47,9 @@ class _ShelterSideBarState extends State<ShelterSideBar> {
                   ],
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.popAndPushNamed(context, ShelterProfile.id);
+                  },
                   child: Row(
                     children: [
                       Icon(
