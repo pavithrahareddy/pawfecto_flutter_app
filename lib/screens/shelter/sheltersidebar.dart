@@ -177,7 +177,8 @@ class _ShelterSideBarState extends State<ShelterSideBar> {
                         borderRadius: BorderRadius.circular(10.0),
                         child: MaterialButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, ShelterLogin.id);
+                            Navigator.pushNamedAndRemoveUntil(
+                                context, ShelterLogin.id, (route) => false);
                           },
                           minWidth: 150.0,
                           height: 30.0,
