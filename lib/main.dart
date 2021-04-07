@@ -7,6 +7,7 @@ import 'package:pawfecto/screens/shelter/addEvent.dart';
 import 'package:pawfecto/screens/shelter/addPet.dart';
 import 'package:pawfecto/screens/shelter/registeredUsers.dart';
 import 'package:pawfecto/screens/shelter/shelter_main_events.dart';
+import 'package:pawfecto/screens/shelter/shelter_profile.dart';
 import 'package:pawfecto/screens/shelter/sheltersidebar.dart';
 import 'package:pawfecto/screens/user/LostandFound/LAF_page.dart';
 import 'package:pawfecto/screens/user/LostandFound/lostpet_form.dart';
@@ -64,6 +65,7 @@ class MyApp extends StatelessWidget {
         LostPetForm.id: (context) => LostPetForm(),
         DonationDetails.id: (context) => DonationDetails(),
         Donators.id: (context) => Donators(),
+        ShelterProfile.id:(context) => ShelterProfile(),
         RegisteredUsers.id: (context) => RegisteredUsers(),
         Settings.id: (context) => Settings(),
         Favorites.id: (context) => Favorites(),
