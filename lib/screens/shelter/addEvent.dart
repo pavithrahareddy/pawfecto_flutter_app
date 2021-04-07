@@ -81,15 +81,19 @@ class _AddEventState extends State<AddEvent> {
     });
 
     try {
+      final shelter = await _firestore.collection('shelters').doc(_uid).get();
       await _firestore.collection('shelters').doc(_uid).update({
         'events': FieldValue.arrayUnion([
           {
+            'id': shelter.data()["events"].length + 1,
+            'uid': _uid,
             'name': _name,
             'location': _location,
             'time': _time,
             'date': _date,
             'description': _description,
             'imageURL': _uploadedFileURL,
+            'registrations': [],
           }
         ])
       });

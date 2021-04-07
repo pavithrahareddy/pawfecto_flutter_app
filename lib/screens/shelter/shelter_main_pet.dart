@@ -25,8 +25,6 @@ class _ShelterMainPetState extends State<ShelterMainPet> {
     _uid = _auth.currentUser.uid;
   }
 
-  int _selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
