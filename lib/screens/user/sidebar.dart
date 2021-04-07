@@ -43,7 +43,7 @@ class _SideBarState extends State<SideBar> {
                       width: 30.0,
                     ),
                     Text(
-                      'Alexa',
+                      'Hello there!',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
@@ -124,7 +124,7 @@ class _SideBarState extends State<SideBar> {
                   child: Row(
                     children: [
                       Icon(
-                        FontAwesomeIcons.democrat,
+                        FontAwesomeIcons.calendar,
                         color: selectedMenuItem == 'events'
                             ? Colors.white
                             : Colors.white.withOpacity(0.7),
@@ -269,24 +269,29 @@ class _SideBarState extends State<SideBar> {
                     ],
                   ),
                 ),
-                Material(
-                  elevation: 5.0,
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.0),
-                  child: MaterialButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, AdoptLogin.id);
-                    },
-                    minWidth: 150.0,
-                    height: 30.0,
-                    child: Text(
-                      'Logout',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Color.fromARGB(255, 0, 136, 145),
+                Row(
+                  children: [
+                    Material(
+                      elevation: 5.0,
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: MaterialButton(
+                        onPressed: () {
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, AdoptLogin.id, (route) => false);
+                        },
+                        minWidth: 150.0,
+                        height: 30.0,
+                        child: Text(
+                          'Logout',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Color.fromARGB(255, 0, 136, 145),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),

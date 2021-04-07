@@ -96,8 +96,8 @@ class _ShelterMainEventsState extends State<ShelterMainEvents> {
                           image: AssetImage(
                             'images/noEvents.jpg',
                           ),
-                          height: 250.0,
-                          width: 300.0,
+                          height: 280.0,
+                          width: 330.0,
                         ),
                       ),
                       Text(
@@ -118,132 +118,120 @@ class _ShelterMainEventsState extends State<ShelterMainEvents> {
                   }
                   if (events != []) {
                     for (var event in events) {
-                      final eventCard = Card(
-                        child: Column(
-                          children: <Widget>[
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => RegisteredUsers(
-                                      event: event,
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  ListTile(
-                                    title: Center(
-                                        child: Text(
-                                      event["name"] ?? 'Default',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
+                      final eventCard = Padding(
+                        padding: EdgeInsets.all(20.0),
+                        child: Card(
+                          child: Column(
+                            children: <Widget>[
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => RegisteredUsers(
+                                        event: event,
                                       ),
-                                    )),
-                                    tileColor: Color.fromARGB(255, 0, 136, 145),
-                                    subtitle: Center(
-                                      child: Text(
-                                        event["location"] ?? 'Default',
+                                    ),
+                                  );
+                                },
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    ListTile(
+                                      title: Center(
+                                          child: Text(
+                                        event["name"] ?? 'Default',
                                         style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                      )),
+                                      tileColor:
+                                          Color.fromARGB(255, 202, 247, 227),
+                                      subtitle: Center(
+                                        child: Text(
+                                          event["location"] ?? 'Default',
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.black,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  Container(
-                                    child: Image.network(
-                                        event["imageURL"] ??
-                                            'https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg',
-                                        scale: 0.5,
-                                        height: 200,
-                                        width: 150,
-                                        fit: BoxFit.fitWidth),
-                                  ),
-                                  Container(
-                                    color: Color.fromARGB(255, 202, 247, 227),
-                                    child: Column(
-                                      children: [
-                                        SizedBox(
-                                          height: 10,
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.88,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.4,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: NetworkImage(event[
+                                                  "imageURL"] ??
+                                              'https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg'),
+                                          fit: BoxFit.cover,
                                         ),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              'Date : ${event["date"] ?? '6th April 2021'}',
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              'Time : ${event["time"] ?? '5:00 PM'}',
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              'Description : ${event["description"] ?? 'Default'}',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            TextButton(
-                                              child: Text('Register'),
-                                              style: TextButton.styleFrom(
-                                                primary: Colors.white,
-                                                backgroundColor: Colors.teal,
-                                                onSurface: Colors.grey,
-                                              ),
-                                              onPressed: () {},
-                                            ),
-                                            const SizedBox(width: 15),
-                                            TextButton(
-                                              child: Text('Enquire'),
-                                              style: TextButton.styleFrom(
-                                                primary: Colors.white,
-                                                backgroundColor: Colors.teal,
-                                                onSurface: Colors.grey,
-                                              ),
-                                              onPressed: () {},
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                      ],
+                                      ),
+                                      child: Container(),
                                     ),
-                                  )
-                                ],
+                                    Container(
+                                      color: Colors.white,
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 12.0, bottom: 12.0),
+                                                child: Text(
+                                                  '${event["description"] ?? 'Default'}',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text(
+                                                'Date : ${event["date"] ?? '6th April 2021'}',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Colors.grey),
+                                              ),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text(
+                                                'Time : ${event["time"] ?? '5:00 PM'}',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Colors.grey),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       );
+
                       eventCards.add(eventCard);
                     }
                   }

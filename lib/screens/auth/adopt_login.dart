@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pawfecto/screens/user/adopt_main.dart';
+import 'package:pawfecto/screens/welcome.dart';
 
 class AdoptLogin extends StatefulWidget {
   static const String id = 'adopt_login';
@@ -68,8 +69,14 @@ class _AdoptLoginState extends State<AdoptLogin> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    Container(
-                      child: Image.asset('images/pawsfecto.png'),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, Welcome.id, (route) => false);
+                      },
+                      child: Container(
+                        child: Image.asset('images/pawsfecto.png'),
+                      ),
                     ),
                     SizedBox(
                       height: 40.0,
@@ -143,7 +150,7 @@ class _AdoptLoginState extends State<AdoptLogin> {
                                 email: email, password: password);
 
                             if (user != null) {
-                              Navigator.pushNamed(context, AdoptMain.id);
+                              Navigator.popAndPushNamed(context, AdoptMain.id);
                             }
 
                             // set spinner to false

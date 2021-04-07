@@ -15,12 +15,10 @@ class StrayPetForm extends StatefulWidget {
 }
 
 class _StrayPetFormState extends State<StrayPetForm> {
-
   bool isLoading = false;
   final _formKey = GlobalKey<FormState>();
-  final _firestore = FirebaseFirestore.instance;
-  final _auth = FirebaseAuth.instance;
-
+  // final _firestore = FirebaseFirestore.instance;
+  // final _auth = FirebaseAuth.instance;
 
   String _type = 'Dog';
   String _strength;
@@ -53,7 +51,7 @@ class _StrayPetFormState extends State<StrayPetForm> {
       isLoading = true;
     });
     Reference storageReference =
-    _storage.ref().child('Pets/${Path.basename(_image.path)}');
+        _storage.ref().child('Pets/${Path.basename(_image.path)}');
     UploadTask uploadTask = storageReference.putFile(_imageFile);
     uploadTask.then((res) {
       res.ref.getDownloadURL().then((fileURL) {
@@ -105,7 +103,6 @@ class _StrayPetFormState extends State<StrayPetForm> {
                   padding: const EdgeInsets.all(25.0),
                   child: Column(
                     children: [
-
                       DropdownButton<String>(
                         hint: Text("Animal Type"),
                         isExpanded: true,
@@ -327,8 +324,11 @@ class _StrayPetFormState extends State<StrayPetForm> {
                             _strength = newValue;
                           });
                         },
-                        items: <String>['Very Active', 'Moderately Active','Dull']
-                            .map<DropdownMenuItem<String>>((String value) {
+                        items: <String>[
+                          'Very Active',
+                          'Moderately Active',
+                          'Dull'
+                        ].map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(value),
@@ -345,28 +345,27 @@ class _StrayPetFormState extends State<StrayPetForm> {
                             child: _imageFile == null
                                 ? Image.asset('images/dog1.png')
                                 : Image.file(
-                              _imageFile,
-                              height: 50.0,
-                              width: 50.0,
-                            ),
+                                    _imageFile,
+                                    height: 50.0,
+                                    width: 50.0,
+                                  ),
                             replacement: SizedBox.shrink(),
                           ),
                           _isImageUploaded
                               ? SizedBox(
-                            width: 20.0,
-                          )
+                                  width: 20.0,
+                                )
                               : SizedBox(
-                            width: 0.0,
-                          ),
+                                  width: 0.0,
+                                ),
                           ElevatedButton(
                             style: ButtonStyle(
-                              backgroundColor:
-                              MaterialStateProperty.all<Color>(
+                              backgroundColor: MaterialStateProperty.all<Color>(
                                 Color(0xff008891),
                               ),
                             ),
                             onPressed:
-                            _isImageUploaded ? uploadFile : chooseFile,
+                                _isImageUploaded ? uploadFile : chooseFile,
                             child: Text(_isImageUploaded
                                 ? 'UPLOAD IMAGE'
                                 : 'CHOOSE IMAGE'),
@@ -390,9 +389,7 @@ class _StrayPetFormState extends State<StrayPetForm> {
                     fontSize: 16.0,
                   ),
                 ),
-                onPressed: (){
-
-                },
+                onPressed: () {},
               )
             ],
           ),

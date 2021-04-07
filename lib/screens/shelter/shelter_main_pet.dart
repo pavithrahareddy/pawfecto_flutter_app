@@ -96,7 +96,7 @@ class _ShelterMainPetState extends State<ShelterMainPet> {
                                   'images/noPetsFound.jpg',
                                 ),
                                 height: 300.0,
-                                width: 300.0,
+                                width: 320.0,
                               ),
                             ),
                             Text(

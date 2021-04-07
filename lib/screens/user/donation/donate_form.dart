@@ -1,8 +1,6 @@
-import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:pawfecto/screens/user/donation/donate_page.dart';
 import 'package:upi_india/upi_india.dart';
-import 'package:pawfecto/constants/constants.dart';
 
 class DonateForm extends StatefulWidget {
   DonateForm({@required this.donor});
@@ -453,11 +451,11 @@ class _DonateFormState extends State<DonateForm> {
                       UpiResponse _upiResponse = snapshot.data;
 
                       // Data in UpiResponse can be null. Check before printing
-                      String txnId = _upiResponse.transactionId ?? 'N/A';
-                      String resCode = _upiResponse.responseCode ?? 'N/A';
-                      String txnRef = _upiResponse.transactionRefId ?? 'N/A';
+                      // String txnId = _upiResponse.transactionId ?? 'N/A';
+                      // String resCode = _upiResponse.responseCode ?? 'N/A';
+                      // String txnRef = _upiResponse.transactionRefId ?? 'N/A';
                       String status = _upiResponse.status ?? 'N/A';
-                      String approvalRef = _upiResponse.approvalRefNo ?? 'N/A';
+                      // String approvalRef = _upiResponse.approvalRefNo ?? 'N/A';
                       _checkTxnStatus(status);
 
                       return Padding(

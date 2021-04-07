@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pawfecto/screens/user/sidebar.dart';
-import 'package:pawfecto/screens/user/adopt/pet_details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pawfecto/screens/auth/adopt_login.dart';
 
@@ -49,23 +48,13 @@ class _AdoptMainState extends State<AdoptMain> {
                   Navigator.pushNamed(context, SideBar.id);
                 },
               ),
-              title: Text(
-                'Pets',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
               actions: <Widget>[
-                Icon(
-                  Icons.location_on,
-                  color: Color(0xff008891),
-                ),
-                SizedBox(
-                  width: 15,
-                ),
                 CircleAvatar(
                   radius: 15.0,
-                  backgroundImage: AssetImage('images/profile.png'),
+                  backgroundImage: AssetImage('images/cat1.jpg'),
+                ),
+                SizedBox(
+                  width: 20.0,
                 ),
               ],
             ),
@@ -142,20 +131,25 @@ class _AdoptMainState extends State<AdoptMain> {
                                       child: Column(
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsets.only(top: 10.0),
+                                            padding: const EdgeInsets.only(
+                                                top: 10.0),
                                             child: Container(
-                                              height:
-                                              MediaQuery.of(context).size.width *
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
                                                   0.70,
-                                              width: MediaQuery.of(context).size.width *
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
                                                   0.80,
                                               decoration: BoxDecoration(
                                                 image: DecorationImage(
-                                                  image: (pet["imageURL"] == null)
-                                                      ? AssetImage(
-                                                      'images/dog1.jpg')
-                                                      : NetworkImage(
-                                                      pet["imageURL"]),
+                                                  image:
+                                                      (pet["imageURL"] == null)
+                                                          ? AssetImage(
+                                                              'images/dog1.jpg')
+                                                          : NetworkImage(
+                                                              pet["imageURL"]),
                                                   fit: BoxFit.fill,
                                                 ),
                                                 shape: BoxShape.rectangle,
@@ -163,38 +157,51 @@ class _AdoptMainState extends State<AdoptMain> {
                                             ),
                                           ),
                                           Container(
-                                            width: MediaQuery.of(context).size.width *
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
                                                 0.85,
                                             child: Row(
                                               mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets.all(20.0),
+                                                  padding: const EdgeInsets.all(
+                                                      20.0),
                                                   child: Column(
                                                     crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Row(
-                                                        children:<Widget> [
+                                                        children: <Widget>[
                                                           Text(
                                                             pet["name"] == null
                                                                 ? "No name"
                                                                 : pet["name"],
                                                             style: TextStyle(
                                                               fontSize: 25.0,
-                                                              color: Colors.blueGrey,
+                                                              color: Colors
+                                                                  .blueGrey,
                                                             ),
                                                           ),
                                                           SizedBox(
                                                             width: 5,
                                                           ),
                                                           Icon(
-                                                            pet["gender"] == 'Male'
-                                                                ? FontAwesomeIcons.mars
-                                                                : FontAwesomeIcons.venus,
-                                                            color: Color.fromARGB(
-                                                                255, 0, 136, 145),
+                                                            pet["gender"] ==
+                                                                    'Male'
+                                                                ? FontAwesomeIcons
+                                                                    .mars
+                                                                : FontAwesomeIcons
+                                                                    .venus,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    0,
+                                                                    136,
+                                                                    145),
                                                           ),
                                                         ],
                                                       ),
@@ -202,11 +209,7 @@ class _AdoptMainState extends State<AdoptMain> {
                                                         height: 3,
                                                       ),
                                                       Text(
-                                                        '${pet["breed"] == null
-                                                            ? "No breed"
-                                                            : pet["breed"]}, ${pet["age"] == null
-                                                            ? "No age"
-                                                            : pet["age"]} years',
+                                                        '${pet["breed"] == null ? "No breed" : pet["breed"]}, ${pet["age"] == null ? "No age" : pet["age"]} years',
                                                         style: TextStyle(
                                                           fontSize: 16.0,
                                                           color: Colors.grey,
@@ -216,12 +219,14 @@ class _AdoptMainState extends State<AdoptMain> {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsets.all(20.0),
-                                                  child: Icon(
-                                                    FontAwesomeIcons.heart,
-                                                    color: Color.fromARGB(255, 0, 136, 145),
-                                                  )
-                                                ),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            20.0),
+                                                    child: Icon(
+                                                      FontAwesomeIcons.heart,
+                                                      color: Color.fromARGB(
+                                                          255, 0, 136, 145),
+                                                    )),
                                               ],
                                             ),
                                           ),
@@ -241,20 +246,25 @@ class _AdoptMainState extends State<AdoptMain> {
                                       child: Column(
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsets.only(top: 10.0),
+                                            padding: const EdgeInsets.only(
+                                                top: 10.0),
                                             child: Container(
-                                              height:
-                                              MediaQuery.of(context).size.width *
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
                                                   0.70,
-                                              width: MediaQuery.of(context).size.width *
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
                                                   0.80,
                                               decoration: BoxDecoration(
                                                 image: DecorationImage(
-                                                  image: (pet["imageURL"] == null)
-                                                      ? AssetImage(
-                                                      'images/dog1.jpg')
-                                                      : NetworkImage(
-                                                      pet["imageURL"]),
+                                                  image:
+                                                      (pet["imageURL"] == null)
+                                                          ? AssetImage(
+                                                              'images/dog1.jpg')
+                                                          : NetworkImage(
+                                                              pet["imageURL"]),
                                                   fit: BoxFit.fill,
                                                 ),
                                                 shape: BoxShape.rectangle,
@@ -262,38 +272,51 @@ class _AdoptMainState extends State<AdoptMain> {
                                             ),
                                           ),
                                           Container(
-                                            width: MediaQuery.of(context).size.width *
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
                                                 0.85,
                                             child: Row(
                                               mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets.all(20.0),
+                                                  padding: const EdgeInsets.all(
+                                                      20.0),
                                                   child: Column(
                                                     crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Row(
-                                                        children:<Widget> [
+                                                        children: <Widget>[
                                                           Text(
                                                             pet["name"] == null
                                                                 ? "No name"
                                                                 : pet["name"],
                                                             style: TextStyle(
                                                               fontSize: 25.0,
-                                                              color: Colors.blueGrey,
+                                                              color: Colors
+                                                                  .blueGrey,
                                                             ),
                                                           ),
                                                           SizedBox(
                                                             width: 5,
                                                           ),
                                                           Icon(
-                                                            pet["gender"] == 'Male'
-                                                                ? FontAwesomeIcons.mars
-                                                                : FontAwesomeIcons.venus,
-                                                            color: Color.fromARGB(
-                                                                255, 0, 136, 145),
+                                                            pet["gender"] ==
+                                                                    'Male'
+                                                                ? FontAwesomeIcons
+                                                                    .mars
+                                                                : FontAwesomeIcons
+                                                                    .venus,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    0,
+                                                                    136,
+                                                                    145),
                                                           ),
                                                         ],
                                                       ),
@@ -301,11 +324,7 @@ class _AdoptMainState extends State<AdoptMain> {
                                                         height: 3,
                                                       ),
                                                       Text(
-                                                        '${pet["breed"] == null
-                                                            ? "No breed"
-                                                            : pet["breed"]}, ${pet["age"] == null
-                                                            ? "No age"
-                                                            : pet["age"]} years',
+                                                        '${pet["breed"] == null ? "No breed" : pet["breed"]}, ${pet["age"] == null ? "No age" : pet["age"]} years',
                                                         style: TextStyle(
                                                           fontSize: 16.0,
                                                           color: Colors.grey,
@@ -315,12 +334,14 @@ class _AdoptMainState extends State<AdoptMain> {
                                                   ),
                                                 ),
                                                 Padding(
-                                                    padding: const EdgeInsets.all(20.0),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            20.0),
                                                     child: Icon(
                                                       FontAwesomeIcons.heart,
-                                                      color: Color.fromARGB(255, 0, 136, 145),
-                                                    )
-                                                ),
+                                                      color: Color.fromARGB(
+                                                          255, 0, 136, 145),
+                                                    )),
                                               ],
                                             ),
                                           ),
