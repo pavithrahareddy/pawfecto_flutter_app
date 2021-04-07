@@ -70,14 +70,8 @@ class MapScreenState extends State<ProfilePage>
               color: Color(0xff008891),
             ),
             onTap: () {
-              Navigator.pushNamed(context, SideBar.id);
+              Navigator.popAndPushNamed(context, SideBar.id);
             },
-          ),
-          title: Text(
-            'Profile',
-            style: TextStyle(
-              color: Colors.black,
-            ),
           ),
         ),
         body: new Container(

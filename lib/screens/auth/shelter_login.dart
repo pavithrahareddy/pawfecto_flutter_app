@@ -144,7 +144,8 @@ class _ShelterLoginState extends State<ShelterLogin> {
                                 email: email, password: password);
 
                             if (user != null) {
-                              Navigator.pushNamed(context, ShelterMainPet.id);
+                              Navigator.popAndPushNamed(
+                                  context, ShelterMainPet.id);
                             }
 
                             // set spinner to false

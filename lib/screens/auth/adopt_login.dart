@@ -150,7 +150,7 @@ class _AdoptLoginState extends State<AdoptLogin> {
                                 email: email, password: password);
 
                             if (user != null) {
-                              Navigator.pushNamed(context, AdoptMain.id);
+                              Navigator.popAndPushNamed(context, AdoptMain.id);
                             }
 
                             // set spinner to false

@@ -48,23 +48,13 @@ class _AdoptMainState extends State<AdoptMain> {
                   Navigator.pushNamed(context, SideBar.id);
                 },
               ),
-              title: Text(
-                'Pets',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
               actions: <Widget>[
-                Icon(
-                  Icons.location_on,
-                  color: Color(0xff008891),
-                ),
-                SizedBox(
-                  width: 15,
-                ),
                 CircleAvatar(
                   radius: 15.0,
-                  backgroundImage: AssetImage('images/profile.png'),
+                  backgroundImage: AssetImage('images/cat1.jpg'),
+                ),
+                SizedBox(
+                  width: 20.0,
                 ),
               ],
             ),
