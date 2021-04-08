@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,6 +17,28 @@ class Appointments extends StatefulWidget {
 class _AppointmentsState extends State<Appointments> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
+
+  void sendEmailNotification({Map user}) async {
+    String username = env['EMAIL'];
+    String password = env['PASSWORD'];
+
+    final smtpServer = gmail(username, password);
+
+    final message = Message()
+      ..from = Address(username, 'Pawfecto')
+      ..recipients.add(user["email"])
+      ..subject = 'Confirmation: Appointment Scheduled on ${user["date"]}'
+      ..text =
+          'Hi ${user["name"]},.\n\nThis is to notify you that your appointment has been confirmed on ${user["date"]} at ${user["time"]}\nHope you find your Pawfect match!\n\nTeam Pawfecto';
+
+    try {
+      final sendReport = await send(message, smtpServer);
+      print('Message sent: ' + sendReport.toString());
+    } on MailerException catch (e) {
+      print('Message not sent.');
+      print(e);
+    }
+  }
 
   String _uid;
   void getUID() {
@@ -265,6 +290,9 @@ class _AppointmentsState extends State<Appointments> {
                                                               .update({
                                                             "adopters": appoint,
                                                           });
+
+                                                          sendEmailNotification(
+                                                              user: user);
                                                         } catch (e) {
                                                           print(e);
                                                         }

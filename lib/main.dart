@@ -17,6 +17,7 @@ import 'package:pawfecto/screens/user/adopt/adopt_form.dart';
 import 'package:pawfecto/screens/user/adopt/favourites.dart';
 import 'package:pawfecto/screens/user/adopt_main.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
 import 'package:pawfecto/screens/user/donation/donate_form.dart';
 import 'package:pawfecto/screens/user/donation/donate_page.dart';
 import 'package:pawfecto/screens/user/donation/donators.dart';
@@ -33,6 +34,7 @@ import 'package:pawfecto/screens/shelter/donation.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await DotEnv.load(fileName: ".env");
   runApp(MyApp());
 }
 
