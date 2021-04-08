@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pawfecto/screens/auth/adopt_login.dart';
 import 'package:pawfecto/screens/auth/shelter_login.dart';
 import 'package:pawfecto/components/rounded_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Welcome extends StatefulWidget {
   static const String id = 'welcome';
@@ -11,6 +12,19 @@ class Welcome extends StatefulWidget {
 }
 
 class _WelcomeState extends State<Welcome> {
+  final _turl =
+      'https://drive.google.com/file/d/1zik_v5Avasv83EwWjmyM0qVx6R0_t45D/view?usp=sharing';
+  final _purl =
+      'https://drive.google.com/file/d/1Dx4VBTz9pw6v-oEVDEn-ug4LpHnquQOD/view?usp=sharing';
+
+  void _tlaunchURL() async => await canLaunch(_turl)
+      ? await launch(_turl)
+      : throw 'Could not launch $_turl';
+
+  void _plaunchURL() async => await canLaunch(_purl)
+      ? await launch(_purl)
+      : throw 'Could not launch $_purl';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,6 +98,7 @@ class _WelcomeState extends State<Welcome> {
                         color: Color.fromARGB(255, 0, 136, 145),
                       ),
                     ),
+                    onTap: _plaunchURL,
                   ),
                   SizedBox(
                     height: 2.0,
@@ -95,6 +110,7 @@ class _WelcomeState extends State<Welcome> {
                         color: Color.fromARGB(255, 0, 136, 145),
                       ),
                     ),
+                    onTap: _tlaunchURL,
                   ),
                 ],
               ),
