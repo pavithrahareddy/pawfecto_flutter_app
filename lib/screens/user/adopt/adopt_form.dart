@@ -270,6 +270,11 @@ class _AdoptFormState extends State<AdoptForm> {
                           });
 
                           try {
+                            final shelter = await _firestore
+                                .collection('shelters')
+                                .doc(this.widget.pet["uid"])
+                                .get();
+                            int size = shelter.data()["adopters"].length;
                             await _firestore
                                 .collection('shelters')
                                 .doc(this.widget.pet["uid"])
@@ -281,7 +286,9 @@ class _AdoptFormState extends State<AdoptForm> {
                                   "phone": _number,
                                   "date": _date,
                                   "time": _time,
-                                  "pet": this.widget.pet
+                                  "pet": this.widget.pet,
+                                  'id': size + 1,
+                                  'isAccepted': false,
                                 }
                               ])
                             });

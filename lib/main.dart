@@ -5,6 +5,7 @@ import 'package:pawfecto/screens/auth/shelter_login.dart';
 import 'package:pawfecto/screens/auth/shelter_register.dart';
 import 'package:pawfecto/screens/shelter/addEvent.dart';
 import 'package:pawfecto/screens/shelter/addPet.dart';
+import 'package:pawfecto/screens/shelter/appointments.dart';
 import 'package:pawfecto/screens/shelter/registeredUsers.dart';
 import 'package:pawfecto/screens/shelter/shelter_main_events.dart';
 import 'package:pawfecto/screens/shelter/shelter_profile.dart';
@@ -65,10 +66,11 @@ class MyApp extends StatelessWidget {
         LostPetForm.id: (context) => LostPetForm(),
         DonationDetails.id: (context) => DonationDetails(),
         Donators.id: (context) => Donators(),
-        ShelterProfile.id:(context) => ShelterProfile(),
+        ShelterProfile.id: (context) => ShelterProfile(),
         RegisteredUsers.id: (context) => RegisteredUsers(),
         Settings.id: (context) => Settings(),
         Favorites.id: (context) => Favorites(),
+        Appointments.id: (context) => Appointments(),
       },
     );
   }
