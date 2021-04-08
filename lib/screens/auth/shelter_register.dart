@@ -160,6 +160,7 @@ class _SRegisterState extends State<SRegister> {
                                 'upi': '',
                                 'description': '',
                               },
+                              'adopters': []
                             });
                             Navigator.pushNamed(context, ShelterLogin.id);
                           }

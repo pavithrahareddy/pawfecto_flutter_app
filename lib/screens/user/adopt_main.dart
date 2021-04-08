@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pawfecto/screens/user/adopt/pet_details.dart';
 import 'package:pawfecto/screens/user/sidebar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pawfecto/screens/auth/adopt_login.dart';
@@ -21,7 +22,6 @@ class _AdoptMainState extends State<AdoptMain> {
   void initState() {
     super.initState();
     _uid = _auth.currentUser.uid;
-    print(_auth.currentUser.emailVerified);
   }
 
   int _selectedtype = 0;
@@ -58,7 +58,7 @@ class _AdoptMainState extends State<AdoptMain> {
                 ),
               ],
             ),
-            backgroundColor: Colors.white,
+            backgroundColor: Color(0xffF6F6F6),
             body: SafeArea(
                 child: SingleChildScrollView(
               child: Column(
@@ -112,125 +112,141 @@ class _AdoptMainState extends State<AdoptMain> {
                               List allpets = [];
                               List<Widget> dogCards = [];
                               List<Widget> catCards = [];
+
                               final shelters = snapshot.data.docs;
+
                               for (var shelter in shelters) {
                                 pets = shelter.data()["pets"];
                                 for (var eachpet in pets) {
                                   allpets.add(eachpet);
                                 }
                               }
+
                               for (var pet in allpets) {
                                 if (pet["type"] == "Dog") {
                                   final dogCard = Padding(
                                     padding: EdgeInsets.only(
                                       top: 20.0,
                                     ),
-                                    child: Card(
-                                      shadowColor: Colors.grey,
-                                      elevation: 5,
-                                      child: Column(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 10.0),
-                                            child: Container(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.70,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => PetDetails(
+                                              pet: pet,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Card(
+                                        shadowColor: Colors.grey,
+                                        elevation: 5,
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 10.0),
+                                              child: Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.70,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.80,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: (pet["imageURL"] ==
+                                                            null)
+                                                        ? AssetImage(
+                                                            'images/dog1.jpg')
+                                                        : NetworkImage(
+                                                            pet["imageURL"]),
+                                                    fit: BoxFit.fill,
+                                                  ),
+                                                  shape: BoxShape.rectangle,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width *
-                                                  0.80,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  image:
-                                                      (pet["imageURL"] == null)
-                                                          ? AssetImage(
-                                                              'images/dog1.jpg')
-                                                          : NetworkImage(
-                                                              pet["imageURL"]),
-                                                  fit: BoxFit.fill,
-                                                ),
-                                                shape: BoxShape.rectangle,
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.85,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      20.0),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Row(
-                                                        children: <Widget>[
-                                                          Text(
-                                                            pet["name"] == null
-                                                                ? "No name"
-                                                                : pet["name"],
-                                                            style: TextStyle(
-                                                              fontSize: 25.0,
-                                                              color: Colors
-                                                                  .blueGrey,
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Icon(
-                                                            pet["gender"] ==
-                                                                    'Male'
-                                                                ? FontAwesomeIcons
-                                                                    .mars
-                                                                : FontAwesomeIcons
-                                                                    .venus,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    0,
-                                                                    136,
-                                                                    145),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        height: 3,
-                                                      ),
-                                                      Text(
-                                                        '${pet["breed"] == null ? "No breed" : pet["breed"]}, ${pet["age"] == null ? "No age" : pet["age"]} years',
-                                                        style: TextStyle(
-                                                          fontSize: 16.0,
-                                                          color: Colors.grey,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
+                                                  0.85,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Padding(
                                                     padding:
                                                         const EdgeInsets.all(
                                                             20.0),
-                                                    child: Icon(
-                                                      FontAwesomeIcons.heart,
-                                                      color: Color.fromARGB(
-                                                          255, 0, 136, 145),
-                                                    )),
-                                              ],
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Row(
+                                                          children: <Widget>[
+                                                            Text(
+                                                              pet["name"] ==
+                                                                      null
+                                                                  ? "No name"
+                                                                  : pet["name"],
+                                                              style: TextStyle(
+                                                                fontSize: 25.0,
+                                                                color: Colors
+                                                                    .blueGrey,
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            Icon(
+                                                              pet["gender"] == 'Male'
+                                                                  ? FontAwesomeIcons
+                                                                      .mars
+                                                                  : FontAwesomeIcons
+                                                                      .venus,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      0,
+                                                                      136,
+                                                                      145),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height: 3,
+                                                        ),
+                                                        Text(
+                                                          '${pet["breed"] == null ? "No breed" : pet["breed"]}, ${pet["age"] == null ? "No age" : pet["age"]} years',
+                                                          style: TextStyle(
+                                                            fontSize: 16.0,
+                                                            color: Colors.grey,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              20.0),
+                                                      child: Icon(
+                                                        FontAwesomeIcons.heart,
+                                                        color: Color.fromARGB(
+                                                            255, 0, 136, 145),
+                                                      )),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   );
@@ -240,112 +256,125 @@ class _AdoptMainState extends State<AdoptMain> {
                                     padding: EdgeInsets.only(
                                       top: 20.0,
                                     ),
-                                    child: Card(
-                                      shadowColor: Colors.grey,
-                                      elevation: 5,
-                                      child: Column(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 10.0),
-                                            child: Container(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.70,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => PetDetails(
+                                              pet: pet,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Card(
+                                        shadowColor: Colors.grey,
+                                        elevation: 5,
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 10.0),
+                                              child: Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.70,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.80,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: (pet["imageURL"] ==
+                                                            null)
+                                                        ? AssetImage(
+                                                            'images/dog1.jpg')
+                                                        : NetworkImage(
+                                                            pet["imageURL"]),
+                                                    fit: BoxFit.fill,
+                                                  ),
+                                                  shape: BoxShape.rectangle,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width *
-                                                  0.80,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  image:
-                                                      (pet["imageURL"] == null)
-                                                          ? AssetImage(
-                                                              'images/dog1.jpg')
-                                                          : NetworkImage(
-                                                              pet["imageURL"]),
-                                                  fit: BoxFit.fill,
-                                                ),
-                                                shape: BoxShape.rectangle,
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.85,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      20.0),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Row(
-                                                        children: <Widget>[
-                                                          Text(
-                                                            pet["name"] == null
-                                                                ? "No name"
-                                                                : pet["name"],
-                                                            style: TextStyle(
-                                                              fontSize: 25.0,
-                                                              color: Colors
-                                                                  .blueGrey,
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Icon(
-                                                            pet["gender"] ==
-                                                                    'Male'
-                                                                ? FontAwesomeIcons
-                                                                    .mars
-                                                                : FontAwesomeIcons
-                                                                    .venus,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    0,
-                                                                    136,
-                                                                    145),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        height: 3,
-                                                      ),
-                                                      Text(
-                                                        '${pet["breed"] == null ? "No breed" : pet["breed"]}, ${pet["age"] == null ? "No age" : pet["age"]} years',
-                                                        style: TextStyle(
-                                                          fontSize: 16.0,
-                                                          color: Colors.grey,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
+                                                  0.85,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Padding(
                                                     padding:
                                                         const EdgeInsets.all(
                                                             20.0),
-                                                    child: Icon(
-                                                      FontAwesomeIcons.heart,
-                                                      color: Color.fromARGB(
-                                                          255, 0, 136, 145),
-                                                    )),
-                                              ],
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Row(
+                                                          children: <Widget>[
+                                                            Text(
+                                                              pet["name"] ==
+                                                                      null
+                                                                  ? "No name"
+                                                                  : pet["name"],
+                                                              style: TextStyle(
+                                                                fontSize: 25.0,
+                                                                color: Colors
+                                                                    .blueGrey,
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            Icon(
+                                                              pet["gender"] == 'Male'
+                                                                  ? FontAwesomeIcons
+                                                                      .mars
+                                                                  : FontAwesomeIcons
+                                                                      .venus,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      0,
+                                                                      136,
+                                                                      145),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height: 3,
+                                                        ),
+                                                        Text(
+                                                          '${pet["breed"] == null ? "No breed" : pet["breed"]}, ${pet["age"] == null ? "No age" : pet["age"]} years',
+                                                          style: TextStyle(
+                                                            fontSize: 16.0,
+                                                            color: Colors.grey,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              20.0),
+                                                      child: Icon(
+                                                        FontAwesomeIcons.heart,
+                                                        color: Color.fromARGB(
+                                                            255, 0, 136, 145),
+                                                      )),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   );

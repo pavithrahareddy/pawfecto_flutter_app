@@ -24,12 +24,6 @@ class _DonatePageState extends State<DonatePage> {
             Navigator.pushNamed(context, SideBar.id);
           },
         ),
-        // title: Text(
-        //   'Donate',
-        //   style: TextStyle(
-        //     color: Colors.black,
-        //   ),
-        // ),
       ),
       body: SafeArea(
         child: Padding(

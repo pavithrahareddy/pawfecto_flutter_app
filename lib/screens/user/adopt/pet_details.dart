@@ -3,6 +3,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pawfecto/screens/user/adopt/adopt_form.dart';
 
 class PetDetails extends StatefulWidget {
+  PetDetails({@required this.pet});
+
+  final Map pet;
+
   static const String id = 'pet_detail';
 
   @override
@@ -22,44 +26,44 @@ class _PetDetailsState extends State<PetDetails> {
             Positioned(
               top: 0,
               child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * .40,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('images/dog1.jpg'),
-                      fit: BoxFit.cover,
-                    ),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * .40,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(this.widget.pet["imageURL"]),
+                    fit: BoxFit.cover,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          left: 0.0,
-                          top: 0.0,
-                          child: GestureDetector(
-                            child: Icon(
-                              FontAwesomeIcons.arrowLeft,
-                              color: Colors.black,
-                            ),
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        left: 0.0,
+                        top: 0.0,
+                        child: GestureDetector(
+                          child: Icon(
+                            FontAwesomeIcons.arrowLeft,
+                            color: Colors.black,
+                          ),
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ),
+                      Positioned(
+                        right: 0.0,
+                        top: 0.0,
+                        child: GestureDetector(
+                          child: Icon(
+                            FontAwesomeIcons.share,
+                            color: Colors.black,
                           ),
                         ),
-                        Positioned(
-                          right: 0.0,
-                          top: 0.0,
-                          child: GestureDetector(
-                            child: Icon(
-                              FontAwesomeIcons.share,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
+                ),
               ),
             ),
             Positioned(
@@ -81,7 +85,7 @@ class _PetDetailsState extends State<PetDetails> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Ellie",
+                            this.widget.pet["name"],
                             style: TextStyle(
                                 color: Color(0xff008891),
                                 fontSize: 20.0,
@@ -91,7 +95,7 @@ class _PetDetailsState extends State<PetDetails> {
                             height: 10.0,
                           ),
                           Text(
-                            "Golden Retriever",
+                            this.widget.pet["breed"],
                             style: TextStyle(
                               color: Colors.grey,
                               fontSize: 17.0,
@@ -104,7 +108,9 @@ class _PetDetailsState extends State<PetDetails> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
-                            FontAwesomeIcons.venus,
+                            this.widget.pet["gender"] == 'Female'
+                                ? FontAwesomeIcons.venus
+                                : FontAwesomeIcons.mars,
                             color: Color(0xff008891),
                             size: 30,
                           ),
@@ -112,7 +118,7 @@ class _PetDetailsState extends State<PetDetails> {
                             height: 10.0,
                           ),
                           Text(
-                            "3 years old",
+                            this.widget.pet["age"],
                             style: TextStyle(
                               color: Colors.grey,
                               fontSize: 17.0,
@@ -144,49 +150,83 @@ class _PetDetailsState extends State<PetDetails> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          CircleAvatar(
-                            radius: 20.0,
-                            backgroundImage: AssetImage('images/profile.png'),
-                          ),
-                          Column(
-                            children: [
-                              Text(
-                                "Ananya",
-                                style: TextStyle(
-                                    color: Color(0xff008891),
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                "Owner",
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 13.0,
-                                ),
-                              ),
-                            ],
-                          ),
                           Text(
-                            "25 March, 2021",
+                            'Type',
                             style: TextStyle(
                               color: Colors.grey,
-                              fontSize: 14.0,
-                              // fontWeight: FontWeight.bold),
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            this.widget.pet["type"],
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 18.0,
                             ),
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 0.0, horizontal: 30.0),
-                        child: Text(
-                          " et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi.",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 16.0,
-                            // fontWeight: FontWeight.bold),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            'Color',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
+                          Text(
+                            this.widget.pet["color"],
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 18.0,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            'Weight',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            this.widget.pet["weight"],
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 18.0,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            'Certified',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Icon(
+                            this.widget.pet["isCertified"]
+                                ? Icons.verified_rounded
+                                : Icons.clear,
+                            color: this.widget.pet["isCertified"]
+                                ? Color(0xff008891)
+                                : Colors.red,
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -229,13 +269,19 @@ class _PetDetailsState extends State<PetDetails> {
                       elevation: 4.0,
                       color: Color.fromARGB(255, 0, 136, 145),
                       child: GestureDetector(
-                        onTap: (){
-                          Navigator.pushNamed(context, AdoptForm.id);
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  AdoptForm(pet: this.widget.pet),
+                            ),
+                          );
                         },
                         child: Padding(
                           padding: EdgeInsets.all(20.0),
                           child: Text(
-                            'Adopt',
+                            'Contact Shelter',
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
