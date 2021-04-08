@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pawfecto/screens/user/adopt_main.dart';
 import 'package:pawfecto/screens/user/sidebar.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -62,15 +64,17 @@ class MapScreenState extends State<ProfilePage>
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: AppBar(
+          elevation: 0,
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
           leading: GestureDetector(
             child: Icon(
-              Icons.menu,
+              FontAwesomeIcons.arrowLeft,
               color: Color(0xff008891),
             ),
             onTap: () {
-              Navigator.popAndPushNamed(context, SideBar.id);
+              Navigator.pushNamedAndRemoveUntil(
+                  context, AdoptMain.id, (route) => false);
             },
           ),
         ),

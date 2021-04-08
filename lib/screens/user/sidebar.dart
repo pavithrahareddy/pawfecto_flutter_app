@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pawfecto/screens/auth/adopt_login.dart';
 import 'package:pawfecto/screens/user/LostandFound/LAF_page.dart';
+import 'package:pawfecto/screens/user/Pawstagram/pawstagram.dart';
 import 'package:pawfecto/screens/user/adopt/favourites.dart';
 import 'package:pawfecto/screens/user/adopt_main.dart';
 import 'package:pawfecto/screens/user/donation/donate_page.dart';
@@ -24,6 +25,7 @@ class _SideBarState extends State<SideBar> {
     return Scaffold(
       backgroundColor: Color(0xff008891),
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Color(0xff008891),
       ),
       body: Container(
@@ -52,37 +54,37 @@ class _SideBarState extends State<SideBar> {
                     ),
                   ],
                 ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      Navigator.pushNamed(context, ProfilePage.id);
-                      selectedMenuItem = 'profile';
-                    });
-                  },
-                  child: Row(
-                    children: [
-                      Icon(
-                        FontAwesomeIcons.userAlt,
-                        color: selectedMenuItem == 'profile'
-                            ? Colors.white
-                            : Colors.white.withOpacity(0.7),
-                      ),
-                      SizedBox(
-                        width: 30.0,
-                      ),
-                      Text(
-                        'Profile',
-                        style: TextStyle(
-                          color: selectedMenuItem == 'profile'
-                              ? Colors.white
-                              : Colors.white.withOpacity(0.7),
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                // GestureDetector(
+                //   onTap: () {
+                //     setState(() {
+                //       Navigator.pushNamed(context, ProfilePage.id);
+                //       selectedMenuItem = 'profile';
+                //     });
+                //   },
+                //   child: Row(
+                //     children: [
+                //       Icon(
+                //         FontAwesomeIcons.userAlt,
+                //         color: selectedMenuItem == 'profile'
+                //             ? Colors.white
+                //             : Colors.white.withOpacity(0.7),
+                //       ),
+                //       SizedBox(
+                //         width: 30.0,
+                //       ),
+                //       Text(
+                //         'Profile',
+                //         style: TextStyle(
+                //           color: selectedMenuItem == 'profile'
+                //               ? Colors.white
+                //               : Colors.white.withOpacity(0.7),
+                //           fontWeight: FontWeight.w600,
+                //           fontSize: 20.0,
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 GestureDetector(
                   onTap: () {
                     setState(() {
@@ -136,6 +138,37 @@ class _SideBarState extends State<SideBar> {
                         'Events',
                         style: TextStyle(
                           color: selectedMenuItem == 'events'
+                              ? Colors.white
+                              : Colors.white.withOpacity(0.7),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      Navigator.pushNamed(context, Pawstagram.id);
+                      selectedMenuItem = 'pawstagram';
+                    });
+                  },
+                  child: Row(
+                    children: [
+                      Icon(
+                        FontAwesomeIcons.image,
+                        color: selectedMenuItem == 'pawstagram'
+                            ? Colors.white
+                            : Colors.white.withOpacity(0.7),
+                      ),
+                      SizedBox(
+                        width: 30.0,
+                      ),
+                      Text(
+                        'Pawstagram',
+                        style: TextStyle(
+                          color: selectedMenuItem == 'pawstagram'
                               ? Colors.white
                               : Colors.white.withOpacity(0.7),
                           fontWeight: FontWeight.w600,

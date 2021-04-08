@@ -13,6 +13,7 @@ import 'package:pawfecto/screens/shelter/sheltersidebar.dart';
 import 'package:pawfecto/screens/user/LostandFound/LAF_page.dart';
 import 'package:pawfecto/screens/user/LostandFound/lostpet_form.dart';
 import 'package:pawfecto/screens/user/LostandFound/straypet_form.dart';
+import 'package:pawfecto/screens/user/Pawstagram/pawstagram.dart';
 import 'package:pawfecto/screens/user/adopt/adopt_form.dart';
 import 'package:pawfecto/screens/user/adopt/favourites.dart';
 import 'package:pawfecto/screens/user/adopt_main.dart';
@@ -73,6 +74,7 @@ class MyApp extends StatelessWidget {
         Settings.id: (context) => Settings(),
         Favorites.id: (context) => Favorites(),
         Appointments.id: (context) => Appointments(),
+        Pawstagram.id: (context) => Pawstagram(),
       },
     );
   }

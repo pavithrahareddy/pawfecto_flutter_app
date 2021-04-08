@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pawfecto/screens/user/adopt/pet_details.dart';
+import 'package:pawfecto/screens/user/profile.dart';
 import 'package:pawfecto/screens/user/sidebar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pawfecto/screens/auth/adopt_login.dart';
@@ -37,35 +38,56 @@ class _AdoptMainState extends State<AdoptMain> {
     return _auth.currentUser.emailVerified
         ? Scaffold(
             appBar: AppBar(
+              elevation: 0,
               automaticallyImplyLeading: false,
               backgroundColor: Colors.white,
-              leading: GestureDetector(
-                child: Icon(
-                  Icons.menu,
-                  color: Color(0xff008891),
-                ),
-                onTap: () {
-                  Navigator.pushNamed(context, SideBar.id);
-                },
+              leading: Row(
+                children: [
+                  SizedBox(
+                    width: 30.0,
+                  ),
+                  GestureDetector(
+                    child: Icon(
+                      Icons.menu,
+                      color: Color(0xff008891),
+                    ),
+                    onTap: () {
+                      Navigator.pushNamed(context, SideBar.id);
+                    },
+                  ),
+                ],
               ),
               actions: <Widget>[
-                CircleAvatar(
-                  radius: 15.0,
-                  backgroundImage: AssetImage('images/cat1.jpg'),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, ProfilePage.id);
+                  },
+                  child: CircleAvatar(
+                    radius: 18.0,
+                    backgroundImage: AssetImage('images/cat1.jpg'),
+                  ),
                 ),
                 SizedBox(
-                  width: 20.0,
+                  width: 30.0,
                 ),
               ],
             ),
-            backgroundColor: Color(0xffF6F6F6),
+            backgroundColor: Colors.white,
             body: SafeArea(
                 child: SingleChildScrollView(
               child: Column(
                 children: [
+                  SizedBox(
+                    height: 15.0,
+                  ),
                   Container(
                     // height: 500.0,
-                    color: Color(0xffF6F6F6),
+
+                    decoration: BoxDecoration(
+                      color: Color(0xffF6F6F6),
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(50.0)),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
