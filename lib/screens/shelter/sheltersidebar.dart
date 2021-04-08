@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pawfecto/screens/auth/shelter_login.dart';
+import 'package:pawfecto/screens/shelter/appointments.dart';
 import 'package:pawfecto/screens/shelter/donation.dart';
 import 'package:pawfecto/screens/shelter/shelter_main_events.dart';
 import 'package:pawfecto/screens/shelter/shelter_main_pet.dart';
@@ -107,6 +108,30 @@ class _ShelterSideBarState extends State<ShelterSideBar> {
                               ),
                               Text(
                                 'Events',
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(0.7),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.popAndPushNamed(context, Appointments.id);
+                          },
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.access_time,
+                                color: Colors.white.withOpacity(0.7),
+                              ),
+                              SizedBox(
+                                width: 30.0,
+                              ),
+                              Text(
+                                'Adopters',
                                 style: TextStyle(
                                   color: Colors.white.withOpacity(0.7),
                                   fontWeight: FontWeight.w600,

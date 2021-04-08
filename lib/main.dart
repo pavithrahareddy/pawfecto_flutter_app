@@ -5,6 +5,7 @@ import 'package:pawfecto/screens/auth/shelter_login.dart';
 import 'package:pawfecto/screens/auth/shelter_register.dart';
 import 'package:pawfecto/screens/shelter/addEvent.dart';
 import 'package:pawfecto/screens/shelter/addPet.dart';
+import 'package:pawfecto/screens/shelter/appointments.dart';
 import 'package:pawfecto/screens/shelter/registeredUsers.dart';
 import 'package:pawfecto/screens/shelter/shelter_main_events.dart';
 import 'package:pawfecto/screens/shelter/shelter_profile.dart';
@@ -16,6 +17,7 @@ import 'package:pawfecto/screens/user/adopt/adopt_form.dart';
 import 'package:pawfecto/screens/user/adopt/favourites.dart';
 import 'package:pawfecto/screens/user/adopt_main.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
 import 'package:pawfecto/screens/user/donation/donate_form.dart';
 import 'package:pawfecto/screens/user/donation/donate_page.dart';
 import 'package:pawfecto/screens/user/donation/donators.dart';
@@ -32,6 +34,7 @@ import 'package:pawfecto/screens/shelter/donation.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await DotEnv.load(fileName: ".env");
   runApp(MyApp());
 }
 
@@ -65,10 +68,11 @@ class MyApp extends StatelessWidget {
         LostPetForm.id: (context) => LostPetForm(),
         DonationDetails.id: (context) => DonationDetails(),
         Donators.id: (context) => Donators(),
-        ShelterProfile.id:(context) => ShelterProfile(),
+        ShelterProfile.id: (context) => ShelterProfile(),
         RegisteredUsers.id: (context) => RegisteredUsers(),
         Settings.id: (context) => Settings(),
         Favorites.id: (context) => Favorites(),
+        Appointments.id: (context) => Appointments(),
       },
     );
   }
