@@ -51,6 +51,11 @@ class _AdoptLoginState extends State<AdoptLogin> {
   }
 
   @override
+  Future<void> resetPassword(String email) async {
+    await _auth.sendPasswordResetEmail(email: email);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -186,7 +191,14 @@ class _AdoptLoginState extends State<AdoptLogin> {
                           ),
                         ),
                         onTap: () {
-                          //for forgot password
+                          resetPassword(email);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Password reset link sent to mail',
+                              ),
+                            ),
+                          );
                         },
                       ),
                     ),

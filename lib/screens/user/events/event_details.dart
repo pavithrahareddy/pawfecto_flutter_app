@@ -39,10 +39,6 @@ class _EventDetailsState extends State<EventDetails> {
         elevation: 0,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        title: Text(
-          'Events',
-          style: TextStyle(fontSize: 16.0, color: Colors.grey),
-        ),
         leading: Row(
           children: [
             SizedBox(
