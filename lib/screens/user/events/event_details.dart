@@ -3,6 +3,7 @@ import 'package:pawfecto/screens/user/events/event_register.dart';
 import 'package:pawfecto/screens/user/sidebar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pawfecto/screens/user/profile.dart';
 
 class EventDetails extends StatefulWidget {
   static const String id = 'event_detail';
@@ -13,6 +14,9 @@ class EventDetails extends StatefulWidget {
 class _EventDetailsState extends State<EventDetails> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
+
+  bool seeDetails = true;
+  List seeDetailsIds = [];
 
   String _uid;
   void getUID() {
@@ -30,35 +34,43 @@ class _EventDetailsState extends State<EventDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        elevation: 0,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        leading: GestureDetector(
-          child: Icon(
-            Icons.menu,
-            color: Color(0xff008891),
-          ),
-          onTap: () {
-            Navigator.pushNamed(context, SideBar.id);
-          },
-        ),
         title: Text(
           'Events',
-          style: TextStyle(
-            color: Colors.black,
-          ),
+          style: TextStyle(fontSize: 16.0, color: Colors.grey),
+        ),
+        leading: Row(
+          children: [
+            SizedBox(
+              width: 30.0,
+            ),
+            GestureDetector(
+              child: Icon(
+                Icons.menu,
+                color: Color(0xff008891),
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, SideBar.id);
+              },
+            ),
+          ],
         ),
         actions: <Widget>[
-          Icon(
-            Icons.location_on,
-            color: Color(0xff008891),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, ProfilePage.id);
+            },
+            child: CircleAvatar(
+              radius: 18.0,
+              backgroundImage: AssetImage('images/cat1.jpg'),
+            ),
           ),
           SizedBox(
-            width: 15,
-          ),
-          CircleAvatar(
-            radius: 15.0,
-            backgroundImage: AssetImage('images/profile.png'),
+            width: 30.0,
           ),
         ],
       ),
@@ -88,6 +100,8 @@ class _EventDetailsState extends State<EventDetails> {
                   for (var event in allevents) {
                     List eventReg = event["registrations"];
                     bool isRegistered = false;
+                    // bool seeDetails = false;
+
                     for (var isReg in eventReg) {
                       if (isReg != "") {
                         if (isReg["uid"] == _uid) {
@@ -95,6 +109,7 @@ class _EventDetailsState extends State<EventDetails> {
                         }
                       }
                     }
+
                     final eventCard = Padding(
                       padding: const EdgeInsets.all(2.0),
                       child: Column(
@@ -153,135 +168,195 @@ class _EventDetailsState extends State<EventDetails> {
                                           ),
                                         ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: Container(
-                                          child: Image(
-                                              image: (event["imageURL"] == null)
-                                                  ? AssetImage(
-                                                      'images/dog1.jpg')
-                                                  : NetworkImage(
-                                                      event["imageURL"]),
-                                              height: 200,
-                                              width: 150,
-                                              fit: BoxFit.fitWidth),
-                                        ),
-                                      ),
                                       Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.88,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.4,
                                         decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          color: Color.fromARGB(
-                                              255, 202, 247, 227),
+                                          image: DecorationImage(
+                                            image: NetworkImage(event[
+                                                    "imageURL"] ??
+                                                'https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg'),
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
-                                        child: Column(
-                                          children: [
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  'Date : ${event["date"]}',
-                                                  style: TextStyle(
-                                                    fontSize: 16,
+                                        child: Container(),
+                                      ),
+                                      (seeDetails &&
+                                              seeDetailsIds
+                                                  .contains(event["id"]))
+                                          ? Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                color: Color(0xffF6F6F6),
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  SizedBox(
+                                                    height: 10,
                                                   ),
-                                                ),
-                                                SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text(
-                                                  'Time : ${event["time"] == null ? "No time" : event["time"]}',
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text(
-                                                  'Description : ${event["description"] == null ? "No description" : event["description"]}',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            isRegistered
-                                                ? Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Container(
-                                                      color: Colors.red,
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(6.0),
-                                                        child: Text(
-                                                          'Registered',
-                                                          style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 16.0,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  )
-                                                : Row(
+                                                  Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .center,
-                                                    children: <Widget>[
-                                                      TextButton(
-                                                        child: Text('Register'),
-                                                        style: TextButton
-                                                            .styleFrom(
-                                                          primary: Colors.white,
-                                                          backgroundColor:
-                                                              Colors.teal,
-                                                          onSurface:
-                                                              Colors.grey,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 22.0,
+                                                                right: 25.0,
+                                                                top: 8.0,
+                                                                bottom: 8.0),
+                                                        child: Text(
+                                                          '${event["description"] == null ? "No description" : event["description"]}',
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                            fontSize: 16,
+                                                          ),
                                                         ),
-                                                        onPressed: () {
-                                                          Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  EventRegister(
-                                                                event: event,
-                                                              ),
-                                                            ),
-                                                          );
-                                                        },
                                                       ),
-                                                      const SizedBox(width: 15),
-                                                      TextButton(
-                                                        child: Text('Enquire'),
-                                                        style: TextButton
-                                                            .styleFrom(
-                                                          primary: Colors.white,
-                                                          backgroundColor:
-                                                              Colors.teal,
-                                                          onSurface:
-                                                              Colors.grey,
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text(
+                                                        'Date : ${event["date"]}',
+                                                        style: TextStyle(
+                                                          fontSize: 14.0,
+                                                          color: Colors.grey,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
-                                                        onPressed: () {},
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text(
+                                                        'Time : ${event["time"] == null ? "No time" : event["time"]}',
+                                                        style: TextStyle(
+                                                          fontSize: 14.0,
+                                                          color: Colors.grey,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
-                                            SizedBox(
-                                              height: 5,
+                                                  SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  isRegistered
+                                                      ? Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: Container(
+                                                            color: Colors.red,
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(6.0),
+                                                              child: Text(
+                                                                'Registered',
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize:
+                                                                      16.0,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      : Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: <Widget>[
+                                                            TextButton(
+                                                              child: Text(
+                                                                'Register',
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize:
+                                                                      17.0,
+                                                                ),
+                                                              ),
+                                                              style: TextButton
+                                                                  .styleFrom(
+                                                                primary: Colors
+                                                                    .white,
+                                                                backgroundColor:
+                                                                    Colors.teal,
+                                                                onSurface:
+                                                                    Colors.grey,
+                                                              ),
+                                                              onPressed: () {
+                                                                Navigator.push(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) =>
+                                                                            EventRegister(
+                                                                      event:
+                                                                          event,
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              },
+                                                            ),
+                                                          ],
+                                                        ),
+                                                  SizedBox(
+                                                    height: 3,
+                                                  ),
+                                                  GestureDetector(
+                                                    child: Icon(
+                                                      Icons.keyboard_arrow_up,
+                                                      color: Color(0xff008891),
+                                                      size: 25.0,
+                                                    ),
+                                                    onTap: () {
+                                                      setState(() {
+                                                        seeDetailsIds.remove(
+                                                            event["id"]);
+                                                      });
+                                                    },
+                                                  )
+                                                ],
+                                              ),
+                                            )
+                                          : Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 10.0,
+                                                ),
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      seeDetailsIds
+                                                          .add(event["id"]);
+                                                    });
+                                                  },
+                                                  child: Text(
+                                                    'More details',
+                                                    style: TextStyle(
+                                                        color:
+                                                            Color(0xff008891)),
+                                                  ),
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                          primary: Colors.white,
+                                                          elevation: 0),
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
-                                      )
                                     ],
                                   ),
                                 ],

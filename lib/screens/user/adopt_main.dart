@@ -77,6 +77,38 @@ class _AdoptMainState extends State<AdoptMain> {
                 child: SingleChildScrollView(
               child: Column(
                 children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          FontAwesomeIcons.dog,
+                          color: _selectedtype == 0
+                              ? Color.fromARGB(255, 0, 136, 145)
+                              : Colors.grey,
+                        ),
+                        iconSize: 30.0,
+                        onPressed: () {
+                          _onItemTapped(0);
+                        },
+                      ),
+                      SizedBox(
+                        width: 20.0,
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          FontAwesomeIcons.cat,
+                          color: _selectedtype == 1
+                              ? Color.fromARGB(255, 0, 136, 145)
+                              : Colors.grey,
+                        ),
+                        iconSize: 30.0,
+                        onPressed: () {
+                          _onItemTapped(1);
+                        },
+                      ),
+                    ],
+                  ),
                   SizedBox(
                     height: 15.0,
                   ),
@@ -92,34 +124,6 @@ class _AdoptMainState extends State<AdoptMain> {
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              IconButton(
-                                icon: Icon(
-                                  FontAwesomeIcons.dog,
-                                  color: Color.fromARGB(255, 0, 136, 145),
-                                ),
-                                iconSize: 30.0,
-                                onPressed: () {
-                                  _onItemTapped(0);
-                                },
-                              ),
-                              SizedBox(
-                                width: 20.0,
-                              ),
-                              IconButton(
-                                icon: Icon(
-                                  FontAwesomeIcons.cat,
-                                  color: Color.fromARGB(255, 0, 136, 145),
-                                ),
-                                iconSize: 30.0,
-                                onPressed: () {
-                                  _onItemTapped(1);
-                                },
-                              ),
-                            ],
-                          ),
                           StreamBuilder<QuerySnapshot>(
                             stream:
                                 _firestore.collection('shelters').snapshots(),
