@@ -181,11 +181,36 @@ class _PawstagramState extends State<Pawstagram> {
                                   ),
                                   Padding(
                                     padding: EdgeInsets.only(
-                                        left: 22.0, right: 22.0, bottom: 10.0),
+                                      left: 22.0,
+                                      right: 22.0,
+                                      bottom: 10.0,
+                                    ),
                                     child: Row(
                                       children: <Widget>[
                                         GestureDetector(
-                                          onTap: () {},
+                                          onTap: () async {
+                                            isLiked
+                                                ? (await _firestore
+                                                    .collection('pawstagram')
+                                                    .doc(post.id)
+                                                    .update({
+                                                    "likes": post["likes"] - 1,
+                                                    "users":
+                                                        FieldValue.arrayRemove([
+                                                      _auth.currentUser.uid
+                                                    ])
+                                                  }))
+                                                : (await _firestore
+                                                    .collection('pawstagram')
+                                                    .doc(post.id)
+                                                    .update({
+                                                    "likes": post["likes"] + 1,
+                                                    "users":
+                                                        FieldValue.arrayUnion([
+                                                      _auth.currentUser.uid
+                                                    ])
+                                                  }));
+                                          },
                                           child: isLiked
                                               ? Icon(
                                                   FontAwesomeIcons.solidHeart,
