@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flat_icons_flutter/flat_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -7,6 +8,8 @@ import 'package:pawfecto/screens/user/profile.dart';
 import 'package:pawfecto/screens/user/sidebar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pawfecto/screens/auth/adopt_login.dart';
+
+import '../../components/rounded_button.dart';
 
 class AdoptMain extends StatefulWidget {
   static const String id = 'adopt_main';
@@ -80,32 +83,122 @@ class _AdoptMainState extends State<AdoptMain> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      IconButton(
-                        icon: Icon(
-                          FontAwesomeIcons.dog,
-                          color: _selectedtype == 0
-                              ? Color.fromARGB(255, 0, 136, 145)
-                              : Colors.grey,
-                        ),
-                        iconSize: 30.0,
-                        onPressed: () {
+                      InkWell(
+                        onTap: () {
                           _onItemTapped(0);
                         },
+                        child: Material(
+                          color: _selectedtype == 0
+                              ? Color.fromARGB(255, 0, 136, 145)
+                              : Colors.white,
+                          elevation: 8.0,
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child: Icon(
+                              FontAwesomeIcons.dog,
+                              color: _selectedtype == 0
+                                  ? Colors.white
+                                  : Color.fromARGB(255, 0, 136, 145),
+                            ),
+                          ),
+                        ),
                       ),
                       SizedBox(
                         width: 20.0,
                       ),
-                      IconButton(
-                        icon: Icon(
-                          FontAwesomeIcons.cat,
-                          color: _selectedtype == 1
-                              ? Color.fromARGB(255, 0, 136, 145)
-                              : Colors.grey,
-                        ),
-                        iconSize: 30.0,
-                        onPressed: () {
+                      InkWell(
+                        onTap: () {
                           _onItemTapped(1);
                         },
+                        child: Material(
+                          color: _selectedtype == 1
+                              ? Color.fromARGB(255, 0, 136, 145)
+                              : Colors.white,
+                          elevation: 8.0,
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child: Icon(
+                              FontAwesomeIcons.cat,
+                              color: _selectedtype == 1
+                                  ? Colors.white
+                                  : Color.fromARGB(255, 0, 136, 145),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20.0,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          _onItemTapped(2);
+                        },
+                        child: Material(
+                          color: _selectedtype == 2
+                              ? Color.fromARGB(255, 0, 136, 145)
+                              : Colors.white,
+                          elevation: 8.0,
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child: Icon(
+                              FontAwesomeIcons.dove,
+                              color: _selectedtype == 2
+                                  ? Colors.white
+                                  : Color.fromARGB(255, 0, 136, 145),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20.0,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          _onItemTapped(3);
+                        },
+                        child: Material(
+                          color: _selectedtype == 3
+                              ? Color.fromARGB(255, 0, 136, 145)
+                              : Colors.white,
+                          elevation: 8.0,
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child: Icon(
+                              FontAwesomeIcons.horse,
+                              color: _selectedtype == 3
+                                  ? Colors.white
+                                  : Color.fromARGB(255, 0, 136, 145),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20.0,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          _onItemTapped(4);
+                        },
+                        child: Material(
+                          color: _selectedtype == 4
+                              ? Color.fromARGB(255, 0, 136, 145)
+                              : Colors.white,
+                          elevation: 8.0,
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child: Icon(
+                              FontAwesomeIcons.fish,
+                              color: _selectedtype == 4
+                                  ? Colors.white
+                                  : Color.fromARGB(255, 0, 136, 145),
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -138,6 +231,10 @@ class _AdoptMainState extends State<AdoptMain> {
                               List allpets = [];
                               List<Widget> dogCards = [];
                               List<Widget> catCards = [];
+                              List<Widget> birdCards = [];
+                              List<Widget> horseCards = [];
+                              List<Widget> fishCards = [];
+                              // List<Widget> hamsterCards = [];
 
                               final shelters = snapshot.data.docs;
 
@@ -277,7 +374,8 @@ class _AdoptMainState extends State<AdoptMain> {
                                     ),
                                   );
                                   dogCards.add(dogCard);
-                                } else {
+                                }
+                                else if(pet["type"] == "Cat") {
                                   final catCard = Padding(
                                     padding: EdgeInsets.only(
                                       top: 20.0,
@@ -406,10 +504,527 @@ class _AdoptMainState extends State<AdoptMain> {
                                   );
                                   catCards.add(catCard);
                                 }
+                                else if(pet["type"] == "Bird") {
+                                  final birdCard = Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 20.0,
+                                    ),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => PetDetails(
+                                              pet: pet,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Card(
+                                        shadowColor: Colors.grey,
+                                        elevation: 5,
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 10.0),
+                                              child: Container(
+                                                height: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                    0.70,
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                    0.80,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: (pet["imageURL"] ==
+                                                        null)
+                                                        ? AssetImage(
+                                                        'images/dog1.jpg')
+                                                        : NetworkImage(
+                                                        pet["imageURL"]),
+                                                    fit: BoxFit.fill,
+                                                  ),
+                                                  shape: BoxShape.rectangle,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                                  0.85,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment
+                                                    .spaceBetween,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                    const EdgeInsets.all(
+                                                        20.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .start,
+                                                      children: [
+                                                        Row(
+                                                          children: <Widget>[
+                                                            Text(
+                                                              pet["name"] ==
+                                                                  null
+                                                                  ? "No name"
+                                                                  : pet["name"],
+                                                              style: TextStyle(
+                                                                fontSize: 25.0,
+                                                                color: Colors
+                                                                    .blueGrey,
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            Icon(
+                                                              pet["gender"] == 'Male'
+                                                                  ? FontAwesomeIcons
+                                                                  .mars
+                                                                  : FontAwesomeIcons
+                                                                  .venus,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                  255,
+                                                                  0,
+                                                                  136,
+                                                                  145),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height: 3,
+                                                        ),
+                                                        Text(
+                                                          '${pet["breed"] == null ? "No breed" : pet["breed"]}, ${pet["age"] == null ? "No age" : pet["age"]} years',
+                                                          style: TextStyle(
+                                                            fontSize: 16.0,
+                                                            color: Colors.grey,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                      padding:
+                                                      const EdgeInsets.all(
+                                                          20.0),
+                                                      child: Icon(
+                                                        FontAwesomeIcons.heart,
+                                                        color: Color.fromARGB(
+                                                            255, 0, 136, 145),
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                  birdCards.add(birdCard);
+                                }
+                                else if(pet["type"] == "Horse") {
+                                  final horseCard = Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 20.0,
+                                    ),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => PetDetails(
+                                              pet: pet,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Card(
+                                        shadowColor: Colors.grey,
+                                        elevation: 5,
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 10.0),
+                                              child: Container(
+                                                height: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                    0.70,
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                    0.80,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: (pet["imageURL"] ==
+                                                        null)
+                                                        ? AssetImage(
+                                                        'images/dog1.jpg')
+                                                        : NetworkImage(
+                                                        pet["imageURL"]),
+                                                    fit: BoxFit.fill,
+                                                  ),
+                                                  shape: BoxShape.rectangle,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                                  0.85,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment
+                                                    .spaceBetween,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                    const EdgeInsets.all(
+                                                        20.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .start,
+                                                      children: [
+                                                        Row(
+                                                          children: <Widget>[
+                                                            Text(
+                                                              pet["name"] ==
+                                                                  null
+                                                                  ? "No name"
+                                                                  : pet["name"],
+                                                              style: TextStyle(
+                                                                fontSize: 25.0,
+                                                                color: Colors
+                                                                    .blueGrey,
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            Icon(
+                                                              pet["gender"] == 'Male'
+                                                                  ? FontAwesomeIcons
+                                                                  .mars
+                                                                  : FontAwesomeIcons
+                                                                  .venus,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                  255,
+                                                                  0,
+                                                                  136,
+                                                                  145),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height: 3,
+                                                        ),
+                                                        Text(
+                                                          '${pet["breed"] == null ? "No breed" : pet["breed"]}, ${pet["age"] == null ? "No age" : pet["age"]} years',
+                                                          style: TextStyle(
+                                                            fontSize: 16.0,
+                                                            color: Colors.grey,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                      padding:
+                                                      const EdgeInsets.all(
+                                                          20.0),
+                                                      child: Icon(
+                                                        FontAwesomeIcons.heart,
+                                                        color: Color.fromARGB(
+                                                            255, 0, 136, 145),
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                  horseCards.add(horseCard);
+                                }
+                                else if(pet["type"] == "Fish") {
+                                  final fishCard = Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 20.0,
+                                    ),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => PetDetails(
+                                              pet: pet,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Card(
+                                        shadowColor: Colors.grey,
+                                        elevation: 5,
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 10.0),
+                                              child: Container(
+                                                height: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                    0.70,
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                    0.80,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: (pet["imageURL"] ==
+                                                        null)
+                                                        ? AssetImage(
+                                                        'images/dog1.jpg')
+                                                        : NetworkImage(
+                                                        pet["imageURL"]),
+                                                    fit: BoxFit.fill,
+                                                  ),
+                                                  shape: BoxShape.rectangle,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                                  0.85,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment
+                                                    .spaceBetween,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                    const EdgeInsets.all(
+                                                        20.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .start,
+                                                      children: [
+                                                        Row(
+                                                          children: <Widget>[
+                                                            Text(
+                                                              pet["name"] ==
+                                                                  null
+                                                                  ? "No name"
+                                                                  : pet["name"],
+                                                              style: TextStyle(
+                                                                fontSize: 25.0,
+                                                                color: Colors
+                                                                    .blueGrey,
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            Icon(
+                                                              pet["gender"] == 'Male'
+                                                                  ? FontAwesomeIcons
+                                                                  .mars
+                                                                  : FontAwesomeIcons
+                                                                  .venus,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                  255,
+                                                                  0,
+                                                                  136,
+                                                                  145),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height: 3,
+                                                        ),
+                                                        Text(
+                                                          '${pet["breed"] == null ? "No breed" : pet["breed"]}, ${pet["age"] == null ? "No age" : pet["age"]} years',
+                                                          style: TextStyle(
+                                                            fontSize: 16.0,
+                                                            color: Colors.grey,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                      padding:
+                                                      const EdgeInsets.all(
+                                                          20.0),
+                                                      child: Icon(
+                                                        FontAwesomeIcons.heart,
+                                                        color: Color.fromARGB(
+                                                            255, 0, 136, 145),
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                  fishCards.add(fishCard);
+                                }
+                                // else if(pet["type"] == "Hamster") {
+                                //   final hamsterCard = Padding(
+                                //     padding: EdgeInsets.only(
+                                //       top: 20.0,
+                                //     ),
+                                //     child: GestureDetector(
+                                //       onTap: () {
+                                //         Navigator.push(
+                                //           context,
+                                //           MaterialPageRoute(
+                                //             builder: (context) => PetDetails(
+                                //               pet: pet,
+                                //             ),
+                                //           ),
+                                //         );
+                                //       },
+                                //       child: Card(
+                                //         shadowColor: Colors.grey,
+                                //         elevation: 5,
+                                //         child: Column(
+                                //           children: [
+                                //             Padding(
+                                //               padding: const EdgeInsets.only(
+                                //                   top: 10.0),
+                                //               child: Container(
+                                //                 height: MediaQuery.of(context)
+                                //                     .size
+                                //                     .width *
+                                //                     0.70,
+                                //                 width: MediaQuery.of(context)
+                                //                     .size
+                                //                     .width *
+                                //                     0.80,
+                                //                 decoration: BoxDecoration(
+                                //                   image: DecorationImage(
+                                //                     image: (pet["imageURL"] ==
+                                //                         null)
+                                //                         ? AssetImage(
+                                //                         'images/dog1.jpg')
+                                //                         : NetworkImage(
+                                //                         pet["imageURL"]),
+                                //                     fit: BoxFit.fill,
+                                //                   ),
+                                //                   shape: BoxShape.rectangle,
+                                //                 ),
+                                //               ),
+                                //             ),
+                                //             Container(
+                                //               width: MediaQuery.of(context)
+                                //                   .size
+                                //                   .width *
+                                //                   0.85,
+                                //               child: Row(
+                                //                 mainAxisAlignment:
+                                //                 MainAxisAlignment
+                                //                     .spaceBetween,
+                                //                 children: [
+                                //                   Padding(
+                                //                     padding:
+                                //                     const EdgeInsets.all(
+                                //                         20.0),
+                                //                     child: Column(
+                                //                       crossAxisAlignment:
+                                //                       CrossAxisAlignment
+                                //                           .start,
+                                //                       children: [
+                                //                         Row(
+                                //                           children: <Widget>[
+                                //                             Text(
+                                //                               pet["name"] ==
+                                //                                   null
+                                //                                   ? "No name"
+                                //                                   : pet["name"],
+                                //                               style: TextStyle(
+                                //                                 fontSize: 25.0,
+                                //                                 color: Colors
+                                //                                     .blueGrey,
+                                //                               ),
+                                //                             ),
+                                //                             SizedBox(
+                                //                               width: 5,
+                                //                             ),
+                                //                             Icon(
+                                //                               pet["gender"] == 'Male'
+                                //                                   ? FontAwesomeIcons
+                                //                                   .mars
+                                //                                   : FontAwesomeIcons
+                                //                                   .venus,
+                                //                               color: Color
+                                //                                   .fromARGB(
+                                //                                   255,
+                                //                                   0,
+                                //                                   136,
+                                //                                   145),
+                                //                             ),
+                                //                           ],
+                                //                         ),
+                                //                         SizedBox(
+                                //                           height: 3,
+                                //                         ),
+                                //                         Text(
+                                //                           '${pet["breed"] == null ? "No breed" : pet["breed"]}, ${pet["age"] == null ? "No age" : pet["age"]} years',
+                                //                           style: TextStyle(
+                                //                             fontSize: 16.0,
+                                //                             color: Colors.grey,
+                                //                           ),
+                                //                         ),
+                                //                       ],
+                                //                     ),
+                                //                   ),
+                                //                   Padding(
+                                //                       padding:
+                                //                       const EdgeInsets.all(
+                                //                           20.0),
+                                //                       child: Icon(
+                                //                         FontAwesomeIcons.heart,
+                                //                         color: Color.fromARGB(
+                                //                             255, 0, 136, 145),
+                                //                       )),
+                                //                 ],
+                                //               ),
+                                //             ),
+                                //           ],
+                                //         ),
+                                //       ),
+                                //     ),
+                                //   );
+                                //   hamsterCards.add(hamsterCard);
+                                // }
+
                               }
                               return Column(
                                 children:
-                                    _selectedtype == 0 ? dogCards : catCards,
+                                _selectedtype == 0 ? dogCards : (_selectedtype == 1 ? catCards : (_selectedtype == 2 ? birdCards : (_selectedtype == 3 ? horseCards : fishCards))),
                               );
                             },
                           ),

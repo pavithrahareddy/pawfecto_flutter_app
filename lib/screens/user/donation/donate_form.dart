@@ -77,35 +77,29 @@ class _DonateFormState extends State<DonateForm> {
         ),
       );
     else
-      return Align(
-        alignment: Alignment.topCenter,
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Wrap(
-            children: apps.map<Widget>((UpiApp app) {
-              return GestureDetector(
-                onTap: () {
-                  _transaction = initiateTransaction(app);
-                  setState(() {});
-                },
-                child: Container(
-                  height: 100,
-                  width: 100,
-                  child: Column(
-                    children: <Widget>[
-                      Image.memory(
-                        app.icon,
-                        height: 60,
-                        width: 60,
-                      ),
-                      Text(app.name),
-                    ],
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: apps.map<Widget>((UpiApp app) {
+          return GestureDetector(
+            onTap: () {
+              _transaction = initiateTransaction(app);
+              setState(() {});
+            },
+            child: Container(
+              height: 100,
+              child: Row(
+                children: <Widget>[
+                  Image.memory(
+                    app.icon,
+                    height: 60,
+                    width: 60,
                   ),
-                ),
-              );
-            }).toList(),
-          ),
-        ),
+                  Text(app.name),
+                ],
+              ),
+            ),
+          );
+        }).toList(),
       );
   }
 
@@ -424,11 +418,14 @@ class _DonateFormState extends State<DonateForm> {
                 onPressed: () {},
               ),
               Container(
-                width: 100,
+                width: double.infinity,
                 height: 100,
                 padding: EdgeInsets.only(top: 10, bottom: 10),
-                child: Expanded(
-                  child: displayUpiApps(),
+                child: Padding(
+                  padding: EdgeInsets.all(5),
+                  child: Expanded(
+                    child: displayUpiApps(),
+                  ),
                 ),
               ),
               Container(
