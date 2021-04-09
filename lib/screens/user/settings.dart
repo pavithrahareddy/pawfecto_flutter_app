@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pawfecto/screens/user/sidebar.dart';
 
+import 'profile.dart';
+
 class Settings extends StatefulWidget {
   static const String id = 'Settings';
   @override
@@ -14,24 +16,39 @@ class _SettingsState extends State<Settings> {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         elevation: 0,
-        brightness: Brightness.light,
-        iconTheme: IconThemeData(color: Colors.black),
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        leading: GestureDetector(
-          child: Icon(
-            Icons.menu,
-            color: Color(0xff008891),
+        leading: Row(
+          children: [
+            SizedBox(
+              width: 30.0,
+            ),
+            GestureDetector(
+              child: Icon(
+                Icons.menu,
+                color: Color(0xff008891),
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, SideBar.id);
+              },
+            ),
+          ],
+        ),
+        actions: <Widget>[
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, ProfilePage.id);
+            },
+            child: CircleAvatar(
+              radius: 18.0,
+              backgroundImage: AssetImage('images/cat1.jpg'),
+            ),
           ),
-          onTap: () {
-            Navigator.pushNamed(context, SideBar.id);
-          },
-        ),
-        title: Text(
-          'Settings',
-          style: TextStyle(color: Colors.black),
-        ),
+          SizedBox(
+            width: 30.0,
+          ),
+        ],
       ),
       body: Stack(
         children: [

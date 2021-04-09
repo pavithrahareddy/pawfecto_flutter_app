@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pawfecto/screens/user/sidebar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../profile.dart';
+
 class Favorites extends StatefulWidget {
   static const String id = 'Favorites';
   @override
@@ -13,28 +15,39 @@ class _FavoritesState extends State<Favorites> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.white,
-          leading: GestureDetector(
-            child: Icon(
-              Icons.menu,
-              color: Color(0xff008891),
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        leading: Row(
+          children: [
+            SizedBox(
+              width: 30.0,
             ),
+            GestureDetector(
+              child: Icon(
+                Icons.menu,
+                color: Color(0xff008891),
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, SideBar.id);
+              },
+            ),
+          ],
+        ),
+        actions: <Widget>[
+          GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, SideBar.id);
+              Navigator.pushNamed(context, ProfilePage.id);
             },
-          ),
-          title: Text(
-            'Favorites',
-            style: TextStyle(
-              color: Colors.black,
+            child: CircleAvatar(
+              radius: 18.0,
+              backgroundImage: AssetImage('images/cat1.jpg'),
             ),
           ),
-          actions: <Widget>[
-            IconButton(onPressed: () {}, icon: Icon(
-              Icons.search,),
-              color: Color(0xff008891),),
-          ]
+          SizedBox(
+            width: 30.0,
+          ),
+        ],
       ),
 
       backgroundColor: Colors.white,

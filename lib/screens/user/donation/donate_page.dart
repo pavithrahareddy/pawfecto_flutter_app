@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pawfecto/screens/user/donation/donators.dart';
 import 'package:pawfecto/screens/user/sidebar.dart';
 
+import '../profile.dart';
+
 class DonatePage extends StatefulWidget {
   static const String id = 'donate_page';
   @override
@@ -13,17 +15,39 @@ class _DonatePageState extends State<DonatePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        leading: GestureDetector(
-          child: Icon(
-            Icons.menu,
-            color: Color(0xff008891),
-          ),
-          onTap: () {
-            Navigator.pushNamed(context, SideBar.id);
-          },
+        leading: Row(
+          children: [
+            SizedBox(
+              width: 30.0,
+            ),
+            GestureDetector(
+              child: Icon(
+                Icons.menu,
+                color: Color(0xff008891),
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, SideBar.id);
+              },
+            ),
+          ],
         ),
+        actions: <Widget>[
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, ProfilePage.id);
+            },
+            child: CircleAvatar(
+              radius: 18.0,
+              backgroundImage: AssetImage('images/cat1.jpg'),
+            ),
+          ),
+          SizedBox(
+            width: 30.0,
+          ),
+        ],
       ),
       body: SafeArea(
         child: Padding(

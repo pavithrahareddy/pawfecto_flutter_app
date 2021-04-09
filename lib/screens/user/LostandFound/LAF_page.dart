@@ -4,6 +4,8 @@ import 'package:pawfecto/screens/user/LostandFound/lostpet_form.dart';
 import 'package:pawfecto/screens/user/LostandFound/straypet_form.dart';
 import 'package:pawfecto/screens/user/sidebar.dart';
 
+import '../profile.dart';
+
 class LAFPage extends StatefulWidget {
   static const String id = 'LAF_page';
   @override
@@ -15,27 +17,37 @@ class _LAFPageState extends State<LAFPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        leading: GestureDetector(
-          child: Icon(
-            Icons.menu,
-            color: Color(0xff008891),
-          ),
-          onTap: () {
-            Navigator.pushNamed(context, SideBar.id);
-          },
-        ),
-        title: Text(
-          'Lost And Found',
-          style: TextStyle(
-            color: Colors.black,
-          ),
+        leading: Row(
+          children: [
+            SizedBox(
+              width: 30.0,
+            ),
+            GestureDetector(
+              child: Icon(
+                Icons.menu,
+                color: Color(0xff008891),
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, SideBar.id);
+              },
+            ),
+          ],
         ),
         actions: <Widget>[
-          CircleAvatar(
-            radius: 15.0,
-            backgroundImage: AssetImage('images/profile.png'),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, ProfilePage.id);
+            },
+            child: CircleAvatar(
+              radius: 18.0,
+              backgroundImage: AssetImage('images/cat1.jpg'),
+            ),
+          ),
+          SizedBox(
+            width: 30.0,
           ),
         ],
       ),
