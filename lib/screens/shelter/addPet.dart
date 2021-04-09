@@ -107,6 +107,7 @@ class _AddPetState extends State<AddPet> {
             'isCertified': _isCertified,
             'imageURL': _uploadedFileURL,
             'uid': _uid,
+            "favourites": []
           }
         ])
       });
