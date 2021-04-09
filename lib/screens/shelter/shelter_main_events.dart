@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pawfecto/screens/shelter/addEvent.dart';
 import 'package:pawfecto/screens/shelter/registeredUsers.dart';
+import 'package:pawfecto/screens/shelter/shelter_profile.dart';
 import 'package:pawfecto/screens/shelter/sheltersidebar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,6 +16,9 @@ class ShelterMainEvents extends StatefulWidget {
 class _ShelterMainEventsState extends State<ShelterMainEvents> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
+
+  bool seeDetails = true;
+  List seeDetailsIds = [];
 
   String _uid;
   void getUID() {
@@ -32,6 +36,41 @@ class _ShelterMainEventsState extends State<ShelterMainEvents> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        leading: Row(
+          children: [
+            SizedBox(
+              width: 30.0,
+            ),
+            GestureDetector(
+              child: Icon(
+                Icons.menu,
+                color: Color(0xff008891),
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, ShelterSideBar.id);
+              },
+            ),
+          ],
+        ),
+        actions: <Widget>[
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, ShelterProfile.id);
+            },
+            child: CircleAvatar(
+              radius: 18.0,
+              backgroundImage: AssetImage('images/cat1.jpg'),
+            ),
+          ),
+          SizedBox(
+            width: 30.0,
+          ),
+        ],
+      ),
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -48,34 +87,6 @@ class _ShelterMainEventsState extends State<ShelterMainEvents> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // appBar
-              Container(
-                color: Color.fromARGB(255, 0, 136, 145),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    // crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      GestureDetector(
-                        child: Icon(
-                          Icons.menu,
-                          color: Colors.white,
-                        ),
-                        onTap: () {
-                          Navigator.pushNamed(context, ShelterSideBar.id);
-                        },
-                      ),
-                      CircleAvatar(
-                        radius: 20.0,
-                        backgroundImage: AssetImage('images/profile.png'),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
               // main screen
               StreamBuilder<QuerySnapshot>(
                 stream: _firestore.collection('shelters').snapshots(),
@@ -119,7 +130,8 @@ class _ShelterMainEventsState extends State<ShelterMainEvents> {
                   if (events != []) {
                     for (var event in events) {
                       final eventCard = Padding(
-                        padding: EdgeInsets.all(20.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 15.0),
                         child: Card(
                           child: Column(
                             children: <Widget>[
@@ -145,17 +157,16 @@ class _ShelterMainEventsState extends State<ShelterMainEvents> {
                                         style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.black,
+                                          color: Colors.white,
                                         ),
                                       )),
-                                      tileColor:
-                                          Color.fromARGB(255, 202, 247, 227),
+                                      tileColor: Color(0xff008891),
                                       subtitle: Center(
                                         child: Text(
                                           event["location"] ?? 'Default',
                                           style: TextStyle(
                                             fontSize: 15,
-                                            color: Colors.black,
+                                            color: Colors.white,
                                           ),
                                         ),
                                       ),
@@ -176,54 +187,155 @@ class _ShelterMainEventsState extends State<ShelterMainEvents> {
                                       ),
                                       child: Container(),
                                     ),
-                                    Container(
-                                      color: Colors.white,
-                                      child: Column(
-                                        children: [
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 12.0, bottom: 12.0),
-                                                child: Text(
-                                                  '${event["description"] ?? 'Default'}',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                  ),
+                                    (seeDetails &&
+                                            seeDetailsIds.contains(event["id"]))
+                                        ? Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              color: Color(0xffF6F6F6),
+                                            ),
+                                            child: Column(
+                                              children: [
+                                                SizedBox(
+                                                  height: 10,
                                                 ),
-                                              ),
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 22.0,
+                                                              right: 25.0,
+                                                              top: 8.0,
+                                                              bottom: 8.0),
+                                                      child: Text(
+                                                        '${event["description"] == null ? "No description" : event["description"]}',
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                          fontSize: 16,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Text(
+                                                      'Date : ${event["date"]}',
+                                                      style: TextStyle(
+                                                        fontSize: 14.0,
+                                                        color: Colors.grey,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Text(
+                                                      'Time : ${event["time"] == null ? "No time" : event["time"]}',
+                                                      style: TextStyle(
+                                                        fontSize: 14.0,
+                                                        color: Colors.grey,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 5.0,
+                                                ),
+                                                GestureDetector(
+                                                  child: Icon(
+                                                    Icons.keyboard_arrow_up,
+                                                    color: Color(0xff008891),
+                                                    size: 25.0,
+                                                  ),
+                                                  onTap: () {
+                                                    setState(() {
+                                                      seeDetailsIds
+                                                          .remove(event["id"]);
+                                                    });
+                                                  },
+                                                )
+                                              ],
+                                            ),
+                                          )
+                                        : Row(
+                                            children: [
                                               SizedBox(
-                                                height: 5,
+                                                width: 10.0,
                                               ),
-                                              Text(
-                                                'Date : ${event["date"] ?? '6th April 2021'}',
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    color: Colors.grey),
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Text(
-                                                'Time : ${event["time"] ?? '5:00 PM'}',
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    color: Colors.grey),
+                                              ElevatedButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    seeDetailsIds
+                                                        .add(event["id"]);
+                                                  });
+                                                },
+                                                child: Text(
+                                                  'More details',
+                                                  style: TextStyle(
+                                                      color: Color(0xff008891)),
+                                                ),
+                                                style: ElevatedButton.styleFrom(
+                                                    primary: Colors.white,
+                                                    elevation: 0),
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                        ],
-                                      ),
-                                    )
+                                    // Container(
+                                    //   color: Colors.white,
+                                    //   child: Column(
+                                    //     children: [
+                                    //       SizedBox(
+                                    //         height: 10,
+                                    //       ),
+                                    //       Column(
+                                    //         mainAxisAlignment:
+                                    //             MainAxisAlignment.center,
+                                    //         children: [
+                                    //           Padding(
+                                    //             padding: const EdgeInsets.only(
+                                    //                 top: 12.0, bottom: 12.0),
+                                    //             child: Text(
+                                    //               '${event["description"] ?? 'Default'}',
+                                    //               textAlign: TextAlign.center,
+                                    //               style: TextStyle(
+                                    //                 fontSize: 16,
+                                    //               ),
+                                    //             ),
+                                    //           ),
+                                    //           SizedBox(
+                                    //             height: 5,
+                                    //           ),
+                                    //           Text(
+                                    //             'Date : ${event["date"] ?? '6th April 2021'}',
+                                    //             style: TextStyle(
+                                    //                 fontSize: 15,
+                                    //                 color: Colors.grey),
+                                    //           ),
+                                    //           SizedBox(
+                                    //             height: 5,
+                                    //           ),
+                                    //           Text(
+                                    //             'Time : ${event["time"] ?? '5:00 PM'}',
+                                    //             style: TextStyle(
+                                    //                 fontSize: 15,
+                                    //                 color: Colors.grey),
+                                    //           ),
+                                    //         ],
+                                    //       ),
+                                    //       SizedBox(
+                                    //         height: 15,
+                                    //       ),
+                                    //     ],
+                                    //   ),
+                                    // )
                                   ],
                                 ),
                               ),

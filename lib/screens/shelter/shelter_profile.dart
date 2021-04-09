@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pawfecto/screens/shelter/sheltersidebar.dart';
 
 class ShelterProfile extends StatefulWidget {
@@ -64,15 +65,16 @@ class MapScreenState extends State<ShelterProfile>
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: AppBar(
+          elevation: 0,
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
           leading: GestureDetector(
             child: Icon(
-              Icons.menu,
+              FontAwesomeIcons.arrowLeft,
               color: Color(0xff008891),
             ),
             onTap: () {
-              Navigator.pushNamed(context, ShelterSideBar.id);
+              Navigator.pop(context);
             },
           ),
         ),
