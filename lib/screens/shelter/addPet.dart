@@ -277,14 +277,8 @@ class _AddPetState extends State<AddPet> {
                               _type = newValue;
                             });
                           },
-                          items: <String>[
-                            'Dog',
-                            'Cat',
-                            'Bird',
-                            'Rabbit',
-                            'Turtle',
-                            'Hamster'
-                          ].map<DropdownMenuItem<String>>((String value) {
+                          items: <String>['Dog', 'Cat', 'Bird', 'Horse', 'Fish']
+                              .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(value),
