@@ -42,6 +42,7 @@ dependencies:
   mailer: ^5.0.0
   flutter_dotenv: ^3.1.0
   url_launcher: ^6.0.3
+  flat_icons_flutter: ^1.0.2
 
 dev_dependencies:
   flutter_test:
