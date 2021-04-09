@@ -45,7 +45,9 @@ class _AddPetState extends State<AddPet> {
   String _weight;
   bool _isCertified = true;
 
+  bool _isImageChosen = false;
   bool _isImageUploaded = false;
+
   PickedFile _image;
   File _imageFile;
   String _uploadedFileURL;
@@ -58,7 +60,7 @@ class _AddPetState extends State<AddPet> {
       setState(() {
         _image = image;
         _imageFile = File(image.path);
-        _isImageUploaded = true;
+        _isImageChosen = true;
       });
     });
   }
@@ -74,10 +76,12 @@ class _AddPetState extends State<AddPet> {
       res.ref.getDownloadURL().then((fileURL) {
         setState(() {
           _uploadedFileURL = fileURL;
-          print(_uploadedFileURL);
           isLoading = false;
         });
       });
+    });
+    setState(() {
+      _isImageUploaded = true;
     });
   }
 
@@ -161,16 +165,16 @@ class _AddPetState extends State<AddPet> {
                             // filled: true,
                             labelText: 'Pet Name',
                             labelStyle: TextStyle(
-                              color: Color(0xff008891),
+                              color: Colors.grey,
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xff008891),
+                                color: Colors.grey,
                               ),
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xff008891),
+                                color: Colors.grey,
                               ),
                             ),
                           ),
@@ -195,16 +199,16 @@ class _AddPetState extends State<AddPet> {
                             // filled: true,
                             labelText: 'Age',
                             labelStyle: TextStyle(
-                              color: Color(0xff008891),
+                              color: Colors.grey,
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xff008891),
+                                color: Colors.grey,
                               ),
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xff008891),
+                                color: Colors.grey,
                               ),
                             ),
                           ),
@@ -236,7 +240,7 @@ class _AddPetState extends State<AddPet> {
                           ),
                           underline: Container(
                             height: 2,
-                            color: Color(0xff008891),
+                            color: Colors.grey,
                           ),
                           onChanged: (newValue) {
                             setState(() {
@@ -266,15 +270,21 @@ class _AddPetState extends State<AddPet> {
                           ),
                           underline: Container(
                             height: 2,
-                            color: Color(0xff008891),
+                            color: Colors.grey,
                           ),
                           onChanged: (newValue) {
                             setState(() {
                               _type = newValue;
                             });
                           },
-                          items: <String>['Dog', 'Cat']
-                              .map<DropdownMenuItem<String>>((String value) {
+                          items: <String>[
+                            'Dog',
+                            'Cat',
+                            'Bird',
+                            'Rabbit',
+                            'Turtle',
+                            'Hamster'
+                          ].map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(value),
@@ -289,16 +299,16 @@ class _AddPetState extends State<AddPet> {
                             // filled: true,
                             labelText: 'Breed',
                             labelStyle: TextStyle(
-                              color: Color(0xff008891),
+                              color: Colors.grey,
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xff008891),
+                                color: Colors.grey,
                               ),
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xff008891),
+                                color: Colors.grey,
                               ),
                             ),
                           ),
@@ -323,16 +333,16 @@ class _AddPetState extends State<AddPet> {
                             // filled: true,
                             labelText: 'Color',
                             labelStyle: TextStyle(
-                              color: Color(0xff008891),
+                              color: Colors.grey,
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xff008891),
+                                color: Colors.grey,
                               ),
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xff008891),
+                                color: Colors.grey,
                               ),
                             ),
                           ),
@@ -357,16 +367,16 @@ class _AddPetState extends State<AddPet> {
                             // filled: true,
                             labelText: 'Weight',
                             labelStyle: TextStyle(
-                              color: Color(0xff008891),
+                              color: Colors.grey,
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xff008891),
+                                color: Colors.grey,
                               ),
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xff008891),
+                                color: Colors.grey,
                               ),
                             ),
                           ),
@@ -408,7 +418,7 @@ class _AddPetState extends State<AddPet> {
                         Row(
                           children: [
                             Visibility(
-                              visible: _isImageUploaded,
+                              visible: _isImageChosen,
                               child: _imageFile == null
                                   ? Image.asset('images/dog1.png')
                                   : Image.file(
@@ -418,7 +428,7 @@ class _AddPetState extends State<AddPet> {
                                     ),
                               replacement: SizedBox.shrink(),
                             ),
-                            _isImageUploaded
+                            _isImageChosen
                                 ? SizedBox(
                                     width: 20.0,
                                   )
@@ -427,14 +437,17 @@ class _AddPetState extends State<AddPet> {
                                   ),
                             ElevatedButton(
                               style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                  Color(0xff008891),
-                                ),
+                                backgroundColor: _isImageUploaded
+                                    ? MaterialStateProperty.all<Color>(
+                                        Colors.grey)
+                                    : MaterialStateProperty.all<Color>(
+                                        Color(0xff008891),
+                                      ),
                               ),
-                              onPressed:
-                                  _isImageUploaded ? uploadFile : chooseFile,
-                              child: Text(_isImageUploaded
+                              onPressed: _isImageChosen
+                                  ? (_isImageUploaded ? null : uploadFile)
+                                  : chooseFile,
+                              child: Text(_isImageChosen
                                   ? 'UPLOAD IMAGE'
                                   : 'CHOOSE IMAGE'),
                             ),
