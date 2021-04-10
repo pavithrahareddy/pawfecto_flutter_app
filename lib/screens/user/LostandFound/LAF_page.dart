@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pawfecto/screens/user/LostandFound/lostpet_form.dart';
-import 'package:pawfecto/screens/user/LostandFound/straypet_form.dart';
+import 'package:pawfecto/screens/user/LostandFound/lost_and_found.dart';
 import 'package:pawfecto/screens/user/sidebar.dart';
 
 import '../profile.dart';
@@ -933,13 +932,14 @@ class _LAFPageState extends State<LAFPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                  "Found a lost pet or stray animal? ",style: TextStyle(
-                color: Colors.teal,
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),),
-              Text(
-                  "Here's how to help them find their way home. "),
+                "Found a lost pet or stray animal? ",
+                style: TextStyle(
+                  color: Colors.teal,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+              Text("Here's how to help them find their way home. "),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -957,7 +957,17 @@ class _LAFPageState extends State<LAFPage> {
                       onSurface: Colors.grey,
                     ),
                     onPressed: () {
-                      Navigator.popAndPushNamed(context, StrayPetForm.id);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LostAndFound(
+                            category: 'Stray Pet',
+                            title: 'Report Homeless Pet',
+                            successMessage:
+                                'We assure you that we will find this pet a home!',
+                          ),
+                        ),
+                      );
                     },
                   ),
                   ElevatedButton(
@@ -974,7 +984,17 @@ class _LAFPageState extends State<LAFPage> {
                       onSurface: Colors.grey,
                     ),
                     onPressed: () {
-                      Navigator.popAndPushNamed(context, LostPetForm.id);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LostAndFound(
+                            category: 'Missing',
+                            title: 'Report Lost Pet',
+                            successMessage:
+                                'We will get in touch if we find anything',
+                          ),
+                        ),
+                      );
                     },
                   ),
                 ],

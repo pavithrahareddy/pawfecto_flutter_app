@@ -11,8 +11,8 @@ import 'package:pawfecto/screens/shelter/shelter_main_events.dart';
 import 'package:pawfecto/screens/shelter/shelter_profile.dart';
 import 'package:pawfecto/screens/shelter/sheltersidebar.dart';
 import 'package:pawfecto/screens/user/LostandFound/LAF_page.dart';
-import 'package:pawfecto/screens/user/LostandFound/lostpet_form.dart';
-import 'package:pawfecto/screens/user/LostandFound/straypet_form.dart';
+import 'package:pawfecto/screens/user/LostandFound/lost_and_found.dart';
+// import 'package:pawfecto/screens/user/LostandFound/straypet_form.dart';
 import 'package:pawfecto/screens/user/Pawstagram/pawstagram.dart';
 import 'package:pawfecto/screens/user/adopt/adopt_form.dart';
 import 'package:pawfecto/screens/user/adopt/favourites.dart';
@@ -65,8 +65,8 @@ class MyApp extends StatelessWidget {
         DonatePage.id: (context) => DonatePage(),
         DonateForm.id: (context) => DonateForm(),
         LAFPage.id: (context) => LAFPage(),
-        StrayPetForm.id: (context) => StrayPetForm(),
-        LostPetForm.id: (context) => LostPetForm(),
+        // StrayPetForm.id: (context) => StrayPetForm(),
+        LostAndFound.id: (context) => LostAndFound(),
         DonationDetails.id: (context) => DonationDetails(),
         Donators.id: (context) => Donators(),
         ShelterProfile.id: (context) => ShelterProfile(),
