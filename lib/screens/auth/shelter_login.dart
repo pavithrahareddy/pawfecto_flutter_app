@@ -46,6 +46,11 @@ class _ShelterLoginState extends State<ShelterLogin> {
   }
 
   @override
+  Future<void> resetPassword(String email) async {
+    await _auth.sendPasswordResetEmail(email: email);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -181,7 +186,14 @@ class _ShelterLoginState extends State<ShelterLogin> {
                           ),
                         ),
                         onTap: () {
-                          //for forgot password
+                          resetPassword(email);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Password reset link sent to mail',
+                              ),
+                            ),
+                          );
                         },
                       ),
                     ),
