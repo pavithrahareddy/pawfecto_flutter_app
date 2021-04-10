@@ -519,7 +519,7 @@ class _AdoptMainState extends State<AdoptMain> {
                                                         height: 3,
                                                       ),
                                                       Text(
-                                                        '${pet["breed"] == null ? "No breed" : pet["breed"]}, ${pet["age"] == null ? "No age" : pet["age"]} years',
+                                                        '${pet["breed"] == null ? "No breed" : pet["breed"]}, ${pet["age"] == null ? "No age" : pet["age"]}',
                                                         style: TextStyle(
                                                           fontSize: 16.0,
                                                           color: Colors.grey,
@@ -686,7 +686,7 @@ class _AdoptMainState extends State<AdoptMain> {
                                                           height: 3,
                                                         ),
                                                         Text(
-                                                          '${pet["breed"] == null ? "No breed" : pet["breed"]}, ${pet["age"] == null ? "No age" : pet["age"]} years',
+                                                          '${pet["breed"] == null ? "No breed" : pet["breed"]}, ${pet["age"] == null ? "No age" : pet["age"]}',
                                                           style: TextStyle(
                                                             fontSize: 16.0,
                                                             color: Colors.grey,
@@ -855,7 +855,7 @@ class _AdoptMainState extends State<AdoptMain> {
                                                           height: 3,
                                                         ),
                                                         Text(
-                                                          '${pet["breed"] == null ? "No breed" : pet["breed"]}, ${pet["age"] == null ? "No age" : pet["age"]} years',
+                                                          '${pet["breed"] == null ? "No breed" : pet["breed"]}, ${pet["age"] == null ? "No age" : pet["age"]}',
                                                           style: TextStyle(
                                                             fontSize: 16.0,
                                                             color: Colors.grey,
@@ -1024,7 +1024,7 @@ class _AdoptMainState extends State<AdoptMain> {
                                                           height: 3,
                                                         ),
                                                         Text(
-                                                          '${pet["breed"] == null ? "No breed" : pet["breed"]}, ${pet["age"] == null ? "No age" : pet["age"]} years',
+                                                          '${pet["breed"] == null ? "No breed" : pet["breed"]}, ${pet["age"] == null ? "No age" : pet["age"]}',
                                                           style: TextStyle(
                                                             fontSize: 16.0,
                                                             color: Colors.grey,

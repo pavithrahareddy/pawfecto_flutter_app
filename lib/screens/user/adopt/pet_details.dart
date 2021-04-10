@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pawfecto/screens/user/adopt/adopt_form.dart';
+import 'package:pawfecto/screens/user/adopt_main.dart';
 
 class PetDetails extends StatefulWidget {
   PetDetails({@required this.pet});
@@ -14,8 +15,6 @@ class PetDetails extends StatefulWidget {
 }
 
 class _PetDetailsState extends State<PetDetails> {
-  bool isFavourite = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,12 +41,22 @@ class _PetDetailsState extends State<PetDetails> {
                         left: 0.0,
                         top: 0.0,
                         child: GestureDetector(
-                          child: Icon(
-                            FontAwesomeIcons.arrowLeft,
-                            color: Colors.black,
+                          child: Container(
+                            width: 35.0,
+                            height: 35.0,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(50.0)),
+                            ),
+                            child: Icon(
+                              FontAwesomeIcons.arrowLeft,
+                              color: Colors.black,
+                            ),
                           ),
                           onTap: () {
-                            Navigator.pop(context);
+                            Navigator.pushNamedAndRemoveUntil(
+                                context, AdoptMain.id, (route) => false);
                           },
                         ),
                       ),
@@ -229,30 +238,30 @@ class _PetDetailsState extends State<PetDetails> {
               right: 15,
               child: Row(
                 children: [
-                  Material(
-                    borderRadius: BorderRadius.circular(20.0),
-                    elevation: 4.0,
-                    color: Color.fromARGB(255, 0, 136, 145),
-                    child: Padding(
-                      padding: EdgeInsets.all(20.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            isFavourite = !isFavourite;
-                          });
-                        },
-                        child: Icon(
-                          isFavourite
-                              ? FontAwesomeIcons.solidHeart
-                              : FontAwesomeIcons.heart,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 24.0,
-                  ),
+                  // Material(
+                  //   borderRadius: BorderRadius.circular(20.0),
+                  //   elevation: 4.0,
+                  //   color: Color.fromARGB(255, 0, 136, 145),
+                  //   child: Padding(
+                  //     padding: EdgeInsets.all(20.0),
+                  //     child: GestureDetector(
+                  //       onTap: () {
+                  //         setState(() {
+                  //           isFavourite = !isFavourite;
+                  //         });
+                  //       },
+                  //       child: Icon(
+                  //         isFavourite
+                  //             ? FontAwesomeIcons.solidHeart
+                  //             : FontAwesomeIcons.heart,
+                  //         color: Colors.white,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   width: 24.0,
+                  // ),
                   Expanded(
                     child: Material(
                       borderRadius: BorderRadius.circular(20.0),

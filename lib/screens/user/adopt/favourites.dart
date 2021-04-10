@@ -43,7 +43,7 @@ class _FavoritesState extends State<Favorites> {
         actions: <Widget>[
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, ProfilePage.id);
+              Navigator.popAndPushNamed(context, ProfilePage.id);
             },
             child: CircleAvatar(
               radius: 18.0,

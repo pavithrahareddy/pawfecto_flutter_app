@@ -119,24 +119,24 @@ class _DonatorsState extends State<Donators> {
                               Container(
                                 // height: MediaQuery.of(context).size.height * 0.11,
                                 width: MediaQuery.of(context).size.width * 0.85,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 20.0,
-                                    top: 15.0,
-                                    right: 20.0,
-                                    bottom: 15.0,
-                                  ),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => DonateForm(
-                                            donor: donor,
-                                          ),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => DonateForm(
+                                          donor: donor,
                                         ),
-                                      );
-                                    },
+                                      ),
+                                    );
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 20.0,
+                                      top: 15.0,
+                                      right: 20.0,
+                                      bottom: 15.0,
+                                    ),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
