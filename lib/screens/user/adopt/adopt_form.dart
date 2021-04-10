@@ -49,8 +49,13 @@ class _AdoptFormState extends State<AdoptForm> {
                                 Icons.close,
                               ),
                               onTap: () {
-                                Navigator.popAndPushNamed(
-                                    context, PetDetails.id);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        PetDetails(pet: this.widget.pet),
+                                  ),
+                                );
                               },
                             ),
                           ],

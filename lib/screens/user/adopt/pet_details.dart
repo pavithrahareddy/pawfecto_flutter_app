@@ -51,16 +51,6 @@ class _PetDetailsState extends State<PetDetails> {
                           },
                         ),
                       ),
-                      Positioned(
-                        right: 0.0,
-                        top: 0.0,
-                        child: GestureDetector(
-                          child: Icon(
-                            FontAwesomeIcons.share,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),

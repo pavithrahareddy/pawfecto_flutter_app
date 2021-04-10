@@ -113,8 +113,10 @@ class _AppointmentsState extends State<Appointments> {
                   // fetch the pets under the current user
                   for (var shelter in shelters) {
                     if (shelter.id == _uid) {
-                      appointments = shelter.data()["adopters"];
-                      break;
+                      if (shelter.data()["adopters"] != []) {
+                        appointments = shelter.data()["adopters"];
+                        break;
+                      }
                     }
                   }
 
@@ -150,7 +152,7 @@ class _AppointmentsState extends State<Appointments> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            user["name"],
+                                            user["name"] ?? 'Fallback',
                                             style: TextStyle(
                                                 fontSize: 20.0,
                                                 color: Color(0xff008891)),
@@ -166,7 +168,7 @@ class _AppointmentsState extends State<Appointments> {
                                                 width: 5.0,
                                               ),
                                               Text(
-                                                user["email"],
+                                                user["email"] ?? 'Fallback',
                                                 style: TextStyle(
                                                   color: Colors.grey,
                                                   fontSize: 13.0,
@@ -205,7 +207,7 @@ class _AppointmentsState extends State<Appointments> {
                                                     width: 5.0,
                                                   ),
                                                   Text(
-                                                    user["phone"],
+                                                    user["phone"] ?? 'Fallback',
                                                     style: TextStyle(
                                                       color: Colors.grey,
                                                       fontSize: 13.0,
@@ -214,7 +216,8 @@ class _AppointmentsState extends State<Appointments> {
                                                 ],
                                               ),
                                               Text(
-                                                'Pet: ${user["pet"]["name"]}',
+                                                'Pet: ${user["pet"]["name"]}' ??
+                                                    'Fallback',
                                                 style: TextStyle(
                                                   color: Colors.grey,
                                                   fontSize: 13.0,
@@ -222,7 +225,7 @@ class _AppointmentsState extends State<Appointments> {
                                                 ),
                                               ),
                                               Text(
-                                                user["date"],
+                                                user["date"] ?? 'Fallback',
                                                 style: TextStyle(
                                                   color: Colors.grey,
                                                   fontSize: 13.0,
@@ -230,7 +233,7 @@ class _AppointmentsState extends State<Appointments> {
                                                 ),
                                               ),
                                               Text(
-                                                user["time"],
+                                                user["time"] ?? 'Fallback',
                                                 style: TextStyle(
                                                   color: Colors.grey,
                                                   fontSize: 13.0,
