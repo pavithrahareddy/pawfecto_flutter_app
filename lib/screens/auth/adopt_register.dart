@@ -17,6 +17,7 @@ class _AdoptRegisterState extends State<AdoptRegister> {
   // private instance auth, which will be used to register
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
+
   bool isLoading = false;
   String name;
   String phone;

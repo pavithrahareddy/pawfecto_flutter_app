@@ -19,6 +19,7 @@ class _ShelterMainPetState extends State<ShelterMainPet> {
   final _firestore = FirebaseFirestore.instance;
 
   String _uid;
+  bool isEmailSent = false;
 
   @override
   void initState() {
@@ -257,6 +258,24 @@ class _ShelterMainPetState extends State<ShelterMainPet> {
                       ),
                       SizedBox(
                         height: 20.0,
+                      ),
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: isEmailSent
+                              ? MaterialStateProperty.all<Color>(Colors.grey)
+                              : MaterialStateProperty.all<Color>(
+                                  Color(0xff008891),
+                                ),
+                        ),
+                        onPressed: !isEmailSent
+                            ? () {
+                                _auth.currentUser.sendEmailVerification();
+                                setState(() {
+                                  isEmailSent = true;
+                                });
+                              }
+                            : null,
+                        child: Text('RESEND VERIFICATION EMAIL'),
                       ),
                       ElevatedButton(
                         style: ButtonStyle(

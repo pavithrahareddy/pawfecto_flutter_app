@@ -25,6 +25,7 @@ class _AdoptMainState extends State<AdoptMain> {
     _uid = _auth.currentUser.uid;
   }
 
+  bool isEmailSent = false;
   int _selectedtype = 0;
 
   void _onItemTapped(int index) {
@@ -1139,6 +1140,24 @@ class _AdoptMainState extends State<AdoptMain> {
                   ),
                   ElevatedButton(
                     style: ButtonStyle(
+                      backgroundColor: isEmailSent
+                          ? MaterialStateProperty.all<Color>(Colors.grey)
+                          : MaterialStateProperty.all<Color>(
+                              Color(0xff008891),
+                            ),
+                    ),
+                    onPressed: !isEmailSent
+                        ? () {
+                            _auth.currentUser.sendEmailVerification();
+                            setState(() {
+                              isEmailSent = true;
+                            });
+                          }
+                        : null,
+                    child: Text('RESEND VERIFICATION EMAIL'),
+                  ),
+                  ElevatedButton(
+                    style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                         Color(0xff008891),
                       ),
@@ -1147,7 +1166,7 @@ class _AdoptMainState extends State<AdoptMain> {
                       _auth.signOut();
                       Navigator.popAndPushNamed(context, AdoptLogin.id);
                     },
-                    child: Text('BACK'),
+                    child: Text('LOGOUT'),
                   ),
                 ],
               ),
