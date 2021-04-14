@@ -1,4 +1,4 @@
-<h2>Pet Adoption App</h2>
+<h1>Pet Adoption App: Pawfecto</h1>
 <img src="images/pawsfecto.png" alt="App name"/>
 <br />
 <h3>Problem</h3>
