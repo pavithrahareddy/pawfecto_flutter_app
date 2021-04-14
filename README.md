@@ -6,4 +6,4 @@
 <h4>Solution</h4>
 <p>The main purpose of our app is to find the right match between potential adopters and pets, such that the adopters find a pet that fits their lifestyle.</p>
 <br />
-<img src="images/main_screen_ss.jpeg" alt="App Screenshot"/>
+<img src="images/main_screen_ss.jpeg" alt="App Screenshot" height="400" width="200"/>
