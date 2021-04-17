@@ -11,6 +11,6 @@
 <img src="images/main_screen_ss.jpeg" alt="App Screenshot" height="400" width="200"/>
 <br />
 <h3>Getting Started</h3>
-<p>Clone this repository via Android Studio: git clone https://github.com/riyasavant/pawfecto.git</p> 
+<p>Clone this repository via Android Studio: git clone https://github.com/pavithrahareddy/pawfecto.git</p>
 <p>Install all the dependencies</p>
 <p>Run the app on a physical device / emulator / IOS simulator</p>

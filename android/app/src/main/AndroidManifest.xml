@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="riyasavant.com.pawfecto">
+    package="pavithrahareddy.com.pawfecto">
    <application
         android:label="pawfecto"
         android:icon="@mipmap/ic_launcher">
