@@ -76,8 +76,9 @@ class MyApp extends StatelessWidget {
         Settings.id: (context) => Settings(),
         Favorites.id: (context) => Favorites(),
         Appointments.id: (context) => Appointments(),
-        Pawstagram.id: (context) => Pawstagram(),
         LostPets.id: (context) => LostPets(),
+        Pawstagram.id: (context) => Pawstagram(),
+        
       },
     );
   }
