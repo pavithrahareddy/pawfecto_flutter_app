@@ -1,4 +1,5 @@
 <h1>Pet Adoption App: Pawfecto</h1>
+<p>Click on the link to download the app and check it out: https://bit.ly/376otN1</p>
 <img src="images/pawsfecto.png" alt="App name"/>
 <br />
 <h3>Problem</h3>
